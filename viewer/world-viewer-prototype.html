@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>worldfile — viewer prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF7; --card:#FFFFFF; --ink:#1F1D1A; --ink-2:#5C5850; --ink-3:#8B867C;
+    --line:#E7E3DA; --line-2:#D8D3C7;
+    /* world palette (from style.md of the example world) */
+    --w-slate:#2E4B52; --w-fog:#AEB7B3; --w-amber:#D9A441; --w-hull:#8C3B2E; --w-night:#151C1E;
+    --canon-bg:#FBF3E2; --canon-edge:var(--w-amber);
+    --never-bg:#F6ECEA; --never-edge:var(--w-hull);
+    --ok:#3E6B4F;
+    --mono:'IBM Plex Mono',monospace; --ui:'Instrument Sans',sans-serif; --prose:'Newsreader',serif;
+    --r:10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--ui);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.55}
+  ::selection{background:var(--w-amber);color:var(--ink)}
+  button{font-family:var(--ui);cursor:pointer}
+  a{color:inherit}
+
+  /* ---------- shell ---------- */
+  .shell{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+  @media(max-width:820px){.shell{grid-template-columns:1fr}.side{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line)}}
+
+  /* ---------- sidebar ---------- */
+  .side{border-right:1px solid var(--line);padding:20px 14px 32px;position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--paper)}
+  .brand{display:flex;align-items:center;gap:9px;padding:2px 8px 16px}
+  .brand .mark{width:26px;height:26px;border-radius:7px;background:var(--w-night);display:grid;place-items:center;color:var(--w-amber);font-family:var(--mono);font-size:13px;font-weight:600}
+  .brand b{font-weight:600;letter-spacing:-.01em}
+  .brand span{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);display:block;margin-top:1px}
+  .grp{margin-top:14px}
+  .grp-label{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);padding:0 8px 6px;display:flex;justify-content:space-between;align-items:center}
+  .count{background:var(--line);border-radius:99px;padding:0 7px;font-size:10px;color:var(--ink-2);line-height:16px}
+  .nav-item{display:flex;align-items:center;gap:8px;width:100%;text-align:left;background:none;border:none;border-radius:7px;padding:6px 8px;font-size:13.5px;color:var(--ink-2)}
+  .nav-item:hover{background:#F1EEE6}
+  .nav-item.active{background:#EDE9DE;color:var(--ink);font-weight:600}
+  .nav-item .dot{width:7px;height:7px;border-radius:50%;flex:none}
+  .nav-item .fname{font-family:var(--mono);font-size:12px}
+  .nav-item.empty-slot{color:var(--ink-3);border:1px dashed var(--line-2);border-radius:7px;margin-top:4px}
+  .nav-item.empty-slot:hover{border-color:var(--w-amber);color:var(--ink-2)}
+
+  /* ---------- topbar ---------- */
+  .main{min-width:0}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 34px;border-bottom:1px solid var(--line);background:var(--paper);position:sticky;top:0;z-index:5;flex-wrap:wrap}
+  .crumb{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+  .crumb b{color:var(--ink);font-weight:600}
+  .top-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .seg{display:flex;border:1px solid var(--line-2);border-radius:99px;overflow:hidden;background:var(--card)}
+  .seg button{border:none;background:none;padding:6px 14px;font-size:12.5px;color:var(--ink-2)}
+  .seg button.on{background:var(--ink);color:var(--paper);font-weight:600}
+  .btn{border:1px solid var(--line-2);background:var(--card);border-radius:99px;padding:7px 14px;font-size:12.5px;font-weight:600;color:var(--ink);display:inline-flex;align-items:center;gap:7px}
+  .btn:hover{border-color:var(--ink-3)}
+  .btn.primary{background:var(--w-night);border-color:var(--w-night);color:#F3EFE5}
+  .btn.primary:hover{background:#22302f}
+  .btn svg{width:13px;height:13px}
+
+  /* ---------- content ---------- */
+  .content{max-width:780px;padding:36px 34px 90px;margin:0 auto}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);display:flex;gap:10px;align-items:center}
+  h1{font-size:30px;letter-spacing:-.02em;font-weight:700;margin:6px 0 4px}
+  .sub{color:var(--ink-2);font-size:14.5px}
+  .badges{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .badge{font-family:var(--mono);font-size:11px;padding:3px 10px;border-radius:99px;border:1px solid var(--line-2);background:var(--card);color:var(--ink-2)}
+  .badge.v{background:var(--w-night);border-color:var(--w-night);color:var(--w-amber)}
+  .badge.st-approved{border-color:var(--ok);color:var(--ok)}
+  .badge.st-iter{border-color:var(--w-amber);color:#9A7420;background:var(--canon-bg)}
+  .badge.role-hero{border-color:var(--w-slate);color:var(--w-slate)}
+
+  section{margin-top:34px}
+  .sec-h{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px}
+  .sec-h h2{font-size:13px;font-weight:600;letter-spacing:.02em}
+  .sec-h .src{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+
+  table.spec{width:100%;border-collapse:collapse;font-size:13.5px}
+  table.spec td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.spec td:first-child{font-family:var(--mono);font-size:12px;color:var(--ink-3);width:34%;white-space:nowrap}
+  table.spec tr:last-child td{border-bottom:none}
+
+  .canon-list,.never-list{list-style:none;display:grid;gap:8px}
+  .canon-list li{background:var(--canon-bg);border-left:3px solid var(--canon-edge);border-radius:0 8px 8px 0;padding:9px 13px;font-size:13.5px}
+  .canon-list li::before{content:"CANON";font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:#9A7420;display:block;margin-bottom:2px}
+  .never-list li{background:var(--never-bg);border-left:3px solid var(--never-edge);border-radius:0 8px 8px 0;padding:9px 13px;font-size:13.5px}
+  .never-list li::before{content:"NEVER";font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--w-hull);display:block;margin-bottom:2px}
+
+  .prose{font-family:var(--prose);font-size:17px;line-height:1.7;color:#33302A}
+  .prose p+p{margin-top:12px}
+  .prose em{font-style:italic}
+
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+  .sw{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--card)}
+  .sw .chip{height:64px}
+  .sw .meta{padding:9px 11px}
+  .sw .meta b{font-size:12.5px;display:block}
+  .sw .meta code{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+  .sw .meta span{display:block;font-size:11px;color:var(--ink-2);margin-top:2px}
+
+  .refs{display:grid;gap:10px}
+  .ref{display:flex;align-items:center;gap:12px;border:1px solid var(--line);background:var(--card);border-radius:var(--r);padding:11px 14px}
+  .ref .kind{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:3px 8px;color:var(--ink-2);flex:none}
+  .ref .info{min-width:0;flex:1}
+  .ref .info b{font-size:13px;display:block}
+  .ref .info span{font-family:var(--mono);font-size:11px;color:var(--ink-3);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ref .lic{font-size:11px;color:var(--ink-2);text-align:right;flex:none}
+  .ref .lic b{font-family:var(--mono);font-size:10.5px;color:var(--ok)}
+  .note-not-stored{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:10px}
+
+  .entity-cards{display:grid;gap:12px}
+  .ecard{display:flex;align-items:center;gap:14px;border:1px solid var(--line);background:var(--card);border-radius:var(--r);padding:14px 16px;text-align:left;width:100%}
+  .ecard:hover{border-color:var(--ink-3)}
+  .ecard .dot{width:9px;height:9px;border-radius:50%;flex:none}
+  .ecard .t b{display:block;font-size:14px}
+  .ecard .t span{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+  .ecard .arrow{margin-left:auto;color:var(--ink-3)}
+
+  /* ---------- empty mode ---------- */
+  .invite{border:1px dashed var(--line-2);border-radius:14px;background:var(--card);padding:22px;margin-top:14px}
+  .invite h3{font-size:15px;font-weight:600;display:flex;align-items:center;gap:9px}
+  .invite h3 .plus{width:22px;height:22px;border-radius:7px;background:var(--paper);border:1px solid var(--line-2);display:grid;place-items:center;font-size:14px;color:var(--ink-2)}
+  .invite p{color:var(--ink-2);font-size:13.5px;margin-top:6px}
+  .promptbox{margin-top:14px;background:var(--w-night);border-radius:10px;padding:13px 15px;position:relative}
+  .promptbox code{font-family:var(--mono);font-size:12.5px;line-height:1.6;color:#E8E2D2;display:block;white-space:pre-wrap}
+  .promptbox code .hl{color:var(--w-amber)}
+  .promptbox .copy{position:absolute;top:9px;right:9px;background:#2A3638;border:none;color:#CFC9BA;border-radius:7px;padding:4px 10px;font-size:11px;font-family:var(--mono)}
+  .promptbox .copy:hover{color:#fff}
+  .invite .then{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:10px}
+  .skeleton{display:grid;gap:8px;margin-top:16px}
+  .skel-row{height:12px;border-radius:6px;background:linear-gradient(90deg,var(--line) 0%,#F1EEE6 50%,var(--line) 100%);background-size:200% 100%;animation:sh 2.2s infinite}
+  @keyframes sh{0%{background-position:0 0}100%{background-position:-200% 0}}
+  @media (prefers-reduced-motion:reduce){.skel-row{animation:none}}
+  .empty-hero{text-align:left;padding:8px 0 0}
+  .empty-hero h1{font-size:28px}
+  .progress{display:flex;gap:6px;margin-top:18px;flex-wrap:wrap}
+  .pstep{font-family:var(--mono);font-size:11px;border:1px solid var(--line-2);border-radius:99px;padding:4px 12px;color:var(--ink-3);background:var(--card)}
+  .pstep.done{border-color:var(--ok);color:var(--ok)}
+
+  /* ---------- toast ---------- */
+  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--w-night);color:#F3EFE5;font-size:13px;padding:10px 18px;border-radius:99px;opacity:0;pointer-events:none;transition:.25s;z-index:50;font-family:var(--mono)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .footer-note{border-top:1px solid var(--line);margin-top:56px;padding-top:14px;font-family:var(--mono);font-size:11px;color:var(--ink-3);line-height:1.7}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side" id="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="crumb" id="crumb"></div>
+      <div class="top-actions">
+        <div class="seg" role="tablist" aria-label="World mode">
+          <button id="mode-example" class="on" onclick="setMode('example')">Example world</button>
+          <button id="mode-empty" onclick="setMode('empty')">Empty world</button>
+        </div>
+        <button class="btn primary" onclick="copyWorldPackage()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          Copy world package
+        </button>
+      </div>
+    </div>
+    <div class="content" id="content"></div>
+  </div>
+</div>
+<div class="toast" id="toast">Copied to clipboard</div>
+
+<script>
+/* =========================================================
+   DATA — a rendered projection of a .world/ folder on disk.
+   The viewer owns nothing; these objects mirror the files.
+   ========================================================= */
+const WORLD = {
+  world: {
+    name:"Harborline", format:"short film", era:"1987, off-season", status:"in-iteration",
+    canon:[ "The story takes place in 1987 — no modern technology ever appears",
+            "The fog never fully lifts on screen" ],
+    premise:[
+      "A container port town in the dead of winter. Mara Voss, a crane operator with a past she keeps in a locked drawer, finds a prototype device washed up in a shipping crate that was never on any manifest.",
+      "Harborline is about the weight of machines and the people who keep them running — rust, sodium light, and the particular loneliness of night shifts."
+    ],
+    tone:"Slow-burn industrial noir. Quiet menace, no melodrama.",
+    audience:"Festival short circuit; proof piece for a feature pitch."
+  },
+  style: {
+    palette:[
+      {name:"Harbor slate", hex:"#2E4B52", use:"dominant — steel, water, shadow"},
+      {name:"Fog gray",     hex:"#AEB7B3", use:"atmosphere, skies, midtones"},
+      {name:"Sodium amber", hex:"#D9A441", use:"artificial light only — lamps, screens"},
+      {name:"Hull red",     hex:"#8C3B2E", use:"sparingly — containers, warning paint"},
+      {name:"Night steel",  hex:"#151C1E", use:"blacks are never pure black"}
+    ],
+    camera:{lens:"32mm & 50mm spherical, wide open", framing:"characters small in industrial frames", movement:"static or slow push; handheld only in the finale"},
+    lighting:{quality:"hard sources, heavy atmosphere", direction:"single-source, motivated by practicals", time_bias:"night and blue hour"},
+    materials:"wet steel, rope, salt-bleached wood, condensation on glass",
+    grade:"Kodak 250D pushed one stop; halation on highlights",
+    mood:["patient","cold","tactile","watchful","weathered"],
+    never:["never lens flare","never teal-and-orange grade","never drone establishing shots","never neon"]
+  },
+  characters:[{
+    id:"mara", name:"Mara Voss", type:"character", version:3, status:"approved", role:"protagonist",
+    physical:{age:"34",build:"lean, 5'9\"",hair:"black, cropped, silver streak at left temple",eyes:"gray",marks:"thin scar above right eyebrow"},
+    wardrobe:{default:"charcoal field jacket, worn boots, canvas work gloves tucked in belt", variants:{off_shift:"gray wool sweater, no jacket"}},
+    voice:"low, deliberate, dry humor",
+    refs:["mara-headshot"],
+    canon:["Silver streak is ALWAYS visible; never fully black hair","Never wears the color red"],
+    relationships:["Sister of Elias (estranged)"],
+    prose:[
+      "Mara moves like someone who trusts machinery more than people — unhurried, exact, hands always finding a rail or a lever. She listens more than she speaks, and when she does speak it lands flat and dry, a joke you only catch two beats later.",
+      "Her default expression is appraisal. She looks at people the way she looks at a load that might shift."
+    ]
+  }],
+  objects:[{
+    id:"aurawatch", name:"Aura Watch", type:"object", role:"hero", version:19, status:"in-iteration", category:"wearable prototype",
+    form:{silhouette:"rounded square face, edge-to-edge display, no visible bezel",scale:"sits flush to the wrist",materials:"woven titanium band, matte case",colorways:[{name:"Graphite",hex:"#3A3F44"}],key_features:"single crown, faint amber standby glow"},
+    iface:"monochrome amber UI; no icons, text only",
+    placement:"worn on LEFT wrist; face angled toward camera in inserts",
+    refs:["aurawatch-cad"],
+    canon:["Crown is on the LEFT side as of v19","Band is woven titanium, never leather"],
+    never:["never shown charging","never with third-party bands"],
+    prose:["The watch should read as slightly out of time — too refined for 1987, which is exactly the point. It glows like an instrument, not a gadget."]
+  },{
+    id:"tin-mug", name:"Mara's tin mug", type:"object", role:"prop", version:1, status:"approved", category:"personal item",
+    form:{silhouette:"enamel camping mug",materials:"chipped blue enamel, bare steel rim",colorways:[{name:"Chipped blue",hex:"#3E5C6B"}]},
+    placement:"always in her LEFT hand; lives on the crane console",
+    refs:[], canon:["Chipped blue enamel — the chip is on the handle side"], never:[],
+    prose:["A quiet continuity anchor. If Mara is at rest, the mug is nearby."]
+  }],
+  locations:[{
+    id:"pier-7", name:"Pier 7", type:"location", version:2, status:"approved", kind:"fictional",
+    geography:"north end of the container terminal, exposed to open water",
+    architecture:"1960s gantry cranes, stacked containers, corrugated operations shed",
+    atmosphere:{weather:"fog, drizzle, standing water",light:"sodium vapor pools in darkness",sound:"gulls, container groan, distant foghorn",season:"deep winter"},
+    subareas:["the crane cab","the operations shed","the north stack"],
+    restrictions:"none — fictional composite",
+    refs:["pier-scout"],
+    canon:["Crane No. 4 is Mara's; its cab light is always warm amber"],
+    never:["never sunny","never crowded"],
+    prose:["Pier 7 is practically a character: patient, rusted, indifferent. Compositions should let it dwarf people."]
+  }],
+  refs:{
+    "mara-headshot":{kind:"image",source:"local",path:"../refs/mara_v3.png",current:"v3",license:{owner:"production",use:"internal reference",expiry:"—"},approved:true,note:"casting reference, not final likeness"},
+    "aurawatch-cad":{kind:"cad-export",source:"google-drive",path:"drive://harborline/aura_v19",current:"v19",license:{owner:"client ID team",use:"campaign + film",expiry:"2027-01-01"},approved:true,note:"check with ID team before hero inserts"},
+    "pier-scout":{kind:"image",source:"dropbox",path:"db://scout/pier7_set",current:"v2",license:{owner:"production",use:"internal reference",expiry:"—"},approved:true,note:"lighting study set, 14 frames"}
+  }
+};
+
+/* ---------- starter prompts for the empty world ---------- */
+const INVITES = {
+  world:{
+    title:"Give this world a constitution",
+    why:"world.md holds the premise, era, tone — and the canon rules nothing may ever violate.",
+    prompt:`Start my world.md. It's a <span class="hl">[short film / campaign / series]</span> set in <span class="hl">[era/place]</span>.
+The premise: <span class="hl">[2–3 sentences]</span>.
+Tone: <span class="hl">[a few words]</span>. Canon rules that must never break: <span class="hl">[list them]</span>.`
+  },
+  style:{
+    title:"Define the visual contract",
+    why:"style.md is written the way a renderer needs it — palette with hexes, lens language, and the NEVER list.",
+    prompt:`Write my style.md. Palette: <span class="hl">[4–6 colors and what each is for]</span>.
+Camera: <span class="hl">[lenses, framing, movement]</span>. Lighting: <span class="hl">[quality, direction]</span>.
+Grade feels like <span class="hl">[film stock / reference]</span>. Never: <span class="hl">[visual rules to ban]</span>.`
+  },
+  character:{
+    title:"Add your first character",
+    why:"Physical facts and wardrobe survive into image prompts; personality prose ships to chat context.",
+    prompt:`Add a character: <span class="hl">[name]</span>, <span class="hl">[age]</span>, <span class="hl">[build/height]</span>.
+Hair: <span class="hl">[…]</span>. Eyes: <span class="hl">[…]</span>. Distinguishing marks: <span class="hl">[…]</span>.
+Default wardrobe: <span class="hl">[…]</span>. Canon: <span class="hl">[what must never change about them]</span>.`
+  },
+  object:{
+    title:"Add an object",
+    why:"role: hero gets the full product treatment (form, interface, CAD refs, strict versions). role: prop stays light.",
+    prompt:`Add an object, role <span class="hl">[hero or prop]</span>: <span class="hl">[name]</span>.
+Form: <span class="hl">[silhouette, scale, materials, colors]</span>.
+How it appears in use: <span class="hl">[worn/held/placed how]</span>. Canon: <span class="hl">[…]</span>. Never: <span class="hl">[…]</span>.`
+  },
+  location:{
+    title:"Add a location",
+    why:"Atmosphere defaults (weather, light, sound) quietly shape every image set here.",
+    prompt:`Add a location: <span class="hl">[name]</span>, <span class="hl">[real or fictional]</span>.
+Architecture: <span class="hl">[…]</span>. Default atmosphere: <span class="hl">[weather, light, sound, season]</span>.
+Named subareas: <span class="hl">[…]</span>. Canon: <span class="hl">[…]</span>.`
+  },
+  refs:{
+    title:"Register where truth lives",
+    why:"The world stores records of external sources — Drive links, CAD exports, licensed images — never the media itself.",
+    prompt:`Register a reference: <span class="hl">[what it is]</span> at <span class="hl">[URL or path]</span>,
+current version <span class="hl">[…]</span>, licensed for <span class="hl">[use]</span> until <span class="hl">[expiry]</span>.`
+  }
+};
+
+/* ---------- state ---------- */
+let MODE = 'example';
+let PAGE = {type:'world'};
+
+/* ---------- helpers ---------- */
+const $ = id => document.getElementById(id);
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),1800)}
+function copyText(txt,msg){navigator.clipboard.writeText(txt).then(()=>toast(msg||'Copied to clipboard')).catch(()=>toast('Copy failed'))}
+function statusBadge(s){return `<span class="badge ${s==='approved'?'st-approved':'st-iter'}">${s}</span>`}
+
+/* ---------- context package composer (the product, in one function) ---------- */
+function composeEntity(e){
+  const L=[];
+  L.push(`${e.name.toUpperCase()} — v${e.version} (${e.status})`);
+  (e.canon||[]).forEach(c=>L.push(`CANON: ${c}`));
+  if(e.physical) L.push(`Physical: ${Object.entries(e.physical).map(([k,v])=>`${k}: ${v}`).join('; ')}`);
+  if(e.form) L.push(`Form: ${Object.entries(e.form).filter(([k])=>k!=='colorways').map(([k,v])=>`${k}: ${v}`).join('; ')}` + (e.form.colorways?`; colorway: ${e.form.colorways.map(c=>c.name+' '+c.hex).join(', ')}`:''));
+  if(e.wardrobe) L.push(`Wardrobe: ${e.wardrobe.default}`);
+  if(e.atmosphere) L.push(`Atmosphere: ${Object.entries(e.atmosphere).map(([k,v])=>`${k}: ${v}`).join('; ')}`);
+  if(e.architecture) L.push(`Architecture: ${e.architecture}`);
+  if(e.placement) L.push(`In use: ${e.placement}`);
+  return L;
+}
+function styleEssentials(){
+  const s=WORLD.style;
+  return [`Style: ${s.mood.join(', ')} — palette ${s.palette.map(p=>p.name+' '+p.hex).join(', ')}`,
+          `Camera: ${s.camera.lens}; ${s.camera.framing}. Light: ${s.lighting.quality}, ${s.lighting.direction}. Grade: ${s.grade}`];
+}
+function mergedNevers(entities){
+  const n=[...WORLD.style.never];
+  entities.forEach(e=>(e.never||[]).forEach(x=>n.push(x)));
+  return n.length?[`NEVER: ${n.join('; ')}`]:[];
+}
+function copyEntityPackage(e){
+  const pkg=[...composeEntity(e),...styleEssentials(),...mergedNevers([e])].join('\n');
+  copyText(pkg,'Context package copied — paste into any AI tool');
+}
+function copyWorldPackage(){
+  if(MODE==='empty'){toast('Nothing here yet — copy a starter prompt below');return}
+  const all=[...WORLD.characters,...WORLD.objects.filter(o=>o.role==='hero'),...WORLD.locations];
+  const head=[`WORLD: ${WORLD.world.name} — ${WORLD.world.format}, ${WORLD.world.era}`,...WORLD.world.canon.map(c=>`CANON: ${c}`)];
+  const body=all.flatMap(e=>['',...composeEntity(e)]);
+  copyText([...head,...body,'',...styleEssentials(),...mergedNevers(all)].join('\n'),'World package copied');
+}
+function copyInvite(key){
+  const tmp=document.createElement('div');tmp.innerHTML=INVITES[key].prompt;
+  copyText(tmp.textContent.replace(/\s+\n/g,'\n'),'Starter prompt copied — paste it to Claude');
+}
+
+/* ---------- sidebar ---------- */
+function navBtn(label,fname,page,dotColor,active){
+  return `<button class="nav-item ${active?'active':''}" onclick='go(${JSON.stringify(page)})'>
+    ${dotColor?`<span class="dot" style="background:${dotColor}"></span>`:''}
+    <span>${label}</span>${fname?`<span class="fname" style="margin-left:auto">${fname}</span>`:''}
+  </button>`;
+}
+function emptySlot(label,page){
+  return `<button class="nav-item empty-slot" onclick='go(${JSON.stringify(page)})'>+ ${label}</button>`;
+}
+function renderSidebar(){
+  const A=(t,id)=>PAGE.type===t&&(id===undefined||PAGE.id===id);
+  let h=`<div class="brand"><div class="mark">.w</div><div><b>${MODE==='example'?'harborline':'untitled'}.world</b><span>read-only viewer · git is truth</span></div></div>`;
+  if(MODE==='example'){
+    h+=`<div class="grp"><div class="grp-label">Foundations</div>
+      ${navBtn('World','world.md',{type:'world'},null,A('world'))}
+      ${navBtn('Style','style.md',{type:'style'},null,A('style'))}</div>`;
+    h+=`<div class="grp"><div class="grp-label">Characters <span class="count">${WORLD.characters.length}</span></div>
+      ${WORLD.characters.map(c=>navBtn(c.name,null,{type:'entity',coll:'characters',id:c.id},'var(--w-slate)',A('entity',c.id))).join('')}</div>`;
+    h+=`<div class="grp"><div class="grp-label">Objects <span class="count">${WORLD.objects.length}</span></div>
+      ${WORLD.objects.map(o=>navBtn(o.name,null,{type:'entity',coll:'objects',id:o.id},o.role==='hero'?'var(--w-amber)':'var(--w-fog)',A('entity',o.id))).join('')}</div>`;
+    h+=`<div class="grp"><div class="grp-label">Locations <span class="count">${WORLD.locations.length}</span></div>
+      ${WORLD.locations.map(l=>navBtn(l.name,null,{type:'entity',coll:'locations',id:l.id},'var(--w-hull)',A('entity',l.id))).join('')}</div>`;
+    h+=`<div class="grp"><div class="grp-label">References <span class="count">${Object.keys(WORLD.refs).length}</span></div>
+      ${navBtn('Registry','references.yaml',{type:'refs'},null,A('refs'))}</div>`;
+  }else{
+    h+=`<div class="grp"><div class="grp-label">Foundations</div>
+      ${emptySlot('world.md',{type:'invite',key:'world'})}
+      ${emptySlot('style.md',{type:'invite',key:'style'})}</div>`;
+    h+=`<div class="grp"><div class="grp-label">Characters <span class="count">0</span></div>${emptySlot('Add a character',{type:'invite',key:'character'})}</div>`;
+    h+=`<div class="grp"><div class="grp-label">Objects <span class="count">0</span></div>${emptySlot('Add an object',{type:'invite',key:'object'})}</div>`;
+    h+=`<div class="grp"><div class="grp-label">Locations <span class="count">0</span></div>${emptySlot('Add a location',{type:'invite',key:'location'})}</div>`;
+    h+=`<div class="grp"><div class="grp-label">References <span class="count">0</span></div>${emptySlot('Register a source',{type:'invite',key:'refs'})}</div>`;
+  }
+  $('sidebar').innerHTML=h;
+}
+
+/* ---------- pages ---------- */
+function specTable(rows){
+  return `<table class="spec">${rows.filter(r=>r[1]).map(r=>`<tr><td>${r[0]}</td><td>${esc(r[1])}</td></tr>`).join('')}</table>`;
+}
+function canonBlock(canon,never){
+  let h='';
+  if(canon&&canon.length) h+=`<section><div class="sec-h"><h2>Canon</h2><span class="src">always survives compression</span></div><ul class="canon-list">${canon.map(c=>`<li>${esc(c)}</li>`).join('')}</ul></section>`;
+  if(never&&never.length) h+=`<section><div class="sec-h"><h2>Never</h2><span class="src">merged into every package</span></div><ul class="never-list">${never.map(c=>`<li>${esc(c)}</li>`).join('')}</ul></section>`;
+  return h;
+}
+function refsBlock(ids){
+  if(!ids||!ids.length) return '';
+  return `<section><div class="sec-h"><h2>References</h2><span class="src">references.yaml</span></div>
+    <div class="refs">${ids.map(id=>refRow(id,WORLD.refs[id])).join('')}</div>
+    <div class="note-not-stored">// fetched from source at view time — the world stores the record, never the media</div></section>`;
+}
+function refRow(id,r){
+  return `<div class="ref"><span class="kind">${r.kind}</span>
+    <div class="info"><b>${id}</b><span>${r.source} · ${r.path} · current ${r.current}</span></div>
+    <div class="lic"><b>${r.approved?'approved':'unapproved'}</b><br>${r.license.use}${r.license.expiry!=='—'?' · exp '+r.license.expiry:''}</div></div>`;
+}
+function copyBtn(fn){
+  return `<button class="btn" onclick="${fn}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy context package</button>`;
+}
+
+function pageWorld(){
+  const w=WORLD.world;
+  return `<div class="eyebrow">world.md · constitution</div>
+  <h1>${w.name}</h1><div class="sub">${w.format} · ${w.era}</div>
+  <div class="badges">${statusBadge(w.status)}<span class="badge">audience: festival short</span></div>
+  ${canonBlock(w.canon)}
+  <section><div class="sec-h"><h2>Premise</h2><span class="src">prose → chat target only</span></div>
+    <div class="prose">${w.premise.map(p=>`<p>${esc(p)}</p>`).join('')}</div></section>
+  <section><div class="sec-h"><h2>Tone &amp; audience</h2></div>${specTable([['tone',w.tone],['audience',w.audience]])}</section>
+  <div class="footer-note">source of truth: harborline.world/world.md · rendered by the viewer, edited in conversation, versioned in git</div>`;
+}
+
+function pageStyle(){
+  const s=WORLD.style;
+  return `<div class="eyebrow">style.md · visual contract</div>
+  <h1>Style</h1><div class="sub">Written the way a renderer needs it — these tokens color this viewer's chrome, too.</div>
+  <section><div class="sec-h"><h2>Palette</h2><span class="src">name · hex · use</span></div>
+    <div class="swatches">${s.palette.map(p=>`<div class="sw"><div class="chip" style="background:${p.hex}"></div><div class="meta"><b>${p.name}</b><code>${p.hex}</code><span>${p.use}</span></div></div>`).join('')}</div></section>
+  <section><div class="sec-h"><h2>Camera &amp; light</h2></div>${specTable([['lens',s.camera.lens],['framing',s.camera.framing],['movement',s.camera.movement],['light quality',s.lighting.quality],['direction',s.lighting.direction],['time bias',s.lighting.time_bias],['materials',s.materials],['grade',s.grade],['mood',s.mood.join(', ')]])}</section>
+  ${canonBlock(null,s.never)}`;
+}
+
+function pageEntity(coll,id){
+  const e=WORLD[coll].find(x=>x.id===id);
+  const eyebrow={characters:'characters/'+id+'.md',objects:'objects/'+id+'.md',locations:'locations/'+id+'.md'}[coll];
+  let badges=`<span class="badge v">v${e.version}</span>${statusBadge(e.status)}`;
+  if(e.role) badges+=`<span class="badge ${e.role==='hero'?'role-hero':''}">role: ${e.role}</span>`;
+  if(e.kind) badges+=`<span class="badge">${e.kind}</span>`;
+  let spec='';
+  if(e.physical) spec+=`<section><div class="sec-h"><h2>Physical</h2><span class="src">survives prompt compression</span></div>${specTable(Object.entries(e.physical))}</section>`;
+  if(e.wardrobe) spec+=`<section><div class="sec-h"><h2>Wardrobe</h2></div>${specTable([['default',e.wardrobe.default],...Object.entries(e.wardrobe.variants||{})])}</section>`;
+  if(e.form) spec+=`<section><div class="sec-h"><h2>Form</h2><span class="src">survives prompt compression</span></div>${specTable([...Object.entries(e.form).filter(([k])=>k!=='colorways'),['colorways',(e.form.colorways||[]).map(c=>`${c.name} ${c.hex}`).join(', ')]])}</section>`;
+  if(e.iface) spec+=`<section><div class="sec-h"><h2>Interface</h2></div>${specTable([['visible UI',e.iface],['placement',e.placement]])}</section>`;
+  else if(e.placement) spec+=`<section><div class="sec-h"><h2>In use</h2></div>${specTable([['placement',e.placement]])}</section>`;
+  if(e.atmosphere) spec+=`<section><div class="sec-h"><h2>Atmosphere</h2><span class="src">defaults for every scene set here</span></div>${specTable(Object.entries(e.atmosphere))}</section>`;
+  if(e.architecture) spec+=`<section><div class="sec-h"><h2>Place</h2></div>${specTable([['geography',e.geography],['architecture',e.architecture],['subareas',(e.subareas||[]).join(' · ')],['restrictions',e.restrictions]])}</section>`;
+  if(e.voice) spec+=`<section><div class="sec-h"><h2>Voice</h2></div>${specTable([['manner',e.voice],['relationships',(e.relationships||[]).join('; ')]])}</section>`;
+  return `<div class="eyebrow">${eyebrow}</div>
+  <h1>${e.name}</h1>
+  <div class="badges">${badges}</div>
+  <div style="margin-top:16px">${copyBtn(`copyEntityPackage(WORLD.${coll}.find(x=>x.id==='${id}'))`)}</div>
+  ${canonBlock(e.canon,e.never)}
+  ${spec}
+  ${e.prose?`<section><div class="sec-h"><h2>Description</h2><span class="src">prose → chat target only</span></div><div class="prose">${e.prose.map(p=>`<p>${esc(p)}</p>`).join('')}</div></section>`:''}
+  ${refsBlock(e.refs)}`;
+}
+
+function pageRefs(){
+  return `<div class="eyebrow">references.yaml · registry of external truth</div>
+  <h1>References</h1><div class="sub">Where truth lives. The world stores these records — never the media.</div>
+  <section style="margin-top:22px"><div class="refs">${Object.entries(WORLD.refs).map(([id,r])=>refRow(id,r)).join('')}</div></section>`;
+}
+
+function pageEmptyHome(){
+  return `<div class="empty-hero">
+    <div class="eyebrow">untitled.world · 0 of 6 files</div>
+    <h1>This world doesn't exist yet.</h1>
+    <div class="sub" style="max-width:56ch;margin-top:6px">Every slot in the sidebar is a piece of a complete world. Pick one, copy its starter prompt, and tell Claude — it writes the file, git records it, this page fills in.</div>
+    <div class="progress">
+      <span class="pstep">1 · constitution</span><span class="pstep">2 · style</span><span class="pstep">3 · a character</span><span class="pstep">4 · an object</span><span class="pstep">5 · a location</span><span class="pstep">6 · references</span>
+    </div>
+  </div>
+  ${inviteCard('world')}
+  <div class="skeleton"><div class="skel-row" style="width:70%"></div><div class="skel-row" style="width:88%"></div><div class="skel-row" style="width:55%"></div></div>`;
+}
+function inviteCard(key){
+  const v=INVITES[key];
+  return `<div class="invite">
+    <h3><span class="plus">+</span>${v.title}</h3>
+    <p>${v.why}</p>
+    <div class="promptbox"><button class="copy" onclick="copyInvite('${key}')">copy</button><code>${v.prompt}</code></div>
+    <div class="then">then: Claude writes the file → git commits it → this page renders it</div>
+  </div>`;
+}
+function pageInvite(key){
+  const labels={world:'world.md',style:'style.md',character:'characters/',object:'objects/',location:'locations/',refs:'references.yaml'};
+  return `<div class="eyebrow">${labels[key]} · empty</div>
+    <h1>Nothing here yet</h1>
+    <div class="sub">The structure already knows what belongs here. Fill the blanks and hand it to Claude.</div>
+    ${inviteCard(key)}
+    <div class="skeleton"><div class="skel-row" style="width:62%"></div><div class="skel-row" style="width:81%"></div><div class="skel-row" style="width:47%"></div></div>`;
+}
+
+/* ---------- router ---------- */
+function crumbFor(){
+  if(MODE==='empty') return `<b>untitled.world</b> / getting started`;
+  const map={world:'world.md',style:'style.md',refs:'references.yaml'};
+  if(PAGE.type==='entity') return `<b>harborline.world</b> / ${PAGE.coll} / ${PAGE.id}.md`;
+  return `<b>harborline.world</b> / ${map[PAGE.type]||''}`;
+}
+function render(){
+  renderSidebar();
+  $('crumb').innerHTML=crumbFor();
+  const c=$('content');
+  if(MODE==='empty'){ c.innerHTML = PAGE.type==='invite'?pageInvite(PAGE.key):pageEmptyHome(); }
+  else{
+    if(PAGE.type==='world') c.innerHTML=pageWorld();
+    else if(PAGE.type==='style') c.innerHTML=pageStyle();
+    else if(PAGE.type==='refs') c.innerHTML=pageRefs();
+    else if(PAGE.type==='entity') c.innerHTML=pageEntity(PAGE.coll,PAGE.id);
+    else c.innerHTML=pageWorld();
+  }
+  window.scrollTo({top:0});
+}
+function go(page){PAGE=page;render()}
+function setMode(m){
+  MODE=m;
+  $('mode-example').classList.toggle('on',m==='example');
+  $('mode-empty').classList.toggle('on',m==='empty');
+  PAGE = m==='empty' ? {type:'home'} : {type:'world'};
+  render();
+}
+render();
+</script>
+</body>
+</html>

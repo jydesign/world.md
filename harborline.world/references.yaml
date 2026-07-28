@@ -1,0 +1,30 @@
+# references.yaml — registry of external truth. The world stores these
+# records; it never stores the media itself. Refs are resolved to their
+# source at view time.
+
+mara-headshot:
+  kind: image
+  source: local
+  path: ../refs/mara_v3.png
+  current: v3
+  license: {owner: production, use: internal reference, expiry: "—"}
+  approved: true
+  note: casting reference, not final likeness
+
+aurawatch-cad:
+  kind: cad-export
+  source: google-drive
+  url: https://drive.google.com/harborline/aura_v19
+  current: v19
+  license: {owner: client ID team, use: campaign + film, expiry: "2027-01-01"}
+  approved: true
+  note: check with ID team before hero inserts
+
+pier-scout:
+  kind: image
+  source: dropbox
+  url: https://dropbox.com/scout/pier7_set
+  current: v2
+  license: {owner: production, use: internal reference, expiry: "—"}
+  approved: true
+  note: lighting study set, 14 frames

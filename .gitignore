@@ -1,0 +1,13 @@
+# Claude Code personal (machine-local) settings
+.claude/settings.local.json
+
+# OS cruft
+.DS_Store
+
+# Node
+node_modules/
+*.log
+
+# Generated viewer output — the viewer is a *projection* of the .world
+# folder, not source. Regenerate with: node viewer/generate.mjs <world>
+*-viewer.html

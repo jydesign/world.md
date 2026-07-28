@@ -1,0 +1,14 @@
+{
+  "name": "worldfile-viewer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Generate a read-only viewer page from a .world/ folder.",
+  "bin": { "worldfile-viewer": "generate.mjs" },
+  "scripts": {
+    "build:example": "node generate.mjs ../harborline.world ../harborline-viewer.html"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}
