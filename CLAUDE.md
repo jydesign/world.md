@@ -44,7 +44,7 @@ Storybook pattern: files are truth, UI is a renderer. Rules:
   look: paper chrome, world palette colors the accents, canon/never
   rules visually highlighted, example/empty mode toggle.
 - Distribution: the viewer is generated static HTML from the folder.
-  `world.md serve` runs it on localhost with live reload while files
+  `worldmd serve` runs it on localhost with live reload while files
   change; publishing the same generated HTML via GitHub Pages (a CI
   action on the world repo) is the intended zero-cost sharing path.
 

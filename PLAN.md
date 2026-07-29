@@ -15,7 +15,7 @@ Start date: ____________  (fill in — the gate date is start + 8 weeks)
 ## Weeks 3–5 — Server + exporters
 - MCP server (read-only, 4 tools) per CLAUDE.md scope.
 - `prompt` exporter with copy-to-clipboard path.
-- `world.md` CLI: `serve` (localhost viewer + live reload), `lint`
+- `worldmd` CLI: `serve` (localhost viewer + live reload), `lint`
   (frontmatter, broken refs, expired licenses), `spec` (print the format
   for pasting into any AI chat).
 - Publish the generated viewer via GitHub Pages CI (zero-cost sharing).
@@ -37,7 +37,7 @@ being prompted?
   which context packages / assets are stale?") grounded in git diffs
   of the world.
   V2 build paths, recorded now but NOT before the gate:
-  - `world.md diff` — entity-level changes between two git states; the
+  - `worldmd diff` — entity-level changes between two git states; the
     seed of the impact analyzer above.
   - Viewer via MCP Apps (official MCP UI extension, Jan 2026): one
     codebase renders inline in Claude AND ChatGPT. Caveats: needs a
@@ -55,11 +55,12 @@ being prompted?
 
 ## Decisions (v0.1) — pre-committed, revisit only at the gate
 - 2026-07-28: Renamed the project `worldfile` → `world.md` (deliberate,
-  DESIGN.md-style). CLI verbs become `world.md <cmd>`; the `.world/`
-  format and the per-world `world.md` file are unchanged. `world.md` is
-  now the FROZEN working name.
+  DESIGN.md-style); `world.md` is now the FROZEN working name. The CLI /
+  npm package is `worldmd` (dot-free, so the command isn't read as a
+  file); the `.world/` format, the per-world `world.md` file, and the repo
+  stay `world.md`.
 - 2026-07-28: Single-file `WORLD.md` compact form → DEFERRED to V2. The
   `.world/` folder stays the single source of truth; the pasteable
   whole-world block is already `compose_context` target `chat`.
-- 2026-07-28: `world.md diff` → V2 (impact-analyzer seed), not built in
+- 2026-07-28: `worldmd diff` → V2 (impact-analyzer seed), not built in
   v0.1. `lint` + `spec` ship in v0.1; diff waits for a passed gate.
