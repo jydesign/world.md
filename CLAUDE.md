@@ -1,4 +1,4 @@
-# Project: worldfile (working name — FROZEN, do not rename)
+# Project: world.md (working name — FROZEN, do not rename)
 
 ## What this is
 An open-source spec + MCP server for portable creative-world context.
@@ -44,7 +44,7 @@ Storybook pattern: files are truth, UI is a renderer. Rules:
   look: paper chrome, world palette colors the accents, canon/never
   rules visually highlighted, example/empty mode toggle.
 - Distribution: the viewer is generated static HTML from the folder.
-  `worldfile serve` runs it on localhost with live reload while files
+  `world.md serve` runs it on localhost with live reload while files
   change; publishing the same generated HTML via GitHub Pages (a CI
   action on the world repo) is the intended zero-cost sharing path.
 
@@ -83,5 +83,5 @@ natural later). Everything else was deliberately cut.
 External validation: Google Labs' DESIGN.md (github.com/google-labs-code/
 design.md) applies the same pattern — YAML frontmatter tokens + markdown
 prose, git as truth, a lint/diff/spec CLI — to design systems for coding
-agents. Positioning analogy: "DESIGN.md : coding agents :: worldfile :
+agents. Positioning analogy: "DESIGN.md : coding agents :: world.md :
 generative models."

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// worldfile viewer generator
+// world.md viewer generator
 // Reads a .world/ folder and renders a self-contained, read-only viewer
 // page. The prototype (world-viewer-prototype.html) IS the template — we
 // parse the folder into the data shape it expects, inject it, and apply a

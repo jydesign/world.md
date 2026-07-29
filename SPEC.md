@@ -125,19 +125,19 @@ The world stores this record, never the media.
 - `chat`: world.md summary + style.md + full entity files, one block.
 - `prompt`: ~150-word compressed block per entity, copy-pasteable.
 
-## Tooling — `worldfile` CLI (v0.1)
-- `worldfile serve <world>` — serve the generated viewer on localhost
+## Tooling — `world.md` CLI (v0.1)
+- `world.md serve <world>` — serve the generated viewer on localhost
   with live reload as files change.
-- `worldfile lint <world>` — validate frontmatter, flag broken refs and
+- `world.md lint <world>` — validate frontmatter, flag broken refs and
   expired/unapproved licenses.
-- `worldfile spec` — print this format spec for pasting into any AI chat,
+- `world.md spec` — print this format spec for pasting into any AI chat,
   so non-MCP tools can author valid world files.
 (Vendor-neutral by construction — see CLAUDE.md guardrail 6.)
 
 ## Deferred (v2 candidates only if FEEDBACK.md demands)
 Wardrobe as entities; structured relationships; scenes/story beats;
 timelines; per-entity permissions.
-- `worldfile diff` — entity-level changes between two git states; the
+- `world.md diff` — entity-level changes between two git states; the
   seed of the V2 world-diff / impact analyzer.
 - Compact single-file `WORLD.md` that tooling explodes into a `.world/`
   folder. Deferred: the folder stays the single source of truth for
