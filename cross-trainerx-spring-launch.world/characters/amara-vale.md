@@ -12,12 +12,12 @@ physical:
   face: oval, high cheekbones
   eyes: dark hazel
   hair: black, tightly coiled, gathered in a high braided ponytail
-  marks: faint scar across the left eyebrow
+  marks: thin pale healed scar through the outer LEFT eyebrow — a small natural break in the brow hair
 wardrobe:
   default: fitted plain unbranded charcoal training top with subtle tonal paneling (no logos or marks), tapered black performance trousers, lime-accented boots
 refs: [references.yaml#amara-ref]
 canon:
-  - "Faint scar across the LEFT eyebrow is always present"
+  - "Thin pale healed scar through the outer LEFT eyebrow (a small break in the brow hair) is always present — a skin mark only, never ink, tattoo, stitches, or tape"
   - "Hair is a high braided ponytail"
   - "No club badges, sponsors, national emblems, or recognizable uniform elements"
 ---

@@ -174,8 +174,11 @@ profiles. Imagen 4 is deprecated — never target it.
   compose. Resolves entities named in the description (id / name / alias
   match, deterministic — unknown or ambiguous names error with
   candidates), always includes style + world canon, composes ONLY the
-  matched entities, and appends the shot line as the action. Hard budget
-  per target (midjourney ≈ 250 words); packing order: medium + style →
+  matched entities, and appends the shot line as the action. Budget per
+  target governs the droppable pool — facts, flavor, atmosphere
+  (midjourney ≈ 150 words, phrase-boundary trimming); medium lead, shot,
+  canon, and nevers are exempt and always ship whole, so totals land
+  ≈250–320. Packing order: medium + style →
   shot → entity facts (terse phrases, not comma soup) → location
   atmosphere → merged nevers. Canon is exempt from budget trimming. No
   LLM-based context selection in v0.1 — chat targets ARE the intelligent

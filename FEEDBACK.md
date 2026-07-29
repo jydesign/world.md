@@ -228,3 +228,24 @@ showed v 7.)
   now reads "plain unbranded charcoal training top … (no logos or
   marks)". Positive phrasing > negation; SPEC notes the pattern. Apply
   the same phrasing to Mateo/Leonie when their images go into rotation.
+
+---
+
+## 2026-07-29 — 005 (setup) · Scar→tattoo drift; references propagate their own flaws
+
+- James: the scar has rendered as a **tattoo-like brow mark since run
+  001**; he picked the reference as overall favorite and the flaw rode
+  in — **a reference lock propagates its own drift**. (Earlier frames
+  showed taped/stitched versions — also off-canon: that's a fresh
+  injury, not a faint healed scar.)
+- Render cause: "scar across the eyebrow" is ambiguous to image models —
+  drifts to ink marks or the fashion "eyebrow slit."
+- Lessons →
+  - Approve references AGAINST THE CANON CHECKLIST feature by feature,
+    not by overall favorite. Version them; supersede, don't patch
+    (amara-ref v1 flaw documented in references.yaml; v2 to replace it).
+  - Describe marks by physical reality: world now says "thin pale healed
+    scar through the outer LEFT eyebrow — a small break in the brow
+    hair; skin mark only, never ink, tattoo, stitches, or tape."
+- Run 005 = tightened wardrobe + scar phrasing, same oref for identity;
+  cull for a scar-correct frame → approve as amara-ref v2.

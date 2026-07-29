@@ -448,18 +448,22 @@ function mjBlock(entities,shot){
   });
   segs.push({t:atmo?'atmosphere: '+atmo:'',d:3});
   segs=segs.filter(x=>x.t);
+  /* Budget governs the DROPPABLE pool only (facts/flavor/atmosphere,
+     ~150 words); lead, shot, canon, and nevers are exempt and always
+     ship whole. Trimming cuts at phrase boundaries, never mid-phrase. */
   const wc=s=>s.split(/\s+/).length;
-  let total=segs.reduce((a,x)=>a+wc(x.t),0);
+  const CAP=150;
+  let droppable=segs.filter(x=>x.d>0).reduce((a,x)=>a+wc(x.t),0);
   for(const level of [3,2]){
-    for(let i=segs.length-1;i>=0&&total>250;i--){
-      if(segs[i].d===level){total-=wc(segs[i].t);segs.splice(i,1);}
+    for(let i=segs.length-1;i>=0&&droppable>CAP;i--){
+      if(segs[i].d===level){droppable-=wc(segs[i].t);segs.splice(i,1);}
     }
   }
-  for(let i=segs.length-1;i>=0&&total>250;i--){
+  for(let i=segs.length-1;i>=0&&droppable>CAP;i--){
     if(segs[i].d===1){
-      const w=segs[i].t.split(/\s+/);
-      const keep=Math.max(12,w.length-(total-250));
-      if(keep<w.length){total-=w.length-keep;segs[i].t=w.slice(0,keep).join(' ').replace(/[,;]$/,'');}
+      const phrases=segs[i].t.split(', ');
+      while(phrases.length>2&&droppable>CAP){droppable-=wc(phrases.pop());}
+      segs[i].t=phrases.join(', ');
     }
   }
   /* attachable refs (D02): approved http image refs of the resolved
