@@ -48,6 +48,13 @@ refs) and composed the first Midjourney prompt for Image 1.
   independently confirming the D02 per-tool-profiles decision. → Viewer
   now has a compose-target picker (Chat / GPT Image / Midjourney /
   Generic) wired to both copy buttons.
+- **Sections you don't know exist never get filled.** The Cross-TrainerX
+  characters had no `voice` or `refs` — not by choice, but because the
+  source brief never mentioned them and the viewer silently hid the
+  slots. The empty-states-are-onboarding principle needed to reach
+  section level, not just world level. → Entity pages now render every
+  SPEC slot for the type; unfilled ones show a dashed invite with a
+  copyable starter prompt ("Add voice to Amara Vale: …").
 - **Whole-world Midjourney package is ~5,200 chars** — far past the terse
   bar MJ culture will paste habitually. The real MJ unit is a per-shot
   subset (character + object + location). CLI `compose <entities>` covers

@@ -86,6 +86,9 @@
   table.spec td:first-child{font-family:var(--mono);font-size:12px;color:var(--ink-3);width:34%;white-space:nowrap}
   table.spec tr:last-child td{border-bottom:none}
 
+  .sec-empty{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px dashed var(--line-2);border-radius:10px;padding:10px 13px;font-size:12.5px;color:var(--ink-3)}
+  .sec-empty:hover{border-color:var(--w-amber)}
+  .sec-empty .btn{font-size:11px;padding:5px 11px;flex:none}
   .canon-list,.never-list{list-style:none;display:grid;gap:8px}
   .canon-list li{background:var(--canon-bg);border-left:3px solid var(--canon-edge);border-radius:0 8px 8px 0;padding:9px 13px;font-size:13.5px}
   .canon-list li::before{content:"CANON";font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:#9A7420;display:block;margin-bottom:2px}
@@ -302,6 +305,31 @@ current version <span class="hl">[…]</span>, licensed for <span class="hl">[us
   }
 };
 
+/* ---------- per-section empty states on entity pages ----------
+   Every slot the SPEC defines renders — filled as data, unfilled as an
+   invite — so the structure teaches what can be added. */
+const SECTION_PROMPTS={
+  physical:e=>`Add physical details to ${e.name}: age [..], build [..], hair [..], eyes [..], distinguishing marks [..].`,
+  wardrobe:e=>`Add wardrobe to ${e.name}: default [outfit]; variants [name: outfit].`,
+  voice:e=>`Add voice to ${e.name}: [manner — e.g. low, deliberate, dry humor]. Optional relationships as plain strings: ["Sister of X (estranged)"].`,
+  form:e=>`Add form to ${e.name}: silhouette [..], scale [..], materials [..], colorways [name + hex], key features [..].`,
+  iface:e=>`Describe ${e.name} in use: visible interface [..]; placement [worn/held/placed how, which side faces the camera].`,
+  atmosphere:e=>`Add atmosphere to ${e.name}: weather [..], light [..], sound [..], season [..].`,
+  place:e=>`Add place details to ${e.name}: geography [..], architecture [..], subareas [named spots as strings], restrictions [legal/licensing notes].`,
+  canon:e=>`Add canon to ${e.name}: hard rules that must never break, e.g. [always / never ..].`,
+  never:e=>`Add never rules to ${e.name}: [what must never appear in outputs].`,
+  prose:e=>`Write the description for ${e.name}: 2–3 short paragraphs — personality or feel, movement or presence, defaults.`,
+  refs:e=>`Register a reference for ${e.name}: [what it is] at [URL or path], current version [..], license [owner, use, expiry]; link it as references.yaml#[id] from ${e.id}.md.`
+};
+function copySectionPrompt(kind,coll,id){
+  const e=WORLD[coll].find(x=>x.id===id);
+  copyText(SECTION_PROMPTS[kind](e),'Starter prompt copied — paste it to Claude');
+}
+function sectionInvite(title,hint,kind,coll,id){
+  return `<section><div class="sec-h"><h2>${title}</h2><span class="src">empty — the format has a slot for this</span></div>
+    <div class="sec-empty"><span>${hint}</span><button class="btn" onclick="copySectionPrompt('${kind}','${coll}','${id}')">copy prompt</button></div></section>`;
+}
+
 /* ---------- state ---------- */
 let MODE = 'example';
 let PAGE = {type:'world'};
@@ -503,26 +531,38 @@ function pageStyle(){
 function pageEntity(coll,id){
   const e=WORLD[coll].find(x=>x.id===id);
   const eyebrow={characters:'characters/'+id+'.md',objects:'objects/'+id+'.md',locations:'locations/'+id+'.md'}[coll];
+  const isChar=coll==='characters',isObj=coll==='objects',isLoc=coll==='locations';
+  const inv=(t,h,k)=>sectionInvite(t,h,k,coll,id);
   let badges=`<span class="badge v">v${e.version}</span>${statusBadge(e.status)}`;
   if(e.role) badges+=`<span class="badge ${e.role==='hero'?'role-hero':''}">role: ${e.role}</span>`;
   if(e.kind) badges+=`<span class="badge">${e.kind}</span>`;
   let spec='';
   if(e.physical) spec+=`<section><div class="sec-h"><h2>Physical</h2><span class="src">survives prompt compression</span></div>${specTable(Object.entries(e.physical))}</section>`;
+  else if(isChar) spec+=inv('Physical','Age, build, hair, eyes, marks — the facts that survive into image prompts.','physical');
   if(e.wardrobe) spec+=`<section><div class="sec-h"><h2>Wardrobe</h2></div>${specTable([['default',e.wardrobe.default],...Object.entries(e.wardrobe.variants||{})])}</section>`;
+  else if(isChar) spec+=inv('Wardrobe','A default outfit plus named variants — wardrobe ships with every prompt.','wardrobe');
   if(e.form) spec+=`<section><div class="sec-h"><h2>Form</h2><span class="src">survives prompt compression</span></div>${specTable([...Object.entries(e.form).filter(([k])=>k!=='colorways'),['colorways',(e.form.colorways||[]).map(c=>`${c.name} ${c.hex}`).join(', ')]])}</section>`;
+  else if(isObj) spec+=inv('Form','Silhouette, scale, materials, colorways, key features — the product facts.','form');
   if(e.iface) spec+=`<section><div class="sec-h"><h2>Interface</h2></div>${specTable([['visible UI',e.iface],['placement',e.placement]])}</section>`;
   else if(e.placement) spec+=`<section><div class="sec-h"><h2>In use</h2></div>${specTable([['placement',e.placement]])}</section>`;
+  else if(isObj) spec+=inv('Interface & use','What shows on it, and how it appears in use — worn, held, placed where.','iface');
   if(e.atmosphere) spec+=`<section><div class="sec-h"><h2>Atmosphere</h2><span class="src">defaults for every scene set here</span></div>${specTable(Object.entries(e.atmosphere))}</section>`;
+  else if(isLoc) spec+=inv('Atmosphere','Weather, light, sound, season — quiet defaults for every scene set here.','atmosphere');
   if(e.architecture) spec+=`<section><div class="sec-h"><h2>Place</h2></div>${specTable([['geography',e.geography],['architecture',e.architecture],['subareas',(e.subareas||[]).join(' · ')],['restrictions',e.restrictions]])}</section>`;
+  else if(isLoc) spec+=inv('Place','Geography, architecture, named subareas, and any legal restrictions.','place');
   if(e.voice) spec+=`<section><div class="sec-h"><h2>Voice</h2></div>${specTable([['manner',e.voice],['relationships',(e.relationships||[]).join('; ')]])}</section>`;
+  else if(isChar) spec+=inv('Voice','How they sound — manner, cadence, humor. Relationships fit here too.','voice');
+  let canonInv='';
+  if(!(e.canon&&e.canon.length)) canonInv+=inv('Canon','Hard rules that must never break — they survive every compression.','canon');
+  if((isObj||isLoc)&&!(e.never&&e.never.length)) canonInv+=inv('Never','Negative rules — merged into every context package.','never');
   return `<div class="eyebrow">${eyebrow}</div>
   <h1>${e.name}</h1>
   <div class="badges">${badges}</div>
   <div style="margin-top:16px">${copyBtn(`copyEntityPackage(WORLD.${coll}.find(x=>x.id==='${id}'))`)}</div>
-  ${canonBlock(e.canon,e.never)}
+  ${canonBlock(e.canon,e.never)}${canonInv}
   ${spec}
-  ${e.prose?`<section><div class="sec-h"><h2>Description</h2><span class="src">prose → chat target only</span></div><div class="prose">${e.prose.map(p=>`<p>${mdInline(p)}</p>`).join('')}</div></section>`:''}
-  ${refsBlock(e.refs)}`;
+  ${(e.prose&&e.prose.length)?`<section><div class="sec-h"><h2>Description</h2><span class="src">prose → chat target only</span></div><div class="prose">${e.prose.map(p=>`<p>${mdInline(p)}</p>`).join('')}</div></section>`:inv('Description','Personality or feel in 2–3 short paragraphs — ships to chat context only.','prose')}
+  ${(e.refs&&e.refs.length)?refsBlock(e.refs):inv('References','Point to external truth — a CAD export, a headshot, a location plate.','refs')}`;
 }
 
 function pageRefs(){
