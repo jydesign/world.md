@@ -15,6 +15,7 @@ physical:
   marks: faint scar across the left eyebrow
 wardrobe:
   default: fitted charcoal training top with subtle tonal paneling, tapered black performance trousers, lime-accented boots
+refs: [references.yaml#amara-ref]
 canon:
   - "Faint scar across the LEFT eyebrow is always present"
   - "Hair is a high braided ponytail"

@@ -135,7 +135,13 @@ v0.1 profiles:
   world; load once per session, brief shots conversationally after.
 - `midjourney` — terse block, the hardest compression case: canon +
   physical/form facts as comma descriptors, style essentials, merged
-  `never` lists emitted as `--no`.
+  `never` lists emitted as `--no`; emits `--style raw` (validated
+  FEEDBACK 001–003). Chirality: left/right canon cannot be enforced by
+  prompt-only generation (mirrored training data makes models
+  chirality-weak). Stage the side in the shot line ("her left side
+  toward camera"); enforce via the canon checklist at selection,
+  reference images (`--cref`/omni-ref), and CAD insertion; the
+  never-mirror canon protects it downstream.
 - `nano-banana` — edit-instruction phrasing for canon-preserving edits
   ("change X; everything else identical"). CLI/MCP only.
 - `flux` — programmatic output (JSON) for API/pipeline use: text block +

@@ -87,3 +87,8 @@ being prompted?
   (`worldmd shoot` + viewer shot field) with DETERMINISTIC entity
   resolution is the per-shot path; LLM-based context selection is not
   built pre-gate — the chat targets already are the intelligent path.
+- 2026-07-29 (FEEDBACK 003): `--style raw` validated 3/3 → emitted by
+  the midjourney target. Left/right canon is NOT claimed at generation
+  (prompt-only tools are chirality-weak); it is enforced at shot-line
+  staging, selection (canon checklist), reference conditioning, CAD
+  insertion, and the never-mirror rule.

@@ -156,3 +156,40 @@ architecture still absent from the prompt.
 - `--style raw` + medium lead looked right in both raw runs — candidate
   for hardcoding into the midjourney target after one more confirming
   run.
+
+---
+
+## 2026-07-29 — 003 · Run 3: composer v2 (canon-adjacent + location floor), ar 16:9 raw
+
+### What held (4 images)
+- **Northstar Ground appeared 4/4** — steep seating + translucent
+  cantilevered roof in every frame. The truncation-floor fix worked on
+  its first outing; location identity had been absent in every prior run.
+- Braided ponytail held (~4/4); medium photographic 4/4; watch present
+  4/4; lime accents on boots; no poses/smiles drift.
+- X-motif landed as a **faint roof reflection** (frame 4) — per canon
+  this time, not the literal signage of run 002-C.
+- `--style raw` right 3/3 runs → now emitted by the midjourney target.
+
+### What drifted
+- **Chirality ~2/4**: watch and scar flip between her left and right
+  side across frames; profile direction inconsistent.
+
+### Diagnosis + decision (the left/right problem)
+Prompt-only diffusion tools are chirality-weak by construction: training
+corpora are full of mirrored images, so "watch on wrist" is learned
+side-agnostic, and anatomical-left vs viewer-left is ambiguous once the
+pose rotates. **world.md does not pretend to fix this at generation.**
+Enforcement is layered:
+1. Stage the side in the shot line ("kneeling, her left side toward
+   camera") — pose language beats anatomical labels.
+2. Canon checklist at selection — flipped frames are objectively
+   cullable, never shipped.
+3. Approved character reference (added `amara-ref` slot) rides along as
+   `--cref` / omni-ref — image refs hold identity + chirality far better
+   than text.
+4. CAD insertion guarantees the product's side in post; generation only
+   owes a clean placement zone (already canon).
+5. The never-mirror world canon protects chirality downstream.
+This run is the canonical example of **canon as acceptance criteria, not
+just prompt text.**

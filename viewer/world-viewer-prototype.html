@@ -462,7 +462,7 @@ function mjBlock(entities,shot){
       if(keep<w.length){total-=w.length-keep;segs[i].t=w.slice(0,keep).join(' ').replace(/[,;]$/,'');}
     }
   }
-  return segs.map(x=>x.t).join('. ')+(no?' --no '+no:'');
+  return segs.map(x=>x.t).join('. ')+(no?' --no '+no:'')+' --style raw';
 }
 function composePackage(entities,shot){
   shot=shot||'';

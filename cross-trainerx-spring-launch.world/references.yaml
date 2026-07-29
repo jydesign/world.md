@@ -2,6 +2,17 @@
 # CAD as external truth — it never stores the model itself. Replace the paths
 # and set current/approved when real exports land.
 
+amara-ref:
+  kind: image
+  source: local
+  path: ../refs/amara_ref_v1.png
+  current: pending
+  approved: false
+  note: "Approved character reference for Amara — pick a canon-clean frame
+    from the culled 4-ups (scar LEFT, braided ponytail). Rides along as
+    --cref / omni-reference; image refs hold identity and chirality far
+    better than prompt text."
+
 pulse-arc-cad:
   kind: cad-export
   source: local
