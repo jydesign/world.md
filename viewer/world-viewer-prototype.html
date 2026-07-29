@@ -397,9 +397,10 @@ function refsBlock(ids){
     <div class="note-not-stored">// fetched from source at view time — the world stores the record, never the media</div></section>`;
 }
 function refRow(id,r){
-  return `<div class="ref"><span class="kind">${r.kind}</span>
-    <div class="info"><b>${id}</b><span>${r.source} · ${r.path} · current ${r.current}</span></div>
-    <div class="lic"><b>${r.approved?'approved':'unapproved'}</b><br>${r.license.use}${r.license.expiry!=='—'?' · exp '+r.license.expiry:''}</div></div>`;
+  const lic=r.license||{};
+  return `<div class="ref"><span class="kind">${r.kind||'ref'}</span>
+    <div class="info"><b>${id}</b><span>${[r.source,r.path,r.current?('current '+r.current):''].filter(Boolean).join(' · ')}</span></div>
+    <div class="lic"><b>${r.approved?'approved':'unapproved'}</b>${lic.use?'<br>'+lic.use:''}${lic.expiry&&lic.expiry!=='—'?' · exp '+lic.expiry:''}</div></div>`;
 }
 function copyBtn(fn){
   return `<button class="btn" onclick="${fn}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy context package</button>`;

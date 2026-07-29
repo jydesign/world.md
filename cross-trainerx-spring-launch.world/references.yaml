@@ -1,0 +1,27 @@
+# Hero products ship as final CAD, inserted in post. The world registers the
+# CAD as external truth — it never stores the model itself. Replace the paths
+# and set current/approved when real exports land.
+
+pulse-arc-cad:
+  kind: cad-export
+  source: local
+  path: ../refs/pulse-arc/
+  current: pending
+  approved: false
+  note: "Pulse Arc AI watch — final CAD not yet delivered; watch is in-iteration."
+
+orbit-home-cad:
+  kind: cad-export
+  source: local
+  path: ../refs/orbit-home/
+  current: pending
+  approved: false
+  note: "Orbit Home AI speaker (~18cm tall) — final CAD pending."
+
+vista-air-cad:
+  kind: cad-export
+  source: local
+  path: ../refs/vista-air/
+  current: pending
+  approved: false
+  note: "Vista Air AI goggles — final CAD pending."
