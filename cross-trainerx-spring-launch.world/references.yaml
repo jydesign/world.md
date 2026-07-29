@@ -4,14 +4,14 @@
 
 amara-ref:
   kind: image
-  source: local
-  path: ../refs/amara_ref_v1.png
-  current: pending
-  approved: false
-  note: "Approved character reference for Amara — pick a canon-clean frame
-    from the culled 4-ups (scar LEFT, braided ponytail). Rides along as
-    --cref / omni-reference; image refs hold identity and chirality far
-    better than prompt text."
+  source: midjourney
+  url: https://cdn.midjourney.com/54b0b750-ad9a-455b-9e66-d743ea40047d/0_1.png
+  current: v1
+  approved: true
+  note: "Approved character reference — run 003 pick (top row, second
+    frame): scar LEFT, braided ponytail, watch on LEFT wrist. Rides along
+    as --oref / --cref. CDN link may expire; mirror to
+    ../refs/amara_ref_v1.png when convenient."
 
 pulse-arc-cad:
   kind: cad-export

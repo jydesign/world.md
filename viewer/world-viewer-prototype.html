@@ -462,7 +462,14 @@ function mjBlock(entities,shot){
       if(keep<w.length){total-=w.length-keep;segs[i].t=w.slice(0,keep).join(' ').replace(/[,;]$/,'');}
     }
   }
-  return segs.map(x=>x.t).join('. ')+(no?' --no '+no:'')+' --style raw';
+  /* attachable refs (D02): approved http image refs of the resolved
+     entities ride along as --oref */
+  const orefs=[];
+  entities.forEach(e=>(e.refs||[]).forEach(id=>{
+    const r=(WORLD.refs||{})[id];
+    if(r&&r.kind==='image'&&r.approved&&/^https?:/.test(r.url||''))orefs.push(r.url);
+  }));
+  return segs.map(x=>x.t).join('. ')+(no?' --no '+no:'')+(orefs.length?' --oref '+orefs.join(' '):'')+' --style raw';
 }
 function composePackage(entities,shot){
   shot=shot||'';

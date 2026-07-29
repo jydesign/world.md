@@ -193,3 +193,9 @@ Enforcement is layered:
 5. The never-mirror world canon protects chirality downstream.
 This run is the canonical example of **canon as acceptance criteria, not
 just prompt text.**
+
+**Follow-up:** James picked run 003's top-row/second frame as the
+approved Amara reference (scar LEFT, watch LEFT) — `amara-ref` v1,
+approved, MJ CDN URL recorded. The composer now emits approved http
+image refs as `--oref` automatically (D02 attachable-refs, minimal
+implementation). No media stored — the URL is the record.

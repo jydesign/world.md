@@ -141,7 +141,9 @@ v0.1 profiles:
   chirality-weak). Stage the side in the shot line ("her left side
   toward camera"); enforce via the canon checklist at selection,
   reference images (`--cref`/omni-ref), and CAD insertion; the
-  never-mirror canon protects it downstream.
+  never-mirror canon protects it downstream. Attachable refs: approved
+  image references (http) of the composed entities are emitted as
+  `--oref` automatically.
 - `nano-banana` — edit-instruction phrasing for canon-preserving edits
   ("change X; everything else identical"). CLI/MCP only.
 - `flux` — programmatic output (JSON) for API/pipeline use: text block +
