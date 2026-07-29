@@ -23,8 +23,10 @@ training:
 
 1. **Measure the moment** — the Pulse Arc AI watch, in a stadium at sunrise
    (Amara Vale, Northstar Ground).
+
 2. **Command the environment** — the Orbit Home AI speaker, in a hillside
    home (Mateo Ríos, Casa Ladera).
+
 3. **See the impossible** — the Vista Air AI goggles, during a fantasy
    skydive (Leonie Falk, the Leap).
 

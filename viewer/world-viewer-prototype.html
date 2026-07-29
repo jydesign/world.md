@@ -300,6 +300,12 @@ let PAGE = {type:'world'};
 /* ---------- helpers ---------- */
 const $ = id => document.getElementById(id);
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function mdInline(s){let h=esc(s);
+  h=h.replace(/\[\[([^\]]+)\]\]/g,'$1');
+  h=h.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  h=h.replace(/(^|[^*])\*(?!\s)([^*\n]+?)\*/g,'$1<em>$2</em>');
+  h=h.replace(/`([^`]+)`/g,'<code>$1</code>');
+  return h;}
 function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),1800)}
 function copyText(txt,msg){navigator.clipboard.writeText(txt).then(()=>toast(msg||'Copied to clipboard')).catch(()=>toast('Copy failed'))}
 function statusBadge(s){return `<span class="badge ${s==='approved'?'st-approved':'st-iter'}">${s}</span>`}
@@ -413,7 +419,7 @@ function pageWorld(){
   <div class="badges">${statusBadge(w.status)}<span class="badge">audience: festival short</span></div>
   ${canonBlock(w.canon)}
   <section><div class="sec-h"><h2>Premise</h2><span class="src">prose → chat target only</span></div>
-    <div class="prose">${w.premise.map(p=>`<p>${esc(p)}</p>`).join('')}</div></section>
+    <div class="prose">${w.premise.map(p=>`<p>${mdInline(p)}</p>`).join('')}</div></section>
   <section><div class="sec-h"><h2>Tone &amp; audience</h2></div>${specTable([['tone',w.tone],['audience',w.audience]])}</section>
   <div class="footer-note">source of truth: harborline.world/world.md · rendered by the viewer, edited in conversation, versioned in git</div>`;
 }
@@ -449,7 +455,7 @@ function pageEntity(coll,id){
   <div style="margin-top:16px">${copyBtn(`copyEntityPackage(WORLD.${coll}.find(x=>x.id==='${id}'))`)}</div>
   ${canonBlock(e.canon,e.never)}
   ${spec}
-  ${e.prose?`<section><div class="sec-h"><h2>Description</h2><span class="src">prose → chat target only</span></div><div class="prose">${e.prose.map(p=>`<p>${esc(p)}</p>`).join('')}</div></section>`:''}
+  ${e.prose?`<section><div class="sec-h"><h2>Description</h2><span class="src">prose → chat target only</span></div><div class="prose">${e.prose.map(p=>`<p>${mdInline(p)}</p>`).join('')}</div></section>`:''}
   ${refsBlock(e.refs)}`;
 }
 
