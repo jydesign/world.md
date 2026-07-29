@@ -1,5 +1,6 @@
 ---
 name: Cross-TrainerX Spring Launch
+medium: photograph
 palette:
   - {name: Graphite black,   hex: "#1C1C1E", use: "dominant hardware and shadow"}
   - {name: Brushed titanium, hex: "#C2C1BA", use: "satin-metal edges, structural trim"}

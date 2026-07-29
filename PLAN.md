@@ -13,9 +13,12 @@ Start date: ____________  (fill in — the gate date is start + 8 weeks)
   - friction: what was annoying to maintain by hand
 - Dogfood test protocol (the gate evidence): the same shot brief run in
   each of the 4 target tools (GPT Image, Midjourney, Nano Banana, FLUX),
-  with and without the world context package; count canon violations per
-  10 generations. "Drift with vs. without" is the headline metric — one
-  number per tool per week, for the gate and the eventual README.
+  A/B'd three ways: (a) no world context, (b) whole-world package paste,
+  (c) shot-driven compose (`worldmd shoot` / the viewer shot field).
+  Count medium adherence + canon violations per 10 generations.
+  "Drift with vs. without" is the headline metric — one number per tool
+  per week, for the gate and the eventual README. For Midjourney also
+  A/B `--style raw` on/off before hardcoding it into the target.
   Per-tool delivery flows: tool-flows.html.
 
 ## Weeks 3–5 — Server + exporters
@@ -79,3 +82,8 @@ being prompted?
   step is conversational in v0.1 (Claude reads the git diff and writes
   the edit instruction); `worldmd diff` itself stays V2 per the decision
   above.
+- 2026-07-29 (from FEEDBACK 001, first MJ test): `medium:` is required
+  in style.md and leads every prompt target. Shot-driven compose
+  (`worldmd shoot` + viewer shot field) with DETERMINISTIC entity
+  resolution is the per-shot path; LLM-based context selection is not
+  built pre-gate — the chat targets already are the intelligent path.

@@ -29,6 +29,9 @@ Prose: premise (2–3 paragraphs), themes. Max 2 pages.
 
 ## style.md
 Frontmatter:
+- `medium:` photograph | 3d-render | illustration | anime — REQUIRED.
+  Every prompt target emits medium + grade first; without it, terse-prompt
+  tools default to their house style.
 - `palette:` list of {name, hex, use}
 - `camera:` {lens, framing, movement}
 - `lighting:` {quality, direction, time_bias}
@@ -157,6 +160,16 @@ profiles. Imagen 4 is deprecated — never target it.
   expired/unapproved licenses.
 - `worldmd spec` — print this format spec for pasting into any AI chat,
   so non-MCP tools can author valid world files.
+- `worldmd shoot "<shot description>" --target <t>` — the shot-driven
+  compose. Resolves entities named in the description (id / name / alias
+  match, deterministic — unknown or ambiguous names error with
+  candidates), always includes style + world canon, composes ONLY the
+  matched entities, and appends the shot line as the action. Hard budget
+  per target (midjourney ≈ 250 words); packing order: medium + style →
+  shot → entity facts (terse phrases, not comma soup) → location
+  atmosphere → merged nevers. Canon is exempt from budget trimming. No
+  LLM-based context selection in v0.1 — chat targets ARE the intelligent
+  path.
 (Vendor-neutral by construction — see CLAUDE.md guardrail 6.)
 
 ## Deferred (v2 candidates only if FEEDBACK.md demands)

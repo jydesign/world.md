@@ -63,6 +63,9 @@
   .btn.primary{background:var(--w-night);border-color:var(--w-night);color:#F3EFE5}
   .btn.primary:hover{background:#22302f}
   .btn svg{width:13px;height:13px}
+  .shot{flex:1;min-width:220px;max-width:420px;border:1px solid var(--line-2);border-radius:99px;padding:7px 14px;font-size:12.5px;font-family:var(--ui);background:var(--card);color:var(--ink)}
+  .shot::placeholder{color:var(--ink-3)}
+  .shot:focus{outline:none;border-color:var(--w-amber)}
 
   /* ---------- content ---------- */
   .content{max-width:780px;padding:36px 34px 90px;margin:0 auto}
@@ -163,6 +166,7 @@
           <button id="mode-example" class="on" onclick="setMode('example')">Example world</button>
           <button id="mode-empty" onclick="setMode('empty')">Empty world</button>
         </div>
+        <input class="shot" id="shot-input" placeholder="Optional shot: &quot;Amara at Northstar Ground, tying her boots&quot; — copy composes only what's named" title="Shot-driven compose: entities named here (by name or alias) are resolved deterministically; everything else is left out">
         <div class="seg" id="target-seg" role="tablist" aria-label="Compose target" title="What the copy buttons compose for">
           <button class="on" data-t="chat" onclick="setTarget('chat')">Chat</button>
           <button data-t="gpt-image" onclick="setTarget('gpt-image')">GPT Image</button>
@@ -392,32 +396,67 @@ function rawNevers(entities){
   entities.forEach(e=>(e.never||[]).forEach(x=>n.push(x)));
   return n.map(x=>String(x).replace(/^never\s+/i,''));
 }
-function mjBlock(entities){
-  const s=WORLD.style||{};
-  const parts=entities.map(e=>{
-    const d=[];
-    if(e.physical)d.push(Object.values(e.physical).join(', '));
-    if(e.wardrobe&&e.wardrobe.default)d.push('wearing '+e.wardrobe.default);
-    if(e.form)d.push(Object.entries(e.form).filter(([k])=>k!=='colorways').map(([,v])=>v).join(', '));
-    if(e.form&&e.form.colorways)d.push('colorway '+e.form.colorways.map(c=>c.name+' '+c.hex).join(', '));
-    if(e.placement)d.push(e.placement);
-    if(e.architecture)d.push(e.architecture);
-    if(e.atmosphere)d.push(Object.values(e.atmosphere).join(', '));
-    (e.canon||[]).forEach(c=>d.push(c));
-    return e.name+': '+d.join(', ');
-  });
-  const st=[];
-  if(s.mood)st.push(s.mood.join(', '));
-  if(s.palette)st.push('palette of '+s.palette.map(p=>p.name).join(', '));
-  if(s.lighting)st.push([s.lighting.quality,s.lighting.direction,s.lighting.time_bias].filter(Boolean).join(', '));
-  if(s.camera&&s.camera.lens)st.push(s.camera.lens);
-  if(s.grade)st.push(s.grade);
-  const no=rawNevers(entities).join(', ');
-  return parts.join('. ')+'. '+st.filter(Boolean).join('. ')+(no?' --no '+no:'');
+function mediumWord(){
+  const m=(WORLD.style||{}).medium||'';
+  return {photograph:'cinematic photograph, photorealistic','3d-render':'3D render',illustration:'illustration',anime:'anime'}[m]||m;
 }
-function composePackage(entities){
-  if(TARGET==='midjourney')return mjBlock(entities);
-  if(TARGET==='prompt')return [...entities.flatMap(e=>composeEntity(e)),...styleEssentials(),...mergedNevers(entities)].join('\n');
+function styleLeadCore(){
+  const s=WORLD.style||{};
+  return [mediumWord(),s.grade,
+    s.lighting?[s.lighting.quality,s.lighting.direction,s.lighting.time_bias].filter(Boolean).join(', '):'',
+    s.camera&&s.camera.lens?s.camera.lens:''].filter(Boolean).join('. ');
+}
+function styleLeadFlavor(){
+  const s=WORLD.style||{};
+  return [(s.mood||[]).join(', '),
+    s.palette?'palette of '+s.palette.map(p=>p.name).join(', '):''].filter(Boolean).join('. ');
+}
+function getShot(){const el=document.getElementById('shot-input');return el?el.value.trim():''}
+function shotEntities(text){
+  const t=text.toLowerCase();const hits=[];
+  [WORLD.characters,WORLD.objects,WORLD.locations].forEach(arr=>arr.forEach(e=>{
+    const names=[e.name,e.id,...(e.aliases||[])].filter(Boolean).map(s=>String(s).toLowerCase());
+    if(names.some(n=>t.includes(n)||n.split(/[^a-z0-9]+/).some(w=>w.length>3&&t.includes(w))))hits.push(e);
+  }));
+  return hits;
+}
+/* midjourney: medium+style lead -> shot -> entity facts -> atmosphere ->
+   canon -> merged nevers as --no. ~250-word budget; canon never trimmed. */
+function mjBlock(entities,shot){
+  const packs=entities.map(e=>({
+    name:e.name,
+    facts:[e.physical?Object.values(e.physical).join(', '):'',
+      e.wardrobe&&e.wardrobe.default?'wearing '+e.wardrobe.default:'',
+      e.form?Object.entries(e.form).filter(([k])=>k!=='colorways').map(([,v])=>v).join(', '):'',
+      e.form&&e.form.colorways?'colorway '+e.form.colorways.map(c=>c.name+' '+c.hex).join(', '):'',
+      e.placement||'',e.architecture||''].filter(Boolean),
+    canon:e.canon||[],
+    atmo:e.atmosphere?Object.values(e.atmosphere).join(', '):null
+  }));
+  const canonSeg=packs.filter(p=>p.canon.length).map(p=>p.name+': '+p.canon.join('; ')).join('. ');
+  const atmo=packs.filter(p=>p.atmo).map(p=>p.atmo).join('; ');
+  const no=rawNevers(entities).join(', ');
+  /* d = drop tier when over budget: 3 atmosphere, 2 style flavor, 1 entity
+     facts (last resort). d:0 never drops: medium lead, shot, canon.
+     Nevers always ship and are excluded from the word budget. */
+  let segs=[{t:styleLeadCore(),d:0},{t:shot?'Shot: '+shot:'',d:0},
+    {t:styleLeadFlavor(),d:2},
+    ...packs.filter(p=>p.facts.length).map(p=>({t:p.name+': '+p.facts.join(', '),d:1})),
+    {t:atmo?'atmosphere: '+atmo:'',d:3},{t:canonSeg,d:0}].filter(x=>x.t);
+  const wc=s=>s.split(/\s+/).length;
+  let total=segs.reduce((a,x)=>a+wc(x.t),0);
+  for(const level of [3,2,1]){
+    for(let i=segs.length-1;i>=0&&total>250;i--){
+      if(segs[i].d===level){total-=wc(segs[i].t);segs.splice(i,1);}
+    }
+  }
+  return segs.map(x=>x.t).join('. ')+(no?' --no '+no:'');
+}
+function composePackage(entities,shot){
+  shot=shot||'';
+  if(TARGET==='midjourney')return mjBlock(entities,shot);
+  const shotTail=shot?['','SHOT: '+shot]:[];
+  if(TARGET==='prompt')return [...entities.flatMap(e=>composeEntity(e)),...styleEssentials(),...mergedNevers(entities),...shotTail].join('\n');
   /* chat + gpt-image: full long-context block */
   const head=[];
   if(TARGET==='gpt-image')head.push('Use this world context for every image generation in this session. CANON lines are hard constraints. Items on the NEVER list must not appear. Keep every fact consistent across shots; ask before deviating.','');
@@ -427,15 +466,25 @@ function composePackage(entities){
     (WORLD.world.premise||[]).forEach(p=>head.push(p));
   }
   const body=entities.flatMap(e=>['',...composeEntity(e),...(e.prose||[])]);
-  return [...head,...body,'',...styleEssentials(),...mergedNevers(entities)].join('\n');
+  return [...head,...body,'',...styleEssentials(),...mergedNevers(entities),...shotTail].join('\n');
 }
 function copyEntityPackage(e){
-  copyText(composePackage([e]),'Context package copied — target: '+TARGETS[TARGET]);
+  copyText(composePackage([e],getShot()),'Context package copied — target: '+TARGETS[TARGET]);
 }
 function copyWorldPackage(){
   if(MODE==='empty'){toast('Nothing here yet — copy a starter prompt below');return}
-  const all=[...WORLD.characters,...WORLD.objects.filter(o=>o.role==='hero'),...WORLD.locations];
-  copyText(composePackage(all),'World package copied — target: '+TARGETS[TARGET]);
+  const shot=getShot();
+  let all;
+  if(shot){
+    all=shotEntities(shot);
+    if(!all.length){
+      const names=[...WORLD.characters,...WORLD.objects,...WORLD.locations].map(e=>e.name).join(', ');
+      toast('No entities matched the shot — name one of: '+names);return;
+    }
+  }else{
+    all=[...WORLD.characters,...WORLD.objects.filter(o=>o.role==='hero'),...WORLD.locations];
+  }
+  copyText(composePackage(all,shot),(shot?'Shot package copied ('+all.length+' entities) — ':'World package copied — ')+TARGETS[TARGET]);
 }
 function copyInvite(key){
   const tmp=document.createElement('div');tmp.innerHTML=INVITES[key].prompt;

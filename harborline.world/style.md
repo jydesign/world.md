@@ -1,5 +1,6 @@
 ---
 name: Harborline
+medium: photograph
 palette:
   - {name: Harbor slate, hex: "#2E4B52", use: "dominant — steel, water, shadow"}
   - {name: Fog gray,     hex: "#AEB7B3", use: "atmosphere, skies, midtones"}
