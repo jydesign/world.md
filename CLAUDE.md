@@ -22,8 +22,9 @@ This is a VALIDATION INSTRUMENT, not a platform. See PLAN.md for the
   NEVER stores media.
 - MCP server is READ-ONLY: world_summary, get_entity, search_world,
   compose_context(entities, target). No write tools in v0.1.
-- compose_context targets: `chat` (full markdown) and `prompt` (tight
-  block for image/video tools, also copy-pasteable).
+- compose_context targets are per-tool profiles: `chat`, `gpt-image`,
+  `midjourney`, `nano-banana`, `flux`, plus generic `prompt` fallback
+  (see SPEC.md). No profiles beyond these before the gate.
 - UI limited to the read-only viewer described below. No auth.
   No hosting. Local server + open repo only.
 

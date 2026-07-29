@@ -32,6 +32,28 @@ refs) and composed the first Midjourney prompt for Image 1.
   real users: do they think in names or hexes? Maybe `hex` should be
   optional and names allowed to stand alone.
 
+---
+
+## 2026-07-29 — Copy path broke; compose targets added
+
+### Friction / bugs
+- **"Copy world package" silently failed in the embedded preview.** The
+  viewer relied solely on `navigator.clipboard`, which sandboxed webviews
+  block. First real user click on the flagship button → nothing. → FIXED:
+  fallback chain (clipboard API → `execCommand` → manual-copy overlay
+  with pre-selected text). Lesson for the spec: the copy path must work
+  in the least-privileged embed, not just a first-class browser tab.
+- **One generic package isn't enough at the moment of paste.** First real
+  use immediately wanted a Midjourney-shaped block, not the generic one —
+  independently confirming the D02 per-tool-profiles decision. → Viewer
+  now has a compose-target picker (Chat / GPT Image / Midjourney /
+  Generic) wired to both copy buttons.
+- **Whole-world Midjourney package is ~5,200 chars** — far past the terse
+  bar MJ culture will paste habitually. The real MJ unit is a per-shot
+  subset (character + object + location). CLI `compose <entities>` covers
+  it; the viewer has no entity multi-select (entity pages copy one entity
+  + style). Watch whether users want shot-level compose in the viewer.
+
 ### Re-explains
 - _(pending — watch once the world is reused across multiple MJ sessions)_
 

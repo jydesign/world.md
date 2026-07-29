@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>world.md — end-to-end flows per tool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF7; --card:#FFFFFF; --ink:#1F1D1A; --ink-2:#5C5850; --ink-3:#8B867C;
+    --line:#E7E3DA; --line-2:#D8D3C7;
+    --slate:#2E4B52; --amber:#D9A441; --amber-bg:#FBF3E2; --hull:#8C3B2E; --night:#151C1E; --fog:#AEB7B3;
+    --mono:'IBM Plex Mono',monospace; --ui:'Instrument Sans',sans-serif; --prose:'Newsreader',serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--ui);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5;padding:40px 22px 80px}
+  .wrap{max-width:1040px;margin:0 auto}
+
+  header .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+  header h1{font-size:27px;font-weight:700;letter-spacing:-.02em;margin-top:6px}
+  header .thesis{font-family:var(--prose);font-style:italic;font-size:17px;color:var(--ink-2);margin-top:8px;max-width:62ch}
+
+  /* legend */
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;font-size:12px;color:var(--ink-2);align-items:center}
+  .legend .key{display:flex;align-items:center;gap:7px}
+  .swk{width:14px;height:14px;border-radius:4px;border:1px solid var(--line-2);background:var(--card)}
+  .swk.u{background:var(--amber-bg);border-color:var(--amber)}
+  .swk.c{background:var(--night);border:none}
+
+  /* shared spine */
+  .spine{margin-top:26px;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:16px 18px}
+  .spine .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 4px}
+  .step{border:1px solid var(--line-2);background:var(--card);border-radius:9px;padding:7px 11px;font-size:12.5px;font-weight:500;color:var(--ink);line-height:1.35;max-width:230px}
+  .step small{display:block;font-family:var(--mono);font-size:10px;color:var(--ink-3);font-weight:400;margin-top:2px}
+  .step.cmd{font-family:var(--mono);font-size:11.5px;background:var(--night);border-color:var(--night);color:#E8E2D2;font-weight:500}
+  .step.cmd .amber{color:var(--amber)}
+  .step.unique{background:var(--amber-bg);border-color:var(--amber)}
+  .step.check{border-style:dashed;border-color:var(--hull);color:var(--hull);font-weight:600}
+  .arr{color:var(--ink-3);font-size:13px;padding:0 3px;flex:none}
+  .arr.back{color:var(--slate)}
+
+  /* lanes */
+  .lane{margin-top:22px;border:1px solid var(--line);background:var(--card);border-radius:14px;overflow:hidden}
+  .lane-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:15px 18px 12px;border-bottom:1px solid var(--line)}
+  .lane-h .num{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+  .lane-h h2{font-size:16.5px;font-weight:700;letter-spacing:-.01em}
+  .lane-h .pattern{font-family:var(--mono);font-size:11px;color:var(--slate);background:#EEF2F1;border:1px solid #D5DEDC;border-radius:99px;padding:2px 10px}
+  .lane-h .travels{margin-left:auto;font-family:var(--mono);font-size:11px;color:#9A7420;background:var(--amber-bg);border:1px solid var(--amber);border-radius:99px;padding:2px 10px}
+  .lane-b{padding:16px 18px 6px}
+  .lane-f{padding:10px 18px 15px;display:flex;gap:14px;flex-wrap:wrap}
+  .note{flex:1;min-width:240px;font-size:12.5px;color:var(--ink-2);border-top:1px solid var(--line);padding-top:10px}
+  .note b{color:var(--ink);font-weight:600}
+  .note .t{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:3px}
+
+  .loopline{margin-top:26px;border:1px dashed var(--line-2);border-radius:14px;padding:14px 18px;background:transparent}
+  .loopline .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin-bottom:8px}
+  .metric{margin-top:22px;font-family:var(--mono);font-size:12px;color:var(--ink-2);border-left:3px solid var(--amber);background:var(--amber-bg);border-radius:0 10px 10px 0;padding:11px 15px;max-width:640px}
+  @media(max-width:640px){.lane-h .travels{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">world.md · end-to-end journeys · v0.1 test matrix</div>
+    <h1>One world, four deliveries</h1>
+    <p class="thesis">The world and the loop are constant across every tool. Only the delivery step changes — and how often the context has to travel.</p>
+    <div class="legend">
+      <span class="key"><span class="swk"></span> shared spine</span>
+      <span class="key"><span class="swk u"></span> unique to this tool</span>
+      <span class="key"><span class="swk c"></span> CLI command</span>
+      <span class="key" style="color:var(--hull)">⌁ drift check vs canon</span>
+    </div>
+  </header>
+
+  <div class="spine">
+    <div class="lbl">The shared spine — every journey below is this loop</div>
+    <div class="flow">
+      <span class="step">.world/ in git<small>truth, versioned</small></span><span class="arr">→</span>
+      <span class="step cmd">worldmd compose <span class="amber">--target ‹tool›</span></span><span class="arr">→</span>
+      <span class="step unique">deliver context<small>the step that differs</small></span><span class="arr">→</span>
+      <span class="step">generate</span><span class="arr">→</span>
+      <span class="step check">⌁ drift check</span><span class="arr">→</span>
+      <span class="step">tell Claude what drifted<small>canon tightens · file edited</small></span><span class="arr">→</span>
+      <span class="step">git commit</span><span class="arr back">⟲</span>
+    </div>
+  </div>
+
+  <!-- 1 ChatGPT -->
+  <div class="lane">
+    <div class="lane-h"><span class="num">01</span><h2>ChatGPT · GPT Image 2</h2><span class="pattern">long-context chat</span><span class="travels">context travels: once per session</span></div>
+    <div class="lane-b"><div class="flow">
+      <span class="step cmd">worldmd compose <span class="amber">--target gpt-image</span></span><span class="arr">→</span>
+      <span class="step unique">load world at session start<small>paste once · later: MCP serves it</small></span><span class="arr">→</span>
+      <span class="step">brief the shot in plain language<small>"Mara at Pier 7, blue hour"</small></span><span class="arr">→</span>
+      <span class="step">generate in-chat</span><span class="arr">→</span>
+      <span class="step unique">iterate conversationally<small>"new angle — canon holds"</small></span><span class="arr">→</span>
+      <span class="step check">⌁ drift? cite the canon line</span><span class="arr">→</span>
+      <span class="step">next shot, same session<small>no re-loading</small></span>
+    </div></div>
+    <div class="lane-f">
+      <div class="note"><span class="t">what this tests</span><b>The chat target.</b> Does one world load hold canon across twenty generations without re-prompting? Also proves vendor neutrality — same package, non-Claude chat.</div>
+      <div class="note"><span class="t">friction to watch</span>Session ends, context dies — restart cost is the pain MCP removes. Note every time the user re-explains anything.</div>
+    </div>
+  </div>
+
+  <!-- 2 Midjourney -->
+  <div class="lane">
+    <div class="lane-h"><span class="num">02</span><h2>Midjourney V8.1</h2><span class="pattern">terse prompt</span><span class="travels">context travels: with every prompt</span></div>
+    <div class="lane-b"><div class="flow">
+      <span class="step cmd">worldmd compose <span class="amber">--target midjourney</span> mara aurawatch</span><span class="arr">→</span>
+      <span class="step unique">copy the ~150-word block<small>clipboard is the interface</small></span><span class="arr">→</span>
+      <span class="step unique">/imagine: block + shot description<small>refs from references.yaml as --sref / omni-ref</small></span><span class="arr">→</span>
+      <span class="step">4-up → vary / upscale</span><span class="arr">→</span>
+      <span class="step check">⌁ drift check the pick</span><span class="arr">→</span>
+      <span class="step">recompose for next shot<small>no session memory — package rides along every time</small></span>
+    </div></div>
+    <div class="lane-f">
+      <div class="note"><span class="t">what this tests</span><b>Compression under hostility.</b> Midjourney culture is short prompts; if the block is too long to paste habitually, the composer failed. The silver streak surviving here is the strongest single proof.</div>
+      <div class="note"><span class="t">friction to watch</span>Does the user start trimming the block by hand? Whatever they cut first is what compression should drop first.</div>
+    </div>
+  </div>
+
+  <!-- 3 Nano Banana -->
+  <div class="lane">
+    <div class="lane-h"><span class="num">03</span><h2>Nano Banana Pro</h2><span class="pattern">edit-first</span><span class="travels">context travels: per edit instruction</span></div>
+    <div class="lane-b"><div class="flow">
+      <span class="step">generate base frame with world context<small>via Gemini chat, as in lane 01</small></span><span class="arr">→</span>
+      <span class="step unique">version bump in the world<small>aurawatch v18 → v19 · crown side changes</small></span><span class="arr">→</span>
+      <span class="step cmd">worldmd diff <span class="amber">HEAD~1</span></span><span class="arr">→</span>
+      <span class="step unique">diff becomes the edit prompt<small>"crown to LEFT — everything else identical"</small></span><span class="arr">→</span>
+      <span class="step">apply edit to existing frame</span><span class="arr">→</span>
+      <span class="step check">⌁ verify untouched canon stayed put</span><span class="arr">→</span>
+      <span class="step">commit · frame tagged v19</span>
+    </div></div>
+    <div class="lane-f">
+      <div class="note"><span class="t">what this tests</span><b>The versioning story.</b> Canon-preserving edits are the primitive under the V2 impact analyzer — change one truth, hold the rest. worldmd diff literally writes the edit instruction.</div>
+      <div class="note"><span class="t">friction to watch</span>Edits that silently break *other* canon (hair, wardrobe) while fixing the watch — count these; they're the drift metric's edit-mode twin.</div>
+    </div>
+  </div>
+
+  <!-- 4 FLUX -->
+  <div class="lane">
+    <div class="lane-h"><span class="num">04</span><h2>FLUX.2</h2><span class="pattern">pipeline / API</span><span class="travels">context travels: in every API call</span></div>
+    <div class="lane-b"><div class="flow">
+      <span class="step unique">workflow or script runs compose<small>ComfyUI node · build step · no human paste</small></span><span class="arr">→</span>
+      <span class="step cmd">worldmd compose <span class="amber">--target flux --json</span></span><span class="arr">→</span>
+      <span class="step unique">text block + approved ref paths<small>references.yaml → live multi-reference inputs</small></span><span class="arr">→</span>
+      <span class="step">API call · batch generate</span><span class="arr">→</span>
+      <span class="step check">⌁ canon checklist review<small>manual now · model-assisted later</small></span><span class="arr">→</span>
+      <span class="step">outputs tagged with world version<small>traceable to a git commit</small></span>
+    </div></div>
+    <div class="lane-f">
+      <div class="note"><span class="t">what this tests</span><b>Compose as infrastructure.</b> The CLI consumed by code, not clipboards — and the moment "own knowledge, not media" pays: refs are fetched and attached, never duplicated.</div>
+      <div class="note"><span class="t">friction to watch</span>JSON shape stability — pipeline users will script against it immediately, so this target's output format freezes first.</div>
+    </div>
+  </div>
+
+  <div class="loopline">
+    <div class="lbl">⟲ the return path — identical in all four lanes</div>
+    <div class="flow">
+      <span class="step check">⌁ something drifted</span><span class="arr">→</span>
+      <span class="step">tell Claude in plain language<small>"the scar keeps vanishing"</small></span><span class="arr">→</span>
+      <span class="step">canon line added or tightened<small>Claude edits the file</small></span><span class="arr">→</span>
+      <span class="step">git commit</span><span class="arr">→</span>
+      <span class="step">every future package inherits the fix<small>in all four tools at once</small></span>
+    </div>
+  </div>
+
+  <p class="metric">headline metric, all lanes: canon violations per 10 generations, with vs. without the world package. one number per tool, per week — this is the gate evidence.</p>
+</div>
+</body>
+</html>
