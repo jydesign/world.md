@@ -433,21 +433,33 @@ function mjBlock(entities,shot){
     canon:e.canon||[],
     atmo:e.atmosphere?Object.values(e.atmosphere).join(', '):null
   }));
-  const canonSeg=packs.filter(p=>p.canon.length).map(p=>p.name+': '+p.canon.join('; ')).join('. ');
   const atmo=packs.filter(p=>p.atmo).map(p=>p.atmo).join('; ');
   const no=rawNevers(entities).join(', ');
-  /* d = drop tier when over budget: 3 atmosphere, 2 style flavor, 1 entity
-     facts (last resort). d:0 never drops: medium lead, shot, canon.
+  /* Each entity ships facts + its canon ADJACENT (early tokens adhere
+     better in terse tools). d = drop tier when over budget: 3 atmosphere,
+     2 style flavor; entity facts (d:1) are truncated gracefully with a
+     ~12-word floor, never deleted. d:0 never drops: lead, shot, canon.
      Nevers always ship and are excluded from the word budget. */
   let segs=[{t:styleLeadCore(),d:0},{t:shot?'Shot: '+shot:'',d:0},
-    {t:styleLeadFlavor(),d:2},
-    ...packs.filter(p=>p.facts.length).map(p=>({t:p.name+': '+p.facts.join(', '),d:1})),
-    {t:atmo?'atmosphere: '+atmo:'',d:3},{t:canonSeg,d:0}].filter(x=>x.t);
+    {t:styleLeadFlavor(),d:2}];
+  packs.forEach(p=>{
+    if(p.facts.length)segs.push({t:p.name+': '+p.facts.join(', '),d:1});
+    if(p.canon.length)segs.push({t:p.name+' canon: '+p.canon.join('; '),d:0});
+  });
+  segs.push({t:atmo?'atmosphere: '+atmo:'',d:3});
+  segs=segs.filter(x=>x.t);
   const wc=s=>s.split(/\s+/).length;
   let total=segs.reduce((a,x)=>a+wc(x.t),0);
-  for(const level of [3,2,1]){
+  for(const level of [3,2]){
     for(let i=segs.length-1;i>=0&&total>250;i--){
       if(segs[i].d===level){total-=wc(segs[i].t);segs.splice(i,1);}
+    }
+  }
+  for(let i=segs.length-1;i>=0&&total>250;i--){
+    if(segs[i].d===1){
+      const w=segs[i].t.split(/\s+/);
+      const keep=Math.max(12,w.length-(total-250));
+      if(keep<w.length){total-=w.length-keep;segs[i].t=w.slice(0,keep).join(' ').replace(/[,;]$/,'');}
     }
   }
   return segs.map(x=>x.t).join('. ')+(no?' --no '+no:'');

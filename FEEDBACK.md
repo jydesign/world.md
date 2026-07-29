@@ -116,3 +116,43 @@ Amara Vale: 27, tall, powerfully athletic, deep brown, oval, high cheekbones, da
 - Protocol: rerun this brief as the A/B — (a) whole-world paste vs
   (b) shot compose; log medium adherence + canon violations per 10.
   Test `--style raw` on/off before hardcoding it.
+
+---
+
+## 2026-07-29 — 002 · Shot-compose A/B reruns (Midjourney)
+
+Same shot brief as 001: Amara tightens her boot cuff pitch-side at
+Northstar Ground at sunrise, Pulse Arc toward camera.
+
+### Arm B — viewer shot compose, `ar 4:3`, no raw (4 images)
+- **Medium 4/4 photographic** (001 was 0/4). The headline number moved.
+- Single subject 4/4; shot action followed 4/4; watch present; sunrise
+  light; no influencer poses.
+- **Hair canon violated ~4/4**: loose curls, not the high braided
+  ponytail — canon was in the prompt but trailing at the end. Model
+  drift with a composer accomplice (placement).
+- **Northstar identity absent**: generic track + pylons. Composer's
+  fault — the budget trim deleted the location's facts wholesale; only
+  its canon shipped. (Incidental X from pylon cross-bracing.)
+
+### Arm C — James's hand-appended version, `ar 16:9 --style raw`
+Canon phrased inline next to each entity, bold labels; stadium
+architecture still absent from the prompt.
+- Photographic 4/4; braided ponytail RETURNED (~4/4) — inline/adjacent
+  canon phrasing appears to be what fixed it.
+- **X-motif present 3/4 but literal**: big X signage on structures, not
+  the canon "faint X-shaped reflection." Phrasing sensitivity — "faint"
+  amplified into set dressing. Watch for this class of drift.
+- Location still a generic track — expected: no prompt so far has
+  carried the stadium description.
+- Left-wrist adherence: pending zoom check on picks.
+
+### Lessons → composer (both shipped)
+- Canon now packs ADJACENT to each entity's facts ("<name> canon: …"),
+  not as a trailing block — arm C is the evidence this placement works.
+- Budget trim now truncates entity facts to a ~12-word floor instead of
+  deleting them, so location identity always ships (stadium line
+  verified present at ~255 in-budget words).
+- `--style raw` + medium lead looked right in both raw runs — candidate
+  for hardcoding into the midjourney target after one more confirming
+  run.
