@@ -14,7 +14,7 @@ physical:
   hair: black, tightly coiled, gathered in a high braided ponytail
   marks: faint scar across the left eyebrow
 wardrobe:
-  default: fitted charcoal training top with subtle tonal paneling, tapered black performance trousers, lime-accented boots
+  default: fitted plain unbranded charcoal training top with subtle tonal paneling (no logos or marks), tapered black performance trousers, lime-accented boots
 refs: [references.yaml#amara-ref]
 canon:
   - "Faint scar across the LEFT eyebrow is always present"

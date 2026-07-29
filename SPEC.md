@@ -143,7 +143,9 @@ v0.1 profiles:
   reference images (`--cref`/omni-ref), and CAD insertion; the
   never-mirror canon protects it downstream. Attachable refs: approved
   image references (http) of the composed entities are emitted as
-  `--oref` automatically.
+  `--oref` automatically. Negation is weak for logos in image models —
+  phrase apparel positively in wardrobe ("plain, unbranded") rather than
+  relying on `--no sponsor logos`.
 - `nano-banana` — edit-instruction phrasing for canon-preserving edits
   ("change X; everything else identical"). CLI/MCP only.
 - `flux` — programmatic output (JSON) for API/pipeline use: text block +

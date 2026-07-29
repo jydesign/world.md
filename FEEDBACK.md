@@ -199,3 +199,32 @@ approved Amara reference (scar LEFT, watch LEFT) — `amara-ref` v1,
 approved, MJ CDN URL recorded. The composer now emits approved http
 image refs as `--oref` automatically (D02 attachable-refs, minimal
 implementation). No media stored — the URL is the record.
+
+---
+
+## 2026-07-29 — 004 · Reference-conditioned run (oref + side-staged shot, ar 16:9 raw)
+
+### Tooling note
+MJ's web UI absorbs the `--oref`/`--cref` URL out of the pasted prompt
+and shows it in its Omni Reference slot — looked like it "dumped" the
+URL but it applied it. Composer output is compatible as-is. (Param chip
+showed v 7.)
+
+### What held (4 images)
+- **Identity locked 4/4** — same face as the approved reference in every
+  frame. The reference layer of the chirality stack works.
+- Braided ponytail 4/4; photographic 4/4; watch present 4/4, face
+  toward camera mostly; stadium roof present where framing allows;
+  left-side staging appears to have improved watch-side consistency
+  (final zoom check on the pick still owed).
+
+### What drifted — NEW CLASS
+- **Sponsor-like swoosh mark on the top ~2/4** — despite "no club
+  badges" canon AND `--no sponsor logos`. Known model behavior: negation
+  is weak for logos; "athletic training top" + athletic reference image
+  pull apparel-brand priors. Lime seams also migrated from boots to the
+  top (minor wardrobe drift).
+- Fix applied where it belongs — in the world: Amara's wardrobe default
+  now reads "plain unbranded charcoal training top … (no logos or
+  marks)". Positive phrasing > negation; SPEC notes the pattern. Apply
+  the same phrasing to Mateo/Leonie when their images go into rotation.
