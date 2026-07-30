@@ -677,3 +677,51 @@ unprompted (Frost poem, vs the Cross-TrainerX campaign). That is the gate
 BEHAVIOR, from the wrong person. Not gate evidence (needs external users),
 but the strongest pull signal so far: the format is being reached for, not
 dutifully tested.
+
+---
+
+## 2026-07-29 — 014 · Midjourney moderation-blocked a literary shot (GPT Image did not)
+
+Same conformed Death of the Hired Man world. James pasted the midjourney
+shot+world package (Mary, the farm, "book-cover portrait, light on Mary's
+apron, show all characters", `--style raw`) and hit:
+
+  "Sorry! The AI Moderator is unsure about this prompt. AI Moderation is
+   cautious with realistic images, especially of people."
+
+No images. (A prior partial-paste run produced Pixar-cartoon output —
+re-confirming that MJ slams to its house style without fully front-loaded
+medium/style cues; GPT Image does not.)
+
+### Leading hypothesis (MJ moderation is opaque/non-deterministic — not certain)
+NOT primarily the artist name (Kollwitz is historical and sat in the `--no`).
+Most likely: the block is dense with individually-flaggable words that a
+keyword moderator reads literally, unable to parse that they are
+PROHIBITIONS/themes: "dried-blood" (contains "blood"), "poverty, illness,
+or death", "childless", "villain", "grimaces", "tears", "vulnerability",
+"never fearless". Most live in the `never:` list and dark thematic canon.
+Combined with a detailed human ("1910s farm dress… show all characters"),
+the moderator flags a sensitive people-image. **The world's own safety
+rules became moderation triggers when the composer dumped the whole never
+list + canon into a terse block.**
+
+### Isolation test (James running it) — to confirm
+1. Regenerate with the entire `--no …` list deleted → if it passes, the
+   never-list was the trigger, definitively.
+2. Then narrow: rename "dried-blood rust" → "oxblood"; drop the Kollwitz
+   line — one at a time.
+(Update this entry with the result.)
+
+### Finding: MJ trails GPT Image on a THIRD axis for world.md's use case
+1) compression (006), 2) medium default (this run + 001), 3) moderation
+(this run). GPT's reasoning-based moderation understands "avoid these"; MJ's
+keyword moderation reads the NEVER list as intent. For rich / dark /
+literary worlds, reasoning-image tools (GPT Image, likely Gemini / Nano
+Banana) fit world.md better than terse-prompt diffusion. Not "drop MJ" — it
+is the stress-test target — but it may reshape which targets carry the gate.
+
+### Composer implication (noted, NOT built)
+The midjourney profile could emit a SHORT curated `--no` of visual terms
+rather than dumping every merged never — helps pasteability (250+ word
+blocks) AND moderation. This is D02's "keep the --no list short" earning
+its place. Revisit if MJ stays a priority target after the isolation test.
