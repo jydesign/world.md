@@ -51,6 +51,7 @@ type: character
 name: Mara Voss
 version: 3
 status: approved
+role: protagonist
 physical:
   presentation: woman
   age: 34
@@ -66,6 +67,24 @@ canon:
 Mara moves like someone who trusts machinery more than people — unhurried,
 exact, hands always finding a rail or a lever.
 ```
+
+**Field contracts — use these exact shapes; do not enrich them.** Frontmatter
+is a machine contract, not the place for rich description (that goes in the
+prose). Several fields are *controlled values* — one exact word, never a phrase
+or a nested map:
+- `status`: `draft | in-iteration | approved | deprecated`
+- `world.md` `format`: `film | campaign | series | game | book`
+- `style.md` `medium`: `photograph | 3d-render | illustration | anime`
+- object `role`: `hero | prop` — governs prompt budget, so it MUST be one of
+  these two words, not a description
+- character `role`: `protagonist | supporting | background`
+- character `physical.presentation`: what an image should render —
+  `woman | man | androgynous`, etc.
+- location `kind`: `real | fictional | real-modified`
+Everything else the story needs goes in the prose, not in invented nested
+frontmatter — tools ignore extra keys, and that is exactly where structure
+silently drifts. Quote any value containing a colon (`ending: "…a single word:
+dead"`) or the file will not parse.
 
 **Five rules that make this work** (learned the hard way — please follow them):
 
@@ -86,8 +105,12 @@ exact, hands always finding a rail or a lever.
    and you enforce the rest with reference images and post work.
 
 **The world never stores media.** `references.yaml` records *where* truth
-lives — a Drive link, a CAD export, an approved reference image URL — with
-`current:`, `license:`, and `approved:`. Never copy the asset in.
+lives — a Drive link, a CAD export, an approved reference image URL. Its
+**top-level keys are the reference ids** (entities cite them as
+`references.yaml#<id>`); do not wrap entries under a `references:` key or add a
+document-level `version:`/`status:`. Each entry: `kind`, `source`, `url` or
+`path`, `current`, `approved`, optional `license` and `note`. Never copy the
+asset in.
 
 **How you use it.** Compose per shot, not per world: take the style, the
 world canon, and *only* the entities your shot names, then add one line of
@@ -113,3 +136,12 @@ language.
 Ask your questions a few at a time, not all at once. If I give you a brief or
 a script, extract the durable facts into entity files and leave the
 shot-specific direction out.
+
+**Validate before you show me a file.** Check each one and fix or flag what
+fails: required fields present and `status` valid; `style.md` has a `medium`;
+every object has `role: hero|prop`; every character has a `role` and a
+`physical.presentation`; every location has a `kind`; all controlled values are
+single words, not phrases or maps; `references.yaml` top-level keys are the ids
+and every `refs:` resolves to one; no unquoted colons in values; and no
+deliverable-specific detail ("Image 1", "paired with…") is sitting in an entity
+file. Report anything you couldn't satisfy.

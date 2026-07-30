@@ -525,3 +525,53 @@ Design note: the two primers share the format+rules block verbatim (also
 in SPEC), so it now lives in three places. Accepted for self-containment —
 each primer must work as a single paste. The real dedup is `worldmd spec`
 generating both from SPEC once Node exists; deferred, not forgotten.
+
+---
+
+## 2026-07-29 — 011 · Validated + conformed a primer-built world (Death of the Hired Man)
+
+James built a full world by pasting the poem + notes into a chat, then
+asked me to validate it before sharing. First real "did the AI follow the
+structure" test. Ran a structural lint (built in-session, ruby — it IS
+`worldmd lint` made real) and conformed the result.
+
+### The headline finding
+**The AI wrote a superb "story bible" but treated frontmatter as rich
+description, not a machine contract.** It nailed the FOLDER (right files,
+right folders, canon + prose already spec-perfect) and consistently
+overrode FIELD CONTRACTS with its own richer schema:
+- `role:` as a nested map (`{occupation, narrative}` / `{category,
+  narrative}`) on every character AND object — instead of the controlled
+  word. `role` has a compositional job (`hero` vs `prop` drives budget),
+  so a map there breaks compose, not just style.
+- `references.yaml` wrapped every entry under a top-level `references:`
+  key with doc-level `version:`/`status:`; non-spec entry fields; `license`
+  as a prose sentence. Broke the "top-level keys are the ids" convention.
+- Deep bespoke frontmatter everywhere (`dramatic_structure`,
+  `psychology`, `visual_motifs`, `narrative_function`, …) — harmless to
+  the tools (ignored) but where drift hides.
+- `physical.presentation` missing on all characters; `kind` missing on
+  all locations; `medium` was the ONE contract that stuck (we hammered it
+  in earlier — evidence the primer CAN pin these when explicit).
+- A YAML parse error from an unquoted colon (`a single word: dead`) that
+  blocked the whole file — proof the viewer alone is a poor validator
+  (it would just crash), and that a lint is the right tool.
+
+### The lesson
+Folder shape is self-evident to a model; **controlled vocabularies and
+conventions are not** — an eager model "improves" them. Content richness
+was never the problem; contract precision was.
+
+### Actions
+- Conformed all 10 files (canon + prose kept verbatim; contract fields
+  reshaped; bespoke nested frontmatter dropped — recoverable from Drive
+  history). Re-lint: 0 errors. Renders + composes.
+- Hardened BOTH primers: a "Field contracts — use these exact shapes"
+  block (controlled values for status/format/medium/role/kind +
+  presentation, the references-key convention, "rich detail goes in prose
+  not invented frontmatter", quote colons); added `role:` to the entity
+  example; and a self-validation step so the AI checks its own output
+  against the contract before handing it over.
+- The world lives in James's Drive (confidential Narraite project), not
+  the repo — so it is not committed. The lint script stays in-session
+  (scratchpad); `worldmd lint` is its specced Node home.
