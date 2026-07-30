@@ -6,6 +6,7 @@ version: 1
 status: draft
 role: protagonist
 physical:
+  presentation: woman
   age: 24
   build: compact, explosive, athletic
   skin: fair with visible freckles

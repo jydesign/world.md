@@ -59,6 +59,7 @@ version: 3
 status: approved
 role: protagonist            # protagonist | supporting | background
 physical:
+  presentation: woman            # what is RENDERED — see note below
   age: 34
   build: lean, 5'9"
   hair: black, cropped, silver streak left temple
@@ -83,6 +84,15 @@ Prose: personality, relevant backstory, movement, default expressions.
 ```
 `physical` + `wardrobe.default` survive prompt compression; `canon`
 always survives; personality prose ships to chat target only.
+
+`presentation:` describes what is RENDERED, not identity — it is the fact
+an image model needs, and keeping it descriptive ("woman", "man",
+"androgynous", "masculine-presenting") covers androgynous, non-binary,
+and in-disguise cases that an identity label would flatten. Optional, but
+include it whenever a name would otherwise carry the burden: image
+targets never receive prose, so pronouns written in prose reach chat
+only, and everything else is left to the model's priors on the name.
+`physical:` is an open map — any key you write renders and composes.
 
 ## Object (objects/<id>.md)
 One type for anything characters wear, hold, or use. Required extra

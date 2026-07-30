@@ -6,6 +6,7 @@ version: 1
 status: draft
 role: protagonist
 physical:
+  presentation: woman
   age: 27
   build: tall, powerfully athletic
   skin: deep brown

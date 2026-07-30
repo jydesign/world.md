@@ -6,6 +6,7 @@ version: 1
 status: draft
 role: protagonist
 physical:
+  presentation: man
   age: 31
   build: broad-shouldered, muscular, elite-athlete presence
   skin: warm olive

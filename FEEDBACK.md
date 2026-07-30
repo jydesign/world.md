@@ -456,3 +456,47 @@ discoverability, not taxonomy. Three fixes, all inside v0.1:
 Also fixed: SPEC still instructed "reference it from a character's
 `wardrobe.variants`", contradicting the pointer we had just removed from
 Leonie. Corrected — no character file points at a shared object.
+
+---
+
+## 2026-07-29 — 009 · Gender was never in the world (added `presentation`)
+
+James asked how a model knows a character's gender. Audited: **no
+character had any gender signal in frontmatter** — no field, no pronouns.
+Pronouns existed only in prose (1 "her" for Amara, 1 "his" for Mateo),
+and prose ships to CHAT TARGETS ONLY. So every Midjourney run in this log
+carried zero gender information from the world. What the model actually
+used:
+1. **Name priors** — Amara / Mateo / Leonie carry strong training
+   associations.
+2. **Pronouns James happened to type in the shot line** ("her boot cuff").
+3. **An incidental secondary characteristic** — Mateo's beard rides in
+   `physical.hair`, so he alone had a shipped cue. Luck, not design.
+
+Three of four are accidental. Predictable failure modes: invented or
+gender-ambiguous names (a core audience — fantasy/sci-fi worlds), shot
+lines without pronouns, non-Western names where priors are unreliable,
+and any deliberately androgynous or in-disguise presentation.
+
+**This is a re-explain in disguise**, which is the metric PLAN tracks: if
+you must type "a woman" into every shot line to hold it stable, the world
+should own it instead.
+
+Passes the earning test (SPEC): an image target CONSUMES this directly,
+unlike deferred categories that reach an image only indirectly.
+
+### Fix — one optional field, no new type
+`physical.presentation:` — describes what is RENDERED, not identity.
+Descriptive values ("woman", "man", "androgynous", "masculine-presenting")
+keep androgynous / non-binary / in-disguise cases expressible, which an
+identity label would flatten. Applied to all four example characters;
+documented in SPEC, the primer, and the viewer's Physical empty-state +
+starter prompt.
+
+Verified with a deliberately pronoun-free shot line: composes as
+"Amara Vale: woman, 27, tall, powerfully athletic…" — previously the
+prompt contained no gender word at all.
+
+Note: the CHAT side already worked and needed nothing — prose ships to
+chat and carries pronouns naturally. Only the image path was blind, so
+one field was the whole fix.

@@ -47,6 +47,7 @@ name: Mara Voss
 version: 3
 status: approved
 physical:
+  presentation: woman
   age: 34
   hair: black, cropped, silver streak at left temple
   marks: thin scar above right eyebrow

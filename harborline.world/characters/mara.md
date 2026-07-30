@@ -7,6 +7,7 @@ version: 3
 status: approved
 role: protagonist
 physical:
+  presentation: woman
   age: "34"
   build: lean, 5'9"
   hair: black, cropped, silver streak at left temple
