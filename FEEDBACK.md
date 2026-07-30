@@ -249,3 +249,19 @@ showed v 7.)
     hair; skin mark only, never ink, tattoo, stitches, or tape."
 - Run 005 = tightened wardrobe + scar phrasing, same oref for identity;
   cull for a scar-correct frame → approve as amara-ref v2.
+
+### Run 005 results (A/B: with vs without oref)
+- **Arm B (no reference, text-only)**: watch/wrist left-consistent; NEW
+  DRIFT — hair rendered as loose braids hanging down the back/shoulders
+  in 4/4, not gathered up. "High braided ponytail" specified the braid
+  pattern but not clearly enough that it must be gathered UP and off the
+  neck — a text-underspecification gap, distinct from the scar issue.
+  → Fixed: physical.hair + canon now say "gathered UP ... into one high
+  ponytail on the crown (never loose braids hanging down)". Faces mostly
+  turned away/down in this arm — scar not scoreable from these frames.
+- **Arm A (with oref)**: identity locked to reference as expected; no
+  obvious tattoo-swoosh brow mark or apparel logo visible at review
+  resolution in frames 2–4 — promising that the scar/logo text fixes are
+  doing something even against the flawed reference, but NOT confirmed
+  without a zoomed crop. Awaiting James's zoom on a frontal frame to
+  identify a scar-correct amara-ref v2 candidate.
