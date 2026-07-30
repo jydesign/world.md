@@ -28,12 +28,12 @@ the feel).
 ```
 harborline.world/
   world.md            # premise, era, canon
-  style.md            # palette, camera, grade, NEVER rules
+  style.md            # medium, palette, camera, grade, NEVER rules
   characters/
     mara.md
   objects/
-    aurawatch.md      # role: hero
-    tin-mug.md        # role: prop
+    aurawatch.md      # role: hero — flagship product treatment
+    tin-mug.md        # role: prop  — anything worn, held, or used
   locations/
     pier-7.md
   references.yaml     # where external truth lives — never the media itself
@@ -49,6 +49,7 @@ name: Mara Voss
 version: 3
 status: approved
 physical:
+  presentation: woman
   age: 34
   hair: black, cropped, silver streak at left temple
   marks: thin scar above right eyebrow
@@ -71,42 +72,91 @@ Full format: [SPEC.md](SPEC.md). *(A compact single-file form that tooling
 can explode into a `.world/` folder is planned; today a world is the
 folder.)*
 
-## Getting started
+## Start here
 
-The format is just text — there's nothing to install to start.
+**Nothing to install.** The format is text, and the fastest way in is to
+let an AI build your world with you.
 
-- **By hand or with an AI.** Write the files yourself, or paste the format
-  spec into Claude / ChatGPT and say "help me build my world."
-- **See it.** Generate a read-only viewer from any world folder (needs
-  Node):
+1. **Open [`exporters/spec-prompt.md`](exporters/spec-prompt.md) and paste
+   it into Claude, ChatGPT, or Gemini.** It is self-contained — it teaches
+   the model the format, then interviews you about your project and writes
+   your files. (If you were sent this README on its own, ask for that file;
+   it's the only one you need to start.)
+2. **Save what it writes** as a `<yourproject>.world/` folder and put it in
+   a git repo. The folder is the truth; git is the history.
+3. **Compose per shot, not per world.** Take the style, the world canon,
+   and *only* the entities your shot needs — then add one line of shot
+   direction: *"Mara at Pier 7 at blue hour, tightening a winch."*
+4. **When something drifts, fix the world, not the prompt.** Add or tighten
+   a canon line, commit it — and every future prompt in every tool inherits
+   the fix.
 
-  ```bash
-  node viewer/generate.mjs harborline.world
-  ```
+That last step is the whole point. The loop is: generate → spot the drift →
+tell your AI what broke → it edits the file → git records it.
 
-  Open the generated HTML — populated entities render; every empty slot
-  shows a copy-paste starter prompt addressed to your AI.
+**If you have the repo and Node**, you can also render a read-only viewer
+of any world folder:
+
+```bash
+cd viewer && npm install && cd ..     # one dependency: js-yaml
+node viewer/generate.mjs harborline.world
+```
+
+Open the generated HTML: entities render as pages with a "copy context
+package" button and a shot field; every empty slot shows a copy-paste
+starter prompt addressed to your AI. Empty states are the onboarding.
 
 A `worldmd` CLI is in development:
 
 ```bash
-worldmd serve  <world>                          # localhost viewer, live reload   [in progress]
-worldmd lint   <world>                           # frontmatter, broken refs, licenses [in progress]
-worldmd compose mara aurawatch --target prompt   # compressed block for image/video   [planned]
-worldmd spec                                     # print the format for any AI chat    [planned]
-worldmd diff   HEAD~5                             # entity-level change log             [v2]
+worldmd shoot "<shot description>" --target midjourney   # shot-driven compose  [planned]
+worldmd serve  <world>       # localhost viewer, live reload                    [in progress]
+worldmd lint   <world>       # frontmatter, broken refs, expired licenses       [in progress]
+worldmd spec                 # print the format for any AI chat                 [available as exporters/spec-prompt.md]
+worldmd diff   HEAD~5        # entity-level change log                          [v2]
 ```
 
 ## Using it with AI tools
 
-- **Chat models (Claude, ChatGPT, Gemini):** paste the composed context —
-  or, once the server ships, serve the world over MCP. Prose ships to
-  chat; only facts ship to image prompts.
-- **Image & video tools (Midjourney, Runway, …):** the `prompt` target
-  produces a tight block — current versions, physical facts, canon, merged
-  NEVER rules. Paste it before your shot description.
-- **Coding agents (Claude Code, Cursor):** the world is files in your repo.
+Compose targets are per-tool profiles, not one generic block — each has its
+own budget, phrasing, and reference handling.
+
+- **Chat models (Claude, ChatGPT, Gemini)** — `chat` / `gpt-image`: paste
+  the whole world once per session, then brief shots in plain language.
+  Long-context tools tolerate the full package comfortably. Prose ships
+  here; only facts ship to image prompts.
+- **Image tools (Midjourney, FLUX, Nano Banana)** — `midjourney` / `flux` /
+  `nano-banana`: a tight block that leads with medium and style, carries
+  each entity's facts with its canon beside them, and merges every `never:`
+  rule into the negative prompt. Approved image references ride along
+  automatically. *(The paste profiles — `chat`, `gpt-image`, `midjourney`,
+  `prompt` — work in the viewer today; the edit and pipeline profiles ship
+  with the CLI.)*
+- **Coding agents (Claude Code, Cursor)** — the world is files in your repo.
   Tell the agent what changed; it edits the world; git records it.
+
+## Five rules that make it work
+
+Learned by generating against a real campaign and counting what broke:
+
+1. **Set `medium:` in `style.md`** (`photograph | 3d-render | illustration |
+   anime`) and put it first in every prompt. Without it, image tools fall
+   back to their house style — our first run came back as cartoons.
+2. **Compose per shot.** Pasting a whole world with no shot direction
+   produces a group lineup of everyone in it. Name the two or three
+   entities the shot needs.
+3. **Entity files describe what is ALWAYS true.** Which image something
+   appears in, its framing, its action — that belongs in the shot line.
+   Entities are reusable atoms; the shot is the composition.
+4. **Phrase positively and physically.** "Plain unbranded top" beats "no
+   logos"; "a thin pale healed scar — a small break in the brow hair" beats
+   "a scar." Negation is weak in image models, and vague nouns drift.
+5. **Keep canon next to what it governs, early in the prompt.** Trailing
+   canon gets ignored. Some rules can't be won at generation at all —
+   left/right sides, subtle recurring motifs, brand type. Write them as
+   canon anyway: canon is *acceptance criteria*, so off-canon outputs
+   become objectively cullable, and you enforce the rest with reference
+   images and post work.
 
 ## Principles
 
@@ -122,6 +172,10 @@ worldmd diff   HEAD~5                             # entity-level change log     
 4. **Vendor-neutral by design.** The format, the composer, and the viewer
    never depend on one AI vendor. Your world works everywhere, or it isn't
    worth keeping.
+5. **Categories earn their place.** A field or folder is added when a
+   compose target consumes it — when leaving it out measurably degrades an
+   output. Familiarity to a profession isn't the test; an unused category
+   is onboarding tax.
 
 ## What this is not
 
@@ -132,12 +186,23 @@ world.md does the same for generative models and the worlds they render.
 
 ## Status
 
-`alpha`, and honestly so: the `.world/` format and a read-only viewer
-generator work today; the MCP server and the `worldmd` CLI are in active
-development; the format will change. world.md is a validation instrument —
-we're looking for a handful of early users making real creative work
-(short films, campaigns, series, games). If you put your project into this
-format, tell us what broke: open an issue or start a discussion.
+`alpha`, and honestly so. What works today: the `.world/` format, the
+read-only viewer generator, and per-tool context composition. In active
+development: the MCP server and the `worldmd` CLI. The format will change.
+
+world.md is a **validation instrument**, not a product. It's being tested
+against one question: do a handful of people making real creative work —
+short films, campaigns, series, games — put their own project into this
+format and keep using it?
+
+**If you're one of those people, the most useful thing you can do is tell
+us what broke.** Where you had to re-explain something the world already
+knew, what drifted anyway, what was annoying to maintain by hand. Blunt is
+better than polite; "I gave up at step 2" is the most valuable sentence you
+can send.
+
+The repo is private during validation, so there are no public issues yet —
+send notes straight back to whoever shared this with you.
 
 ## License
 
