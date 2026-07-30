@@ -1,16 +1,15 @@
-# world.md — the pasteable primer
+# world.md — one-pass extraction primer
 
-This is the payload of `worldmd spec`: hand it to someone with no repo, no
-CLI, and no particular AI vendor, and they can build a world in one
-conversation. Send it as text (email, DM, gist, paste). It is deliberately
-self-contained — do not require the reader to clone anything.
+Use this when you ALREADY have written material — a script, treatment,
+creative brief, brand guide, character notes — and want a fast first draft
+instead of an interview. Paste this whole file into Claude, ChatGPT, or
+Gemini, then paste or attach your material below it. The model makes one
+best-effort pass and hands back a full `.world/` folder draft, marking what
+it inferred and what's still missing.
 
-This primer *interviews* the reader from a blank page. If they already have
-written material — a script, brief, treatment, or notes — hand them
-`extract-prompt.md` instead: it drafts a world from that material in one
-pass.
+Starting from a blank page instead? Use `spec-prompt.md` — it interviews you.
 
-Everything below the line is what you send.
+Everything below the line is what you send (put your material at the very end).
 
 ---
 
@@ -98,18 +97,43 @@ language.
 
 ---
 
-**Now, please do this:**
+**Now, please do this — one best-effort pass, then we refine. Do not
+interview me first; draft from the material, then tell me what's thin.**
 
-1. Ask me what I'm making — the format (film, campaign, series, game, book),
-   the era, the tone, and any rules that must never break.
-2. Ask about my visual style: medium, 4–6 palette colors, camera/lens
-   language, lighting, and what should never appear.
-3. Ask me for one character, one object, and one location to start. Just one
-   each — don't try to map my whole project.
-4. Then write the actual files as Markdown I can save, following the shape
-   above. Use my words, not stock phrasing.
-5. Tell me what's still empty and worth filling next.
+1. **Read all of my material first.** Find the durable, reusable entities:
+   the recurring characters, the products/objects, the locations, and the
+   overall visual style.
+2. **Separate the world from the shots.** The world is what is ALWAYS true
+   (who a character is, what a product looks like). A specific image, scene,
+   or shot — its framing, its action, which entities it pairs — is a
+   *deliverable*, not the world. Durable facts become entity files; specific
+   shots go in a separate list at the end labeled "Suggested shots (not
+   canon)". This is the single most important step — briefs are usually
+   organized by shot, and it is easy to bake a one-time moment into a
+   character by mistake.
+3. **Write the files** as Markdown code blocks, each labeled with its path:
+   `world.md` (premise, era, tone, canon), `style.md` (`medium:` FIRST, then
+   palette, camera, lighting, `never:`), one file per character / object /
+   location, and `references.yaml` for any external asset named (CAD,
+   images, brand marks) — recording only where it lives, never inventing its
+   contents.
+4. **Mark every inference.** If my material didn't state something you filled
+   in — a palette hex, a character's `presentation`, the `medium` — tag it
+   `# inferred` so I can correct it. Never invent a canon rule that my
+   material doesn't support: a wrong canon rule is worse than a missing one.
+5. **Apply the entry test.** Something earns its own file only if it recurs
+   across the material OR carries a rule. One-off scene props are shot text,
+   not entities.
 
-Ask your questions a few at a time, not all at once. If I give you a brief or
-a script, extract the durable facts into entity files and leave the
-shot-specific direction out.
+Then finish with two short lists:
+
+- **Gaps & inferences** — what you guessed, what's thin, and the 3–5
+  highest-value things I should add next.
+- **Suggested shots (not canon)** — the deliverable-specific moments you
+  kept out of the world, phrased as ready-to-use shot lines.
+
+Use my words wherever possible; keep entity prose to a few sentences. If my
+material is a shot-by-shot brief, expect most of it to be shots — only the
+durable facts become the world.
+
+My material follows:

@@ -77,10 +77,16 @@ folder.)*
 **Nothing to install.** The format is text, and the fastest way in is to
 let an AI build your world with you.
 
-1. **Open [`exporters/spec-prompt.md`](exporters/spec-prompt.md) and paste
-   it into Claude, ChatGPT, or Gemini.** It is self-contained — it teaches
-   the model the format, then interviews you about your project and writes
-   your files. (If you were sent this README on its own, ask for that file;
+1. **Let an AI build your world with you.** Two ways in, both self-contained
+   — paste one into Claude, ChatGPT, or Gemini:
+   - **Starting fresh?** [`exporters/spec-prompt.md`](exporters/spec-prompt.md)
+     interviews you about your project and writes the files as you answer.
+   - **Already have a script, brief, or notes?**
+     [`exporters/extract-prompt.md`](exporters/extract-prompt.md) — paste it,
+     then drop your material below it, and it drafts as much of the world as
+     it can in one pass, flagging what it guessed.
+
+   (If you were sent this README on its own, ask for whichever file fits —
    it's the only one you need to start.)
 2. **Save what it writes** as a `<yourproject>.world/` folder and put it in
    a git repo. The folder is the truth; git is the history.

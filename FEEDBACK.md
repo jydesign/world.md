@@ -500,3 +500,28 @@ prompt contained no gender word at all.
 Note: the CHAT side already worked and needed nothing — prose ships to
 chat and carries pronouns naturally. Only the image path was blind, so
 one field was the whole fix.
+
+---
+
+## 2026-07-29 — 010 · Second onboarding path: one-pass extraction
+
+Friction (James, first ChatGPT test of `spec-prompt.md`): the interview
+primer is thorough but slow — a lot of back-and-forth before you have
+anything on the page. And many real users arrive with material already
+written (script, brief, treatment, brand guide), so an interview asks them
+to re-type what they already have.
+
+Fix: `exporters/extract-prompt.md` — paste it, drop your material below it,
+and one best-effort pass returns a full `.world/` draft with every
+inference tagged `# inferred` and the deliverable-specific moments split
+into a "Suggested shots (not canon)" list. This is exactly how the
+Cross-TrainerX world was built from the D01 brief — now packaged for anyone.
+
+Two entry modes now: **interview** (blank page → spec-prompt.md) and
+**extract** (existing material → extract-prompt.md). README "Start here"
+presents both; the primers cross-link each other.
+
+Design note: the two primers share the format+rules block verbatim (also
+in SPEC), so it now lives in three places. Accepted for self-containment —
+each primer must work as a single paste. The real dedup is `worldmd spec`
+generating both from SPEC once Node exists; deferred, not forgotten.
