@@ -27,6 +27,14 @@ myproject.world/
   references.yaml   # where external truth lives (Drive, CAD, approved images)
 ```
 
+**Where clothing goes.** A person's own always-true outfit lives in that
+character's `wardrobe:`. Anything an *activity* owns — a flight suit anyone
+who jumps would wear — or that recurs across characters becomes an object
+with `role: prop`, so recasting doesn't break continuity and the
+description is never duplicated. One-off looks for a single shot are just
+prompt text. (Costume isn't its own folder here: a generative model treats
+a costume and a prop identically, so `role:` carries the distinction.)
+
 Every entity file needs `id`, `type`, `name`, `version`, `status`
 (`draft | in-iteration | approved | deprecated`), and may add `canon:` —
 hard rules that must never break. Example:

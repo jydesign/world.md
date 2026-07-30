@@ -395,3 +395,64 @@ glyphs; canon reserves the negative space; type is composited in post.
 Added a style `never` for generated wordmarks/headline type. A DESIGN.md
 brand-token import stays deferred V2 interop — building it now would drag
 a design-system dependency into a context format before the gate.
+
+---
+
+## 2026-07-29 — 008 · D05 film-production mental model, reconciled
+
+James probed whether the categories match filmmakers' mental models, via
+a draft (D05) proposing four new top-level categories — `wardrobe/`,
+`audio.md`, `factions/`, `vfx-gfx/` — plus `role: set-dressing`, on the
+grounds that physical production groups elements by **department
+ownership**.
+
+### The reconciliation
+Department boundaries divide **labor and budget**. Entity types here
+divide **what a model must keep consistent**. Those are different axes,
+and conflating them is how the taxonomy grows: a generative model sees a
+costume and a prop identically, so a Costume/Props split buys a familiar
+label and no compositional difference.
+
+Adopted a governing rule instead (now in SPEC): **a category earns its
+place when a compose target consumes it** — when leaving it out
+measurably degrades an output. Evidence for the rule from our own logs:
+across runs 001–005, every drift traced to phrasing and packing
+(missing `medium`, canon placement, trimmed location facts, chirality,
+logo negation). **None traced to insufficient categorization.**
+
+### Per-proposal verdicts
+- `wardrobe/` — NO. Already works as `objects` + `role: prop`; the
+  skydive rig proves it, including recasting. Real problem underneath was
+  discoverability, fixed below.
+- `audio.md` — DEFER with a clear "when": no v0.1 target consumes sound
+  (all four targets are image tools). It earns in when a video/audio
+  target exists. Good idea, wrong week.
+- `factions/lore` — NO, and the most dangerous of the five: it is a
+  relationship container (guardrail 1 names relationships and scopes),
+  and it reaches an image only *through* wardrobe, insignia, and
+  locations, which are already entities.
+- `vfx-gfx/` — NO, already covered: in-universe screen graphics are the
+  `interface:` field of the object that displays them (the Pulse Arc's
+  readiness ring is authored this way today). Better placement, too —
+  the UI belongs to the device.
+- `role: set-dressing` — DEFER, but the likeliest future addition. It is
+  a value, not a type, and it has a real compositional meaning (drops
+  first under budget). Needs evidence of a world where props and dressing
+  must be trimmed separately; the entry test already excludes one-off
+  scene items.
+
+### The real question underneath, and the fix
+"How does a user or AI know to define wardrobe as an object?" —
+discoverability, not taxonomy. Three fixes, all inside v0.1:
+1. SPEC now states a three-question decision rule (person-specific →
+   `wardrobe:`; activity-owned/recurring/canon-bearing → `objects` +
+   `role: prop`; one-off → prompt text).
+2. The primer (`exporters/spec-prompt.md`) teaches the same rule, so
+   external users get it without the repo.
+3. The viewer's Wardrobe empty state and its starter prompt now say it
+   at the moment of authoring — which answers "should we signal it in the
+   character file itself": the signal belongs where the user is looking.
+
+Also fixed: SPEC still instructed "reference it from a character's
+`wardrobe.variants`", contradicting the pointer we had just removed from
+Leonie. Corrected — no character file points at a shared object.

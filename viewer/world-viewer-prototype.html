@@ -314,7 +314,7 @@ current version <span class="hl">[…]</span>, licensed for <span class="hl">[us
    invite — so the structure teaches what can be added. */
 const SECTION_PROMPTS={
   physical:e=>`Add physical details to ${e.name}: age [..], build [..], hair [..], eyes [..], distinguishing marks [..].`,
-  wardrobe:e=>`Add wardrobe to ${e.name}: default [outfit]; variants [name: outfit].`,
+  wardrobe:e=>`Add wardrobe to ${e.name}: default [outfit]; variants [name: outfit] for their own alternate looks. If the kit belongs to an activity rather than to ${e.name} (anyone doing it would wear it), make it an object with role: prop instead.`,
   voice:e=>`Add voice to ${e.name}: [manner — e.g. low, deliberate, dry humor]. Optional relationships as plain strings: ["Sister of X (estranged)"].`,
   form:e=>`Add form to ${e.name}: silhouette [..], scale [..], materials [..], colorways [name + hex], key features [..].`,
   iface:e=>`Describe ${e.name} in use: visible interface [..]; placement [worn/held/placed how, which side faces the camera].`,
@@ -614,7 +614,7 @@ function pageEntity(coll,id){
   if(e.physical) spec+=`<section><div class="sec-h"><h2>Physical</h2><span class="src">survives prompt compression</span></div>${specTable(Object.entries(e.physical))}</section>`;
   else if(isChar) spec+=inv('Physical','Age, build, hair, eyes, marks — the facts that survive into image prompts.','physical');
   if(e.wardrobe) spec+=`<section><div class="sec-h"><h2>Wardrobe</h2></div>${specTable([['default',e.wardrobe.default],...Object.entries(e.wardrobe.variants||{})])}</section>`;
-  else if(isChar) spec+=inv('Wardrobe','A default outfit plus named variants — wardrobe ships with every prompt.','wardrobe');
+  else if(isChar) spec+=inv('Wardrobe','This person’s own outfit, plus their variants. Kit an ACTIVITY owns (a flight suit anyone who jumps wears) belongs in Objects as role: prop.','wardrobe');
   if(e.form) spec+=`<section><div class="sec-h"><h2>Form</h2><span class="src">survives prompt compression</span></div>${specTable([...Object.entries(e.form).filter(([k])=>k!=='colorways'),['colorways',(e.form.colorways||[]).map(c=>`${c.name} ${c.hex}`).join(', ')]])}</section>`;
   else if(isObj) spec+=inv('Form','Silhouette, scale, materials, colorways, key features — the product facts.','form');
   if(e.iface) spec+=`<section><div class="sec-h"><h2>Interface</h2></div>${specTable([['visible UI',e.iface],['placement',e.placement]])}</section>`;

@@ -100,14 +100,25 @@ Entry test — an object only earns a file if it recurs across outputs
 OR has a canon rule. One-off scene items are prompt text, not world
 context.
 
-Shared wardrobe is an object, not a character attribute. A configuration
-that belongs to an activity rather than a person — a flight suit anyone
-who jumps would wear — passes the entry test and becomes one `role: prop`
-file, so continuity survives recasting and the description is never
-duplicated across characters. Reference it from a character's
-`wardrobe.variants` and name it in the shot line; keep it out of any
-character's `wardrobe.default`. Per-person outfits stay character
-attributes.
+**Where does clothing live?** Three questions, in order:
+
+1. Specific to one person and always true of them? → the character's
+   `wardrobe:` (`default`, plus `variants:` for that person's own
+   alternate looks — "formal", "off-shift").
+2. Owned by an ACTIVITY or role, recurring across characters, or
+   carrying its own canon? → `objects/<id>.md` with `role: prop`. A
+   flight suit anyone who jumps would wear is the world's constant; the
+   wearer is not. Name it in the shot line to compose it. Do **not**
+   point at it from any character file — a pointer encodes current
+   casting, which is deliverable coupling, and it is unnecessary: shot
+   resolution finds the object by name on its own.
+3. One-off, this shot only? → prompt text, not world context.
+
+Costume is not a separate type here even though it is a separate
+department in physical production. Department boundaries divide labor;
+entity types divide what a model must keep consistent — and a generative
+model treats a costume and a prop identically. `role:` is the governance
+level, which is the distinction that actually changes composition.
 
 Brand marks and typography are references, never descriptions. Register
 the wordmark/lockup in `references.yaml` (the world records where it
@@ -209,8 +220,29 @@ profiles. Imagen 4 is deprecated — never target it.
 (Vendor-neutral by construction — see CLAUDE.md guardrail 6.)
 
 ## Deferred (v2 candidates only if FEEDBACK.md demands)
-Wardrobe as entities; structured relationships; scenes/story beats;
-timelines; per-entity permissions.
+
+**The earning test for any new category:** a collection or field earns
+its place when a compose target CONSUMES it — when leaving it out
+measurably degrades an output. Familiarity to a profession is not the
+test; a category nobody composes is onboarding tax, because every
+collection is one more empty slot a new user must understand, fill, and
+maintain. Across the first six documented generation runs, every
+observed drift traced to phrasing and packing (missing `medium`, canon
+placement, trimmed location facts, chirality, logo negation), and none
+to insufficient categorization.
+
+Deferred by that test: wardrobe as its own type (covered by `objects` +
+`role`); structured relationships; scenes/story beats; timelines;
+per-entity permissions; factions/lore (a relationship container, and it
+reaches an image only through wardrobe, insignia, and locations, which
+are already entities); `audio.md` (no v0.1 target consumes sound — it
+earns inclusion when a video/audio target exists); `vfx-gfx/`
+(in-universe screen graphics are already the `interface:` field of the
+object that displays them); `role: set-dressing` as a third governance
+tier (cheapest of these and the most likely to earn in — it would drop
+first under budget — but the entry test already excludes one-off scene
+items, so it needs evidence of a real world where props and dressing
+must be trimmed separately).
 - `worldmd diff` — entity-level changes between two git states; the
   seed of the V2 world-diff / impact analyzer.
 - Compact single-file `WORLD.md` that tooling explodes into a `.world/`
