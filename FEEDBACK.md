@@ -725,3 +725,25 @@ The midjourney profile could emit a SHORT curated `--no` of visual terms
 rather than dumping every merged never — helps pasteability (250+ word
 blocks) AND moderation. This is D02's "keep the --no list short" earning
 its place. Revisit if MJ stays a priority target after the isolation test.
+
+### UPDATE — CONFIRMED (2026-07-29)
+Removing ONLY the `--no …` list unblocked Midjourney. The never-list was
+the moderation trigger, definitively — hypothesis 1 confirmed; artist name
+and other candidates ruled out.
+
+BONUS FINDING (bigger than the fix): the unblocked output is the strongest
+MJ result of the whole series — charcoal illustration, lamplit apron, faces
+receding into shadow per canon, dense dark. So the `--no` list wasn't
+earning its place on adherence either; the positive prompt (medium-first +
+palette + canon-adjacent facts) carried it. The never-dump was pure
+downside — it blocked the tool AND was unnecessary.
+
+REFRAME: this is less "MJ renders worse" than "the composer's MJ profile
+actively sabotaged it." Dumping every merged `never:` as `--no` handed MJ's
+moderator a pile of charged words for little adherence benefit. MJ's
+moderator IS stricter than GPT's (real per-tool trait), but the composer
+loaded the gun. The fix is composer-side and now EVIDENCE-BACKED, not
+hypothetical: the midjourney target should emit a SHORT curated `--no` of
+visual terms (or none), never the full merged never-list. D02's "keep the
+--no list short" is now proven. Ready to build when/if MJ is a priority
+target; NOT built yet.
