@@ -1,6 +1,6 @@
 # 8-week plan and gate
 
-Start date: ____________  (fill in — the gate date is start + 8 weeks)
+Start date: 2026-07-28  →  **THE GATE: 2026-09-22** (start + 8 weeks)
 
 ## Weeks 1–3 — Hand-written dogfood
 - Pick ONE real project as the test world: ____________
@@ -28,15 +28,22 @@ Start date: ____________  (fill in — the gate date is start + 8 weeks)
   (frontmatter, broken refs, expired licenses), `spec` (print the format
   for pasting into any AI chat).
 - Publish the generated viewer via GitHub Pages CI (zero-cost sharing).
-- Open-source the repo; SPEC.md becomes the heart of the README.
+- Repo stays PRIVATE pre-gate (2026-07-29 decision). Distribution is the
+  spec as text: send `exporters/spec-prompt.md` — it is self-contained, so
+  community channels work without publishing the repo. Add individual
+  early users as collaborators if they want the example worlds.
 
 ## Weeks 5–8 — Five external users
 - Targets: AI film/video Discords (Runway, Midjourney, ComfyUI),
   r/aivideo, writing/worldbuilding communities, plus personal agency
   and brand contacts.
 - Ask each to put THEIR project into the format and use it ~1 week.
-  Do not demo; observe.
+  Do not demo; observe. Hand them `exporters/spec-prompt.md` and nothing
+  else — if they need you to explain it, that is the finding.
 - One conversation each, notes verbatim into FEEDBACK.md.
+- TIMING RISK (named 2026-07-29): the gate needs ≥2 people on a SECOND
+  project, so first-project use must finish well before 2026-09-22.
+  Start recruiting in week 1–2, not week 5.
 
 ## THE GATE (pre-committed — do not move)
 By week 8: do >= 2 external people use it on a SECOND project without
@@ -87,6 +94,11 @@ being prompted?
   (`worldmd shoot` + viewer shot field) with DETERMINISTIC entity
   resolution is the per-shot path; LLM-based context selection is not
   built pre-gate — the chat targets already are the intelligent path.
+- 2026-07-29: Repo stays PRIVATE through the gate — the Cross-TrainerX
+  world derives from a confidential project and FEEDBACK.md is a raw
+  internal log. Adoption is the spec spreading as text (guardrail 4) via
+  `exporters/spec-prompt.md`; individual users get collaborator access if
+  they want the worked examples. Revisit only at the gate.
 - 2026-07-29 (FEEDBACK 003): `--style raw` validated 3/3 → emitted by
   the midjourney target. Left/right canon is NOT claimed at generation
   (prompt-only tools are chirality-weak); it is enforced at shot-line
