@@ -328,3 +328,70 @@ image, composed in ChatGPT's image mode.
   catch, my authoring error — fixed across all 9 entity files, and the
   principle is now in SPEC: entity files describe what is ALWAYS true;
   deliverable specifics belong in the shot line.
+
+---
+
+## 2026-07-29 — 007 · Activity-owned wardrobe, X-motif control, brand marks
+
+### Wardrobe, take two — James's better example wins the argument
+"The skydiver's outfit would only be associated with a character under
+certain conditions. If you change who skydives, you still need continuity
+of what ANYONE in this world wears skydiving." Correct, and the first
+counter-argument (use `wardrobe.variants`) fails here: it would duplicate
+the rig across three characters and require three edits to change it.
+**But no new entity type is needed** — SPEC's object definition already
+covers "anything characters WEAR", and the rig passes the entry test
+(recurs + has canon).
+- Created `objects/skydive-rig.md` (`role: prop`): the configuration
+  belongs to the activity, so recasting the leap keeps continuity.
+- **Bug this exposed**: Leonie's `wardrobe.default` WAS the flight suit —
+  she was permanently dressed to jump. Default is now her ordinary
+  performance-lifestyle apparel; the freefall variant POINTS at the
+  shared object instead of restating it (references over duplication,
+  applied to wardrobe).
+- SPEC now states the rule: activity-owned configurations are `role: prop`
+  objects, referenced from `wardrobe.variants`, never in `default`;
+  per-person outfits stay character attributes. Wardrobe-as-its-own-type
+  remains deferred — with a concrete reason, not a hand-wave.
+
+### X-motif — controllable, but only partly at generation
+Diagnosis: the canon token "X-shaped light motif" reads to models as
+*make an X graphic*, so both MJ and GPT Image produced signage and decals.
+Fixes:
+- World canon rewritten to describe the physical CAUSE, not the shape:
+  "an incidental X … formed where two real elements cross — light,
+  shadow, reflection, structural members, vapour trails … never painted,
+  printed, projected, or signage."
+- style.md `never`: painted/decal/projected X shapes.
+- Honest limit: "subtle motif in every frame" is inherently unreliable in
+  prompt-only tools — subtlety is what diffusion amplifies. Treat it like
+  chirality: bias it in the prompt, GUARANTEE it at selection/post. The
+  location-level canon lines were already well-phrased (roof reflection,
+  floor shadows, crossing trails) and those read better than the
+  world-level abstraction — evidence that concrete beats conceptual.
+
+### Verified: recast + remix both compose correctly
+- Recast test — `"Amara Vale leaps from the aircraft door in The Leap
+  wearing the skydive rig and Vista Air"` resolves Amara + Skydive rig +
+  Vista Air + The Leap, with the rig's continuity canon shipping and
+  Leonie correctly absent. Activity-owned wardrobe works as intended.
+- Remix test — `"Leonie Falk at Casa Ladera wearing the Pulse Arc"`
+  resolves exactly those three. The original remix scenario needed no
+  format change at all.
+- **New friction, honest**: that 4-entity recast composes to **487 words**
+  for Midjourney. Canon is budget-exempt by design (it must survive), so
+  canon-rich shots balloon past what MJ users will paste habitually.
+  Trade-off is deliberate, not a bug — but it means per-shot entity count
+  is the real lever. The copy toast now reports word count for the
+  midjourney target so over-stuffed shots are visible, not silent. Watch
+  whether users start trimming by hand (per tool-flows: whatever they cut
+  first is what compression should drop first).
+
+### Brand marks — references, not descriptions (scope answer)
+Question: does the wordmark belong in a design-system file / DESIGN.md /
+external system? Scope answer: the v0.1 mechanism is already right —
+`references.yaml` records WHERE the asset lives and never describes its
+glyphs; canon reserves the negative space; type is composited in post.
+Added a style `never` for generated wordmarks/headline type. A DESIGN.md
+brand-token import stays deferred V2 interop — building it now would drag
+a design-system dependency into a context format before the gate.

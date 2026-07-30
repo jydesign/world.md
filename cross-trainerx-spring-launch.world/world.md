@@ -7,7 +7,7 @@ tone: Ambitious, intelligent, energetic, human — premium cinematic realism, ne
 audience: Premium performance-hardware launch; aspirational sport-tech buyers.
 canon:
   - "Campaign line is FIND YOUR NEXT; it appears on the lockup and is never altered."
-  - "A subtle illuminated X-shaped light motif appears somewhere in every composition."
+  - "An incidental X appears somewhere in every composition, formed where two real elements cross — light, shadow, a reflection, structural members, vapour trails. It is a coincidence of the scene, never painted, printed, projected, or signage."
   - "No real team crests, sponsor logos, national emblems, or recognizable trademarks — ever."
   - "Performances are natural and assured — never exaggerated smiles or generic influencer poses."
   - "Hero products are inserted from final CAD: every shot preserves a clean, unobstructed placement zone with correct scale, contact shadows, and reflections."

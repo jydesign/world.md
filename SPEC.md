@@ -100,6 +100,22 @@ Entry test — an object only earns a file if it recurs across outputs
 OR has a canon rule. One-off scene items are prompt text, not world
 context.
 
+Shared wardrobe is an object, not a character attribute. A configuration
+that belongs to an activity rather than a person — a flight suit anyone
+who jumps would wear — passes the entry test and becomes one `role: prop`
+file, so continuity survives recasting and the description is never
+duplicated across characters. Reference it from a character's
+`wardrobe.variants` and name it in the shot line; keep it out of any
+character's `wardrobe.default`. Per-person outfits stay character
+attributes.
+
+Brand marks and typography are references, never descriptions. Register
+the wordmark/lockup in `references.yaml` (the world records where it
+lives, never its glyphs), reserve negative space for it in canon, and
+composite type in post — models invent plausible non-canon marks when
+none is registered. Importing brand tokens from an external design-system
+file (DESIGN.md) is deferred V2 interop.
+
 ## Location (locations/<id>.md)
 Frontmatter: `kind` (real|fictional|real-modified), `geography`,
 `architecture`,

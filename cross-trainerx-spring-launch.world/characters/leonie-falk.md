@@ -13,7 +13,9 @@ physical:
   eyes: pale green
   face: strong angular jaw
 wardrobe:
-  default: streamlined charcoal flight suit with titanium fastening hardware, subtle kinetic-lime seams, gloves, compact matte-black parachute pack
+  default: plain unbranded modern performance-lifestyle apparel — charcoal technical layers, tapered trousers (no logos or marks)
+  variants:
+    freefall: the shared skydive rig — see objects/skydive-rig.md, never duplicated here
 canon:
   - "Visible freckles and short copper-red hair"
   - "Worn eyewear must conform to her face WITHOUT changing her identity or facial structure"

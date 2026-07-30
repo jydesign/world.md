@@ -507,7 +507,9 @@ function copyWorldPackage(){
   }else{
     all=[...WORLD.characters,...WORLD.objects.filter(o=>o.role==='hero'),...WORLD.locations];
   }
-  copyText(composePackage(all,shot),(shot?'Shot package copied ('+all.length+' entities) — ':'World package copied — ')+TARGETS[TARGET]);
+  const pkg=composePackage(all,shot);
+  const wn=TARGET==='midjourney'?' · '+pkg.split(/\s+/).length+' words':'';
+  copyText(pkg,(shot?'Shot package copied ('+all.length+' entities) — ':'World package copied — ')+TARGETS[TARGET]+wn);
 }
 function copyInvite(key){
   const tmp=document.createElement('div');tmp.innerHTML=INVITES[key].prompt;

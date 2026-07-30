@@ -23,6 +23,8 @@ never:
   - never dense sci-fi HUD graphics on product interfaces
   - never essential detail in the outer 20% of the frame
   - never a conventional, sterile technology product-shot look
+  - never X shapes as painted graphics, decals, signage, or projected logos
+  - never generated wordmarks or headline typography — type is composited in post
 ---
 
 Every frame should read as a still from a premium, human sports film — real
