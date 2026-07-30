@@ -20,6 +20,13 @@ description sent to AI tools. Required fields for every entity:
 `id`, `type`, `name`, `version`, `status`
 (status: draft | in-iteration | approved | deprecated).
 
+**Entity files describe what is ALWAYS true.** Anything specific to one
+deliverable — which image an entity appears in, its framing, its action,
+which other entities it is paired with — belongs in the shot line, never
+in the world. Deliverable coupling in an entity file ships into every
+context package and goes stale the moment the brief changes. Entities are
+the reusable atoms; the shot is the composition.
+
 ## world.md
 Frontmatter: `name`, `format` (film|campaign|series|game|book), `era`,
 `status`, `canon:` (rules that must never be violated anywhere).

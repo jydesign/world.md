@@ -18,5 +18,5 @@ canon:
   - "Sunlight and architectural shadows form a subtle X across the kitchen floor"
 ---
 
-Mateo's fictional hillside home outside Valencia and the setting for Image 2
-— intelligent technology becoming an effortless part of real life.
+Mateo's fictional hillside home outside Valencia. Lived-in and warm —
+technology sits in it as an effortless part of real life, never on display.

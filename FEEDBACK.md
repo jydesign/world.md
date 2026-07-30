@@ -265,3 +265,66 @@ showed v 7.)
   doing something even against the flawed reference, but NOT confirmed
   without a zoomed crop. Awaiting James's zoom on a frontal frame to
   identify a scar-correct amara-ref v2 candidate.
+
+---
+
+## 2026-07-29 — 006 · GPT Image (ChatGPT create-image), all three campaign images
+
+First cross-tool run. Same world, `gpt-image` target + one shot line per
+image, composed in ChatGPT's image mode.
+
+**Shot prompts used (preserved verbatim — reusable, and the answer to
+"don't retype the shot"):**
+1. `Amara kneels pitch-side at Northstar Ground at sunrise tightening her
+   boot cuff, her left side toward camera, Pulse Arc watch face toward
+   camera.`
+2. `Mateo Ríos prepares breakfast after training in his home Casa Ladera.
+   He holds a ceramic bowl of fruit while speaking naturally toward the
+   kitchen counter, caught mid–voice command rather than posing. Nearby is
+   the Cross-TrainerX Orbit Home.`
+3. `Leonie Falk leaps from the open side of a sleek parachuter's aircraft
+   in The Leap (high-altitude skydive). Wearing Cross-TrainerX Vista Air`
+
+### Result — strongest output of the test series, and stronger AS A SET
+- All three read as one campaign: consistent palette, premium realism,
+  lime accents, lockup treatment. Set coherence beat Midjourney's.
+- Products landed properly for the first time: **Orbit Home** correct
+  (low cylinder, warm-white mesh, brushed trim, lime ring) on a clean
+  island corner; **Vista Air** panoramic smoke-black lens; **Pulse Arc**
+  on wrist. Locations legible in all three (stadium roof + steep seating,
+  limestone/oak kitchen with courtyard, aircraft + valley).
+- Per-tool finding: long-context chat targets tolerate the full world
+  package far better than terse tools — the compression fight is a
+  Midjourney-specific problem, not a format problem.
+
+### Drift
+- **X-motif still renders LITERAL** (roof X, wall X, cloud X) rather than
+  the canon "faint X-shaped reflection." Recurrence of the 002-C class —
+  across two different tools now, so this is a phrasing problem in the
+  world, not a model quirk. Candidate rewording: describe it as an
+  incidental structural coincidence, never a graphic.
+- **Models invent the wordmark.** GPT Image added "FIND YOUR NEXT" +
+  Cross-TrainerX lockups unprompted. Canon says leave SPACE for a
+  headline; it never described the mark, so the model designed one. GAP:
+  registered `crosstrainerx-wordmark` ref (pending) — register the real
+  asset and composite type in post rather than generating it.
+
+### Scope requests raised by dogfooding (logged per guardrail 1, not built)
+- **Wardrobe as its own entity type**, for remixability ("Leonie at Casa
+  Ladera wearing a watch"). Assessment: remix ALREADY works — the shot
+  field resolves entities across all three collections independently, so
+  that exact shot composes today. Shared wearables that recur or carry
+  canon are already expressible as `object` + `role: prop` (the object
+  entry test IS the atomic threshold); per-shot outfit changes are
+  `wardrobe.variants`. Recommend keeping deferred.
+- **Scenes/shots as managed variables** — real friction: three shot lines
+  hand-typed, dozens for a real campaign. But "story beats" is the
+  named-in-guardrail-1 failure mode and doesn't move the week-8 gate.
+  Recommend deferring; if FEEDBACK demands it, the shape is a flat
+  `shots.yaml` (shot line + entities named), explicitly non-canonical —
+  no beats, no sequence, no relationships, NOT a scene entity type.
+- **Deliverable coupling in entity prose** (James: should a character
+  ever say "Hero of Image 1… paired with northstar-ground"?). Correct
+  catch, my authoring error — fixed across all 9 entity files, and the
+  principle is now in SPEC: entity files describe what is ALWAYS true;
+  deliverable specifics belong in the shot line.

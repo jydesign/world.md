@@ -21,5 +21,5 @@ canon:
   - "The aircraft stays visible to make the leap legible"
 ---
 
-The fantasy skydive setting for Image 3 — the instant when preparation
-becomes possibility.
+A high-altitude freefall setting: extraordinary but physically convincing.
+Reads as the instant when preparation becomes possibility.

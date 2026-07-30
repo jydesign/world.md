@@ -23,7 +23,7 @@ never:
   - never obscure the placement zone with fingers or fabric
 ---
 
-The Pulse Arc is Cross-TrainerX's AI watch — the hero of Image 1. A slim,
-instrument-like wearable that reads as precise and calm, not gadgety. The
-interface shows a readiness ring, recovery score, and live environmental
-analysis without excess text.
+The Pulse Arc is Cross-TrainerX's AI watch. A slim, instrument-like
+wearable that reads as precise and calm, not gadgety. The interface shows a
+readiness ring, recovery score, and live environmental analysis without
+excess text.

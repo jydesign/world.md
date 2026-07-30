@@ -25,6 +25,3 @@ canon:
 A fictional 27-year-old World Cup midfielder — tall, powerfully athletic,
 and quietly assured. Her default register is focused and calm: the private
 concentration of an elite competitor before public performance.
-
-Hero of Image 1 (the stadium / Pulse Arc watch), paired with
-[[northstar-ground]] and [[pulse-arc]].

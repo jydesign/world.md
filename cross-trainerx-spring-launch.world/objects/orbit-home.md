@@ -23,6 +23,6 @@ never:
   - never let hands or props overlap the placement zone
 ---
 
-The Orbit Home is Cross-TrainerX's AI speaker — hero of Image 2. A compact,
-sculptural home device that reads as calm intelligence on the counter, its
-lime ring breathing with the voice it answers to.
+The Orbit Home is Cross-TrainerX's AI speaker. A compact, sculptural home
+device that reads as calm intelligence on the counter, its lime ring
+breathing with the voice it answers to.

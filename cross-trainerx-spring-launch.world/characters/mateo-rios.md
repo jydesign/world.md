@@ -21,8 +21,5 @@ canon:
 ---
 
 A fictional 31-year-old World Cup goalkeeper — relaxed and approachable, but
-unmistakably an elite athlete in build and presence.
-
-Hero of Image 2 (the home / Orbit Home speaker), paired with
-[[casa-ladera]] and [[orbit-home]]; caught mid voice-command while making
-breakfast, never posing.
+unmistakably an elite athlete in build and presence. At ease in his own
+space; reads as someone mid-conversation rather than posing.

@@ -2,6 +2,18 @@
 # CAD as external truth — it never stores the model itself. Replace the paths
 # and set current/approved when real exports land.
 
+crosstrainerx-wordmark:
+  kind: brand-asset
+  source: local
+  path: ../refs/crosstrainerx_wordmark.svg
+  current: pending
+  approved: false
+  note: "Cross-TrainerX wordmark + X mark and the FIND YOUR NEXT lockup.
+    GAP found in the GPT Image test: with no registered wordmark, models
+    invent one (they rendered plausible but non-canon lockups). Register
+    the real asset, then keep type out of generation and composite the
+    lockup in post."
+
 amara-ref:
   kind: image
   source: midjourney

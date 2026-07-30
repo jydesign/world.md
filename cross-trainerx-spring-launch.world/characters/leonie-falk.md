@@ -20,7 +20,5 @@ canon:
 ---
 
 A fictional 24-year-old World Cup winger — concentration, exhilaration, and
-complete control held in a single expression.
-
-Hero of Image 3 (the leap / Vista Air goggles), paired with [[the-leap]]
-and [[vista-air]]; mid-freefall after an intentional athletic launch.
+complete control held in a single expression. Her physicality is explosive
+and deliberate: she commits fully to a movement rather than easing into it.

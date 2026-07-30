@@ -23,6 +23,6 @@ never:
   - never dense heads-up-display graphics across the lens
 ---
 
-The Vista Air is Cross-TrainerX's AI goggles — hero of Image 3. A single
-continuous smoke-black lens with a titanium brow; the interface is a
-whisper — a reflected sliver — never a science-fiction overlay.
+The Vista Air is Cross-TrainerX's AI goggles. A single continuous
+smoke-black lens with a titanium brow; the interface is a whisper — a
+reflected sliver — never a science-fiction overlay.

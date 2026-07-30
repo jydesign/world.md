@@ -20,5 +20,5 @@ canon:
   - "Floodlights are unlit, receding into the background"
 ---
 
-Amara's fictional home stadium and the setting for Image 1 — empty and quiet
-at sunrise, the private moment before public performance.
+Amara's fictional home stadium. Reads best empty and quiet — a working
+ground before anyone arrives, not a match-day crowd.
