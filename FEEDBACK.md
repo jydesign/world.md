@@ -635,3 +635,45 @@ running extract-prompt.md on one real short scene.
   beat/register/camera schema.
 - Through-line holds: the highest-value next action is the first real user,
   not another capability for user zero.
+
+---
+
+## 2026-07-29 — 013 · Death of the Hired Man renders on GPT Image (3 shots, world-package paste)
+
+Second project, generating successfully. James composed three shot prompts
+against the conformed Death of the Hired Man world (world package pasted
+into ChatGPT image mode): Mary lamplit on the porch; Silas arriving alone
+on the muddy road; Mary and Warren at the threshold with Silas inside by
+the warmth. Outputs in James's archive (repo stores no media).
+
+### Scored against canon
+- Medium 3/3 — charcoal/printmaking ILLUSTRATION, not photo, not cartoon.
+  `medium` proving itself in a second register (photograph killed cartoons
+  for Cross-TrainerX; illustration produced drawn images here). The field
+  generalizes across style worlds.
+- Palette + light 3/3 — muted charcoal/bone/umber, weak lamplight + cold
+  moonlight, Kollwitz graphic force without copying a work.
+- Motifs landed — the threshold (frame 3), Silas depleted and alone
+  (frame 2), Mary lamplit in apron (frame 1); farm severe, no sentiment,
+  no heroic posing.
+
+### The finding: a world can be authored to tolerate the tools' weakness
+Cross-frame character identity — what broke on Amara (wrong wrist,
+tattoo-scar) — is a NON-issue here, because this world's canon deliberately
+leaves exact features unspecified and lets faces recede into shadow. The
+model's loose identity is WITHIN canon, not a violation. Lesson: a
+well-authored world can shape canon around what prompt-only tools can't
+guarantee, instead of fighting them (cf. the chirality layering in 003).
+
+### Validates the last session end-to-end
+The conformance fixes (parse error, role->controlled value, references
+unwrap, presentation/kind) produced a world that not only lints clean and
+renders, but composes and generates on-canon on a real tool. The fix
+worked all the way through.
+
+### Signal (not the gate)
+James — user zero — used the format on a SECOND, unrelated project
+unprompted (Frost poem, vs the Cross-TrainerX campaign). That is the gate
+BEHAVIOR, from the wrong person. Not gate evidence (needs external users),
+but the strongest pull signal so far: the format is being reached for, not
+dutifully tested.
