@@ -14,8 +14,6 @@ physical:
   face: strong angular jaw
 wardrobe:
   default: plain unbranded modern performance-lifestyle apparel — charcoal technical layers, tapered trousers (no logos or marks)
-  variants:
-    freefall: the shared skydive rig — see objects/skydive-rig.md, never duplicated here
 canon:
   - "Visible freckles and short copper-red hair"
   - "Worn eyewear must conform to her face WITHOUT changing her identity or facial structure"
