@@ -575,3 +575,63 @@ was never the problem; contract precision was.
 - The world lives in James's Drive (confidential Narraite project), not
   the repo — so it is not committed. The lint script stays in-session
   (scratchpad); `worldmd lint` is its specced Node home.
+
+---
+
+## 2026-07-29 — 012 · D08 manuscript-to-world/shots — evaluation & decision
+
+Proposal (D08): the defining gesture is "drop any text — a line, a poem, a
+screenplay, a whole book — and get a world (persistent entities) plus a
+drafted shot library (the seeable moments) out." Shots reference world
+entities by id and never re-describe them. Near-term ask: a `shots/` draft
+format + an extract step that emits into it.
+
+### What's right (affirmed)
+- Best articulation of the core loop yet: one gesture, scale-independent.
+  "Aggressive about referencing entities as ids, stingy about describing
+  them" states the non-redundancy principle better than SPEC does.
+- Not a leap — it's the convergence of two proven pieces: extract-prompt.md
+  (text -> world) and the shot field / worldmd shoot (shot + world -> MJ).
+- Mutation deferral is exactly right: scar-persists-across-chapters is the
+  V2 change-propagation runtime; surface as ambiguity, don't bake in.
+- "Extractor proposes; review, prune, commit; never truth, never
+  overwrites an approved world" = correct write-path safety model.
+
+### The reframe D08 misses
+The near-term proof is BEHIND us, not ahead. extract-prompt.md already
+drops text in, splits world from shots, and emits a "Suggested shots (not
+canon)" list. Death of the Hired Man is the evidence: that AI naturally
+produced dramatic_structure / narrative_rules / visual_motifs — the beats
+D08 wants — which we stripped as non-spec. Through the current extract
+primer they surface as suggested shots instead of being discarded. The
+extractor half already works; D08 formalizes its OUTPUT into files.
+
+### The guardrail collision
+A committed `shots/` collection is **story beats** — named in guardrail 1
+("prior versions died of taxonomy") and in SPEC's Deferred list. Clean
+distinction D08 blurs:
+- Shots as OUTPUT (ephemeral in-chat list) — have it, gate-safe, no format.
+- Shots as a persistent `shots/` collection — the deferred scenes/beats
+  taxonomy.
+Also: D08's shot record {entity ids, beat, emotional register, setting,
+camera intent} is richer than the minimal "shot line + entity ids" that
+was sanctioned earlier. `beat`/`emotional register` are scene-schema
+fields — where taxonomy-death starts. Keep the record flat if ever built.
+
+### Gate reality
+Building `shots/` doesn't move the gate — it's tooling for user zero (James).
+Zero external users, Node not installed. The "40 candidates -> 12" quality
+test validates a build; the same interaction-quality question is free by
+running extract-prompt.md on one real short scene.
+
+### DECISION
+- North star: YES — file D08 as the V2 headline direction; post-gate,
+  likely the flagship feature.
+- Near-term build: NO — the provable version already shipped; don't
+  rebuild it as a format ahead of demand.
+- Trigger to build `shots/`: a real user who can't manage many shots in a
+  chat log. No external user has said anything yet — because there are none
+  yet. When built: minimal flat record (line + entity ids), not the
+  beat/register/camera schema.
+- Through-line holds: the highest-value next action is the first real user,
+  not another capability for user zero.
