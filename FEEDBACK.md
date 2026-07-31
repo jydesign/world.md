@@ -802,3 +802,42 @@ Amara chirality work (003–004): text bias narrows the odds, a reference
 locks it. Not applied yet — needs James to pick a canon-correct frame
 first (same process as amara-ref). Natural next step once he reviews
 these three frames or a rerun against the tightened wardrobe.
+
+---
+
+## 2026-07-29 — 016 · Toggle labels: "GPT Image" reads as vendor-locked (UX finding, no change yet)
+
+James, using the viewer directly: is it unintuitive that "GPT Image" is
+the right choice for Gemini too? Should Gemini get its own toggle? What's
+the benefit of keeping "Chat" and "Generic" distinct, given the mental
+model is "I'm copying into THIS specific tool" — should they collapse?
+
+### Analysis
+The four targets split on two different axes the flat button row doesn't
+communicate:
+- `midjourney`'s vendor name is EARNED — the output contains literal
+  MJ-only syntax (`--no`, `--style raw`, `--oref`).
+- `gpt-image`'s vendor name is NOT earned — nothing in that profile is
+  ChatGPT-specific (confirmed by FEEDBACK 015: it works correctly on
+  Gemini too). The label borrows a brand for what's actually a capability
+  class (chat-native image generation).
+- `chat` and `prompt`("Generic") aren't redundant — they solve different
+  problems (full-fidelity discussion/build vs. a compact universal
+  fallback for tight budgets or uncovered tools) — but their CURRENT
+  labels read as a near-synonym pair rather than naming the job each does.
+
+### Recommendation (not applied)
+Rename the misleading button to name the capability class, not a vendor
+("Chat + Image" or similar, with a subtitle listing ChatGPT/Gemini/etc.);
+keep `midjourney` as-is since its name is accurate; relabel `chat`/
+`prompt` to name their job ("Discuss / Full" vs "Compact") rather than
+collapsing them — both earn their place, only the labels are unclear.
+Explicitly rejected: giving Gemini its own toggle. A second button
+identical in behavior to gpt-image would imply vendor-specific tuning
+that doesn't exist, requires a new fake button per future chat-image
+vendor, and contradicts guardrail 6 (neutrality of the read path).
+
+### Decision: HOLD
+James chose to hold off rather than apply now. Revisit once a real
+external user's actual confusion (or lack of it) with the toggle gives
+real evidence, rather than fixing a label pre-emptively pre-gate.
