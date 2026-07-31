@@ -116,8 +116,8 @@ A `worldmd` CLI is in development:
 
 ```bash
 worldmd shoot "<shot description>" --target midjourney   # shot-driven compose  [planned]
-worldmd serve  <world>       # localhost viewer, live reload                    [in progress]
-worldmd lint   <world>       # frontmatter, broken refs, expired licenses       [in progress]
+worldmd serve  <world>       # localhost viewer, live reload                    [planned]
+worldmd lint   <world>       # frontmatter, broken refs, expired licenses       [planned]
 worldmd spec                 # print the format for any AI chat                 [available as exporters/spec-prompt.md]
 worldmd diff   HEAD~5        # entity-level change log                          [v2]
 ```
@@ -199,8 +199,8 @@ into any tool. Different questions, near-zero overlap, complementary.
 ## Status
 
 `alpha`, and honestly so. What works today: the `.world/` format, the
-read-only viewer generator, and per-tool context composition. In active
-development: the MCP server and the `worldmd` CLI. The format will change.
+read-only viewer generator, and per-tool context composition. Not built
+yet: the MCP server and the `worldmd` CLI. The format will change.
 
 world.md is a **validation instrument**, not a product. It's being tested
 against one question: do a handful of people making real creative work —
@@ -213,8 +213,7 @@ knew, what drifted anyway, what was annoying to maintain by hand. Blunt is
 better than polite; "I gave up at step 2" is the most valuable sentence you
 can send.
 
-The repo is private during validation, so there are no public issues yet —
-send notes straight back to whoever shared this with you.
+Open an issue, or reply directly to whoever shared this with you.
 
 ## License
 

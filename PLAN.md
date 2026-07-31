@@ -34,10 +34,11 @@ any of that until post-gate.
   (frontmatter, broken refs, expired licenses), `spec` (print the format
   for pasting into any AI chat).
 - Publish the generated viewer via GitHub Pages CI (zero-cost sharing).
-- Repo stays PRIVATE pre-gate (2026-07-29 decision). Distribution is the
-  spec as text: send `exporters/spec-prompt.md` — it is self-contained, so
-  community channels work without publishing the repo. Add individual
-  early users as collaborators if they want the example worlds.
+- Repo goes PUBLIC (2026-07-31, superseding the 2026-07-29 private-through-
+  gate call). Distribution is still the spec as text — send
+  `exporters/spec-prompt.md` or `extract-prompt.md`, both self-contained —
+  but a public repo adds discoverability, which helps rather than hinders
+  the gate.
 
 ## Weeks 5–8 — Five external users
 - Targets: AI film/video Discords (Runway, Midjourney, ComfyUI),
@@ -105,6 +106,18 @@ being prompted?
   internal log. Adoption is the spec spreading as text (guardrail 4) via
   `exporters/spec-prompt.md`; individual users get collaborator access if
   they want the worked examples. Revisit only at the gate.
+  **SUPERSEDED 2026-07-31 — repo goes PUBLIC.** Three reasons the original
+  no longer holds: (a) the confidentiality concern was overstated —
+  Narraite is a public site, the Cross-TrainerX world is self-contained
+  fiction that never names it, and the one Drive-hosted world (Death of
+  the Hired Man) was never in the repo, since `*-viewer.html` is
+  gitignored; (b) the repo is also a portfolio artifact while James is
+  applying to roles, which the private call didn't weigh; (c) public adds
+  discoverability, which helps the gate rather than hindering it — private
+  was only ever the safer option, never the strategically better one.
+  Noted for the record: the original entry's "through the gate / revisit
+  only at the gate" rigidity was AI-authored framing around a looser user
+  choice, and timing/gates are James's to move.
 - 2026-07-29 (FEEDBACK 003): `--style raw` validated 3/3 → emitted by
   the midjourney target. Left/right canon is NOT claimed at generation
   (prompt-only tools are chirality-weak); it is enforced at shot-line
