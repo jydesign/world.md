@@ -750,17 +750,31 @@ target; NOT built yet.
 
 ---
 
-## 2026-07-29 — 015 · Gemini/Nano Banana: third vendor confirms neutrality; apron drift traced to a vague noun
+## 2026-07-29 — 015 · Gemini/Nano Banana: gpt-image profile holds on a 2nd vendor; apron drift traced to a vague noun
 
 Same conformed Death of the Hired Man world, gpt-image-target package
 pasted into Gemini's native image generation (Nano Banana backend).
 
 ### Result
 Good coherence — medium held (illustration, never photo/cartoon), no
-logos, moonlit-window and doorway-threshold compositions landed. This is
-the THIRD distinct vendor (GPT Image, Midjourney, now Gemini) rendering
-correctly from the same vendor-neutral package — real evidence for the
-neutrality thesis, not GPT-specific luck.
+logos, moonlit-window and doorway-threshold compositions landed.
+
+### CORRECTION (caught by James — the claim below was imprecise)
+Originally logged this as "the same vendor-neutral package" rendering
+correctly on GPT Image, Midjourney, AND Gemini. Not accurate: James used
+the **gpt-image** compose target for ChatGPT and Gemini, and the separate
+**midjourney** compose target (its own terse/canon-adjacent/`--no`/
+`--style raw` treatment, per FEEDBACK 001–003 and 014) for Midjourney.
+
+The corrected — and actually stronger — result: **two different per-tool
+profiles, each correctly tailored, both hold canon on their respective
+tools.** gpt-image now has two confirmed vendors (GPT Image, Gemini/Nano
+Banana); midjourney is confirmed on its own vendor with its own fixes
+(medium-first, `--style raw`, canon-adjacent facts, curated `--no`). This
+is direct evidence FOR the D02 per-tool-profiles decision, not evidence
+that one generic block works everywhere — which is the opposite of what
+we'd want, since "one block for all tools" would undercut the reason
+per-tool profiles were built in the first place.
 
 Per-vendor aesthetic note (honest, not a defect): James found it "not as
 moody as ChatGPT" on the Kollwitz/charcoal influence specifically — a
