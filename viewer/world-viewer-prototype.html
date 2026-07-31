@@ -168,10 +168,10 @@
         </div>
         <input class="shot" id="shot-input" placeholder="Optional shot: &quot;Amara at Northstar Ground, tying her boots&quot; — copy composes only what's named" title="Shot-driven compose: entities named here (by name or alias) are resolved deterministically; everything else is left out">
         <div class="seg" id="target-seg" role="tablist" aria-label="Compose target" title="What the copy buttons compose for">
-          <button class="on" data-t="chat" onclick="setTarget('chat')">Chat</button>
-          <button data-t="gpt-image" onclick="setTarget('gpt-image')">GPT Image</button>
+          <button class="on" data-t="chat" onclick="setTarget('chat')">Full Context</button>
+          <button data-t="gpt-image" onclick="setTarget('gpt-image')">Chat to Image</button>
           <button data-t="midjourney" onclick="setTarget('midjourney')">Midjourney</button>
-          <button data-t="prompt" onclick="setTarget('prompt')">Generic</button>
+          <button data-t="prompt" onclick="setTarget('prompt')">Compact</button>
         </div>
         <button class="btn primary" onclick="copyWorldPackage()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
@@ -389,7 +389,7 @@ function mergedNevers(entities){
 /* ---------- compose targets (per-tool profiles; paste targets only —
    nano-banana and flux are edit/pipeline flows and ship with the CLI) ---------- */
 let TARGET='chat';
-const TARGETS={'chat':'Chat','gpt-image':'GPT Image','midjourney':'Midjourney','prompt':'Generic'};
+const TARGETS={'chat':'Full Context','gpt-image':'Chat to Image','midjourney':'Midjourney','prompt':'Compact'};
 function setTarget(t){TARGET=t;document.querySelectorAll('#target-seg button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));toast('Compose target: '+TARGETS[t])}
 function rawNevers(entities){
   const s=WORLD.style||{};const n=[...(s.never||[])];

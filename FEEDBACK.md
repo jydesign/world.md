@@ -841,3 +841,18 @@ vendor, and contradicts guardrail 6 (neutrality of the read path).
 James chose to hold off rather than apply now. Revisit once a real
 external user's actual confusion (or lack of it) with the toggle gives
 real evidence, rather than fixing a label pre-emptively pre-gate.
+
+### UPDATE — applied (2026-07-29, superseding the HOLD above)
+James decided to relabel after all, choosing his own wording — labels
+only, no subtitles:
+- Chat → **Full Context**
+- GPT Image → **Chat to Image**  (vendor name dropped, as recommended)
+- Midjourney → **Midjourney**  (unchanged — its vendor name is earned)
+- Generic → **Compact**
+
+Purely cosmetic; every compose profile is byte-identical. The two
+substantive recommendations both survived: no Gemini-specific button, and
+`chat`/`prompt` kept as distinct targets rather than collapsed. Layout
+note: the longer labels push "Copy world package" onto a second toolbar
+row at ~800px width — not broken, but a candidate for tightening if the
+toolbar gets crowded later.
