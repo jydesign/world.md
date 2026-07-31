@@ -1,0 +1,17 @@
+{
+  "name": "world.md",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A portable, vendor-neutral format for describing a creative world to generative AI.",
+  "license": "Apache-2.0",
+  "bin": { "worldmd": "./cli/worldmd.mjs" },
+  "scripts": {
+    "lint": "node cli/worldmd.mjs lint",
+    "build:example": "node viewer/generate.mjs harborline.world",
+    "test": "node test/regression.mjs"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

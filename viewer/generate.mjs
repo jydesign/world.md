@@ -11,7 +11,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import url from 'node:url';
-import yaml from 'js-yaml';
+import { loadWorld } from '../lib/world.mjs';
 
 const worldArg = process.argv[2];
 if (!worldArg) {
@@ -30,76 +30,14 @@ const outFile = process.argv[3]
 const here = path.dirname(url.fileURLToPath(import.meta.url));
 const templatePath = path.join(here, 'world-viewer-prototype.html');
 
-/* ---------- parsing ---------- */
-const readMaybe = p => (fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : null);
-
-function splitFrontmatter(raw) {
-  const m = raw.match(/^﻿?---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
-  if (!m) return { fm: {}, body: raw.trim() };
-  return { fm: yaml.load(m[1]) || {}, body: (m[2] || '').trim() };
+/* ---------- parsing (shared with `worldmd lint` — see lib/world.mjs) ---------- */
+const L = loadWorld(absWorld);
+if (L.errors.length) {
+  console.error('cannot generate — fix these first (or run `worldmd lint`):');
+  for (const e of L.errors) console.error(`  ${e.file}: ${e.message}`);
+  process.exit(1);
 }
-// prose -> array of paragraphs (plain text; the viewer escapes it)
-function paras(body) {
-  if (!body) return [];
-  return body
-    .split(/\n\s*\n/)
-    .map(s => s.replace(/\s*\n\s*/g, ' ').trim())
-    .filter(Boolean);
-}
-// refs may be written as "references.yaml#id" (spec) or bare "id"
-const refIds = arr => (arr || []).map(r => String(r).split('#').pop());
-
-function loadCollection(dir) {
-  const d = path.join(absWorld, dir);
-  if (!fs.existsSync(d)) return [];
-  return fs
-    .readdirSync(d)
-    .filter(f => f.endsWith('.md'))
-    .sort()
-    .map(f => {
-      const { fm, body } = splitFrontmatter(fs.readFileSync(path.join(d, f), 'utf8'));
-      const e = { ...fm, prose: paras(body) };
-      if (e.refs) e.refs = refIds(e.refs);
-      if (e.interface && !e.iface) e.iface = e.interface; // template reads .iface
-      return e;
-    });
-}
-
-let world = null;
-const wRaw = readMaybe(path.join(absWorld, 'world.md'));
-if (wRaw) {
-  const { fm, body } = splitFrontmatter(wRaw);
-  world = { ...fm, premise: paras(body) };
-}
-
-let style = null;
-const sRaw = readMaybe(path.join(absWorld, 'style.md'));
-if (sRaw) style = splitFrontmatter(sRaw).fm;
-
-const characters = loadCollection('characters');
-const objects = loadCollection('objects');
-const locations = loadCollection('locations');
-
-let refs = {};
-const rRaw = readMaybe(path.join(absWorld, 'references.yaml'));
-if (rRaw) {
-  refs = yaml.load(rRaw) || {};
-  for (const k of Object.keys(refs)) {
-    const r = refs[k] || {};
-    r.path = r.path || r.url || ''; // template shows a single location string
-    refs[k] = r;
-  }
-}
-
-const WORLD = {
-  meta: { slug, name: (world && world.name) || slug },
-  world,
-  style,
-  characters,
-  objects,
-  locations,
-  refs,
-};
+const { WORLD, world, style, characters, objects, locations, refs } = L;
 
 /* ---------- build viewer from the prototype template ---------- */
 let tpl = fs.readFileSync(templatePath, 'utf8');

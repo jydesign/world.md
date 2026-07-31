@@ -109,7 +109,7 @@ gets stronger with every generation you run.**
 of any world folder:
 
 ```bash
-cd viewer && npm install && cd ..     # one dependency: js-yaml
+npm install                                  # one dependency: js-yaml
 node viewer/generate.mjs harborline.world
 ```
 
@@ -117,13 +117,19 @@ Open the generated HTML: entities render as pages with a "copy context
 package" button and a shot field; every empty slot shows a copy-paste
 starter prompt addressed to your AI. Empty states are the onboarding.
 
-A `worldmd` CLI is in development:
+A `worldmd` CLI ships with the repo. `lint` is worth running on any world an
+AI wrote for you — it catches contract drift the viewer renders straight past
+(a stray `role:` map, a broken ref, an unquoted colon that breaks YAML):
 
 ```bash
+npm install && node cli/worldmd.mjs lint      # lints every *.world here
+```
+
+```bash
+worldmd lint   [<world>...]  # frontmatter, broken refs, expired licenses       [works]
+worldmd spec                 # print the format primer for any AI chat          [works]
 worldmd shoot "<shot description>" --target midjourney   # shot-driven compose  [planned]
 worldmd serve  <world>       # localhost viewer, live reload                    [planned]
-worldmd lint   <world>       # frontmatter, broken refs, expired licenses       [planned]
-worldmd spec                 # print the format for any AI chat                 [available as exporters/spec-prompt.md]
 worldmd diff   HEAD~5        # entity-level change log                          [v2]
 ```
 
@@ -204,8 +210,9 @@ into any tool. Different questions, near-zero overlap, complementary.
 ## Status
 
 `alpha`, and honestly so. What works today: the `.world/` format, the
-read-only viewer generator, and per-tool context composition. Not built
-yet: the MCP server and the `worldmd` CLI. The format will change.
+read-only viewer generator, per-tool context composition, and `worldmd
+lint` / `worldmd spec`. Not built yet: the MCP server, and the CLI's
+`shoot` / `serve` / `diff`. The format will change.
 
 world.md is a **validation instrument**, not a product. It's being tested
 against one question: do a handful of people making real creative work —
