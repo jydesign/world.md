@@ -9,10 +9,14 @@ every prompt, and your outputs stop drifting.
 
 ## The problem
 
-Every AI generation session starts from amnesia. You describe your
-protagonist for the hundredth time, the model forgets her scar anyway, and
-the product in shot three is last month's design. The knowledge exists —
-scattered across prompts, docs, and your head. Nothing owns it.
+Generative AI is brilliant at the first image and hopeless at the fortieth.
+Every session starts from amnesia. You describe your protagonist for the
+hundredth time, the model forgets her scar anyway, and the product in shot
+three is last month's design. The knowledge exists — scattered across
+prompts, docs, and your head. Nothing owns it.
+
+The hard part was never making the image. It's keeping the world consistent
+behind all of them.
 
 world.md makes that knowledge into files: human-editable, git-versioned,
 readable by any AI tool.
@@ -98,7 +102,8 @@ let an AI build your world with you.
    the fix.
 
 That last step is the whole point. The loop is: generate → spot the drift →
-tell your AI what broke → it edits the file → git records it.
+tell your AI what broke → it edits the file → git records it. **The world
+gets stronger with every generation you run.**
 
 **If you have the repo and Node**, you can also render a read-only viewer
 of any world folder:
