@@ -190,6 +190,12 @@ of all of them: it's the persistent context layer your tools read from.
 DESIGN.md gives coding agents a durable understanding of a design system;
 world.md does the same for generative models and the worlds they render.
 
+Not a story-theory or narrative-structure tool, either. NCP (Narrative
+Context Protocol — the open edition of the Dramatica storyform) preserves a
+story's *thematic* coherence: authorial intent, dynamics, story beats. world.md
+preserves a world's *visual* coherence: entities, canon, and composing them
+into any tool. Different questions, near-zero overlap, complementary.
+
 ## Status
 
 `alpha`, and honestly so. What works today: the `.world/` format, the

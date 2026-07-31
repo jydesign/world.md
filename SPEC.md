@@ -253,6 +253,12 @@ tier (cheapest of these and the most likely to earn in — it would drop
 first under budget — but the entry test already excludes one-off scene
 items, so it needs evidence of a real world where props and dressing
 must be trimmed separately).
+
+Also deferred, and explicitly a REFERENCE not an adoption target: an
+optional NCP (Narrative Context Protocol) beat pointer on a shot record,
+for worlds whose author also maintains a Dramatica-style storyform. A
+pointer only, never a dependency — see PLAN.md's decision log for the
+reasoning against importing NCP/Dramatica structure directly.
 - `worldmd diff` — entity-level changes between two git states; the
   seed of the V2 world-diff / impact analyzer.
 - Compact single-file `WORLD.md` that tooling explodes into a `.world/`

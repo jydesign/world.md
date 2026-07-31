@@ -104,3 +104,21 @@ being prompted?
   (prompt-only tools are chirality-weak); it is enforced at shot-line
   staging, selection (canon checklist), reference conditioning, CAD
   insertion, and the never-mirror rule.
+- 2026-07-29 (positioning research — NCP / Narrative Context Protocol,
+  USC ETC / Narrative First, the open JSON edition of the Dramatica
+  storyform): REFERENCE, do not adopt or compete. NCP models
+  thematic/structural authorial intent (Dynamics, Storypoints,
+  Storybeats, the 64-element grid) — it keeps a story's MEANING
+  coherent. world.md keeps a world's LOOK coherent across tools
+  (entities, canon, per-tool composition). Different question, near-zero
+  overlap. Do NOT import Dramatica structure into the scenes/shots model
+  — it's heavy, opinionated, trademarked (USC/Write Bros), and violates
+  the drop-a-manuscript-and-go ethos; keep shots light (entity ids, beat,
+  register, camera intent) exactly as already specced (FEEDBACK 012).
+  Deferred interop: an optional NCP beat pointer on a shot — a pointer,
+  never a dependency (recorded in SPEC's Deferred list). One pattern
+  worth stealing, not the schema: NCP's token-aware LAYERED context
+  (spoon-feed only what matters) independently validates our own
+  per-target compose + compression-survival precedence (canon/nevers
+  always ship; facts/flavor/atmosphere are the droppable pool). No
+  Dramatica vocabulary or content adopted.
