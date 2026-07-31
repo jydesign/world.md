@@ -123,8 +123,14 @@ being prompted?
   register, camera intent) exactly as already specced (FEEDBACK 012).
   Deferred interop: an optional NCP beat pointer on a shot — a pointer,
   never a dependency (recorded in SPEC's Deferred list). One pattern
-  worth stealing, not the schema: NCP's token-aware LAYERED context
+  worth REFERENCING, not the schema: NCP's token-aware LAYERED context
   (spoon-feed only what matters) independently validates our own
   per-target compose + compression-survival precedence (canon/nevers
-  always ship; facts/flavor/atmosphere are the droppable pool). No
-  Dramatica vocabulary or content adopted.
+  always ship; facts/flavor/atmosphere are the droppable pool) — an
+  approach already built here before encountering NCP, so this is
+  convergent validation, not borrowing. No Dramatica vocabulary or
+  content adopted. (Wording note: this line and commit 52a29c1 first read
+  "worth stealing" — a phrase carried over from an AI-assisted summary.
+  Corrected here for accuracy, since nothing was taken; the original
+  commit message is left unrewritten, per this project's
+  verbatim-beats-tidy norm.)
