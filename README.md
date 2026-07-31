@@ -218,4 +218,11 @@ send notes straight back to whoever shared this with you.
 
 ## License
 
-Apache-2.0
+**Code** — the viewer generator, and the CLI and MCP server as they land —
+is Apache-2.0. See [LICENSE](LICENSE).
+
+**The format itself is free.** Anyone may implement `.world` in any tool,
+commercial or not, with no permission, licensing, or attribution required —
+and the spec and primers here may be copied, pasted, and adapted freely
+(they are designed to be pasted into a chat window). A format that isn't
+free to implement isn't a format; it's a product.
