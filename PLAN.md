@@ -2,6 +2,12 @@
 
 Start date: 2026-07-28  →  **THE GATE: 2026-09-22** (start + 8 weeks)
 
+**Commercial thesis** (so there's a crisp answer if asked, and a guardrail
+against building it early): the format, MCP server, composer, and viewer are
+free forever and vendor-neutral. Potential future revenue is hosted sync and
+team governance — a paid layer ON TOP of a free, portable core. Do not build
+any of that until post-gate.
+
 ## Weeks 1–3 — Hand-written dogfood
 - Pick ONE real project as the test world: ____________
 - Write its .world folder by hand per SPEC.md. No code yet.

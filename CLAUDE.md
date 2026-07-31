@@ -64,6 +64,11 @@ Storybook pattern: files are truth, UI is a renderer. Rules:
    never depend on any single AI vendor. Claude Code may be the best
    WRITE path for now; the READ paths work everywhere, because "your
    world works everywhere" is the moat.
+7. Do not build monetization, accounts, hosted sync, or team features
+   before the gate. Commercial thesis (PLAN.md): free forever and
+   vendor-neutral core; potential future revenue is a paid layer for
+   hosted sync and team governance. That is the whole answer to "what's
+   the business" until post-gate.
 
 ## Repo layout (target)
 - SPEC.md            — the .world format spec (doubles as README core)
