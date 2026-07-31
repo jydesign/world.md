@@ -747,3 +747,44 @@ hypothetical: the midjourney target should emit a SHORT curated `--no` of
 visual terms (or none), never the full merged never-list. D02's "keep the
 --no list short" is now proven. Ready to build when/if MJ is a priority
 target; NOT built yet.
+
+---
+
+## 2026-07-29 — 015 · Gemini/Nano Banana: third vendor confirms neutrality; apron drift traced to a vague noun
+
+Same conformed Death of the Hired Man world, gpt-image-target package
+pasted into Gemini's native image generation (Nano Banana backend).
+
+### Result
+Good coherence — medium held (illustration, never photo/cartoon), no
+logos, moonlit-window and doorway-threshold compositions landed. This is
+the THIRD distinct vendor (GPT Image, Midjourney, now Gemini) rendering
+correctly from the same vendor-neutral package — real evidence for the
+neutrality thesis, not GPT-specific luck.
+
+Per-vendor aesthetic note (honest, not a defect): James found it "not as
+moody as ChatGPT" on the Kollwitz/charcoal influence specifically — a
+real stylistic difference between reasoning-image models worth knowing
+about, not something to fix.
+
+### Drift: apron coverage inconsistent across generations
+Some frames showed a full chest-covering bib apron, others a waist-only
+apron. Traced to source, not model failure: Mary's wardrobe said only
+"plain apron" — a vague noun with no silhouette, same category as the
+original scar issue (rule 4: describe physical reality, not a vague
+label). Nothing told the model bib vs. waist, so it guessed per-frame.
+
+### Fix (applied directly in the Drive world, not the repo)
+wardrobe.default now specifies: "full bib-style apron with a wide chest
+panel and crossed straps over both shoulders, tied at the waist, covering
+from chest to knee." Added matching canon: "Her apron is a full bib style
+covering chest to knee — never a waist-only or half apron." Bib apron is
+also the more period-correct 1910s choice and suits the world's own
+"lamplight gathering on her apron" motif better than a narrow waist sash.
+
+### Deferred: reference image
+James's instinct (also add a reference image) is the SAME lesson as the
+Amara chirality work (003–004): text bias narrows the odds, a reference
+locks it. Not applied yet — needs James to pick a canon-correct frame
+first (same process as amara-ref). Natural next step once he reviews
+these three frames or a rerun against the tightened wardrobe.
