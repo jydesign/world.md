@@ -237,3 +237,7 @@ commercial or not, with no permission, licensing, or attribution required —
 and the spec and primers here may be copied, pasted, and adapted freely
 (they are designed to be pasted into a chat window). A format that isn't
 free to implement isn't a format; it's a product.
+
+## WORLD.md Viewer Example
+
+<img width="1427" height="825" alt="world-md-viewer-example" src="https://github.com/user-attachments/assets/d010b028-3f93-44d2-8b92-082291437a85" />
