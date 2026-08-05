@@ -1,8 +1,10 @@
-# world.md
+# WORLD.md
 
-**A format for describing a creative world to generative AI.**
+**A portable, vendor-neutral format for describing a creative world to generative AI.**
 
-world.md gives image, video, and chat models a persistent, structured
+Define your world once, in files you own. Generate with it anywhere — Midjourney, ChatGPT, Google Gemini, FLUX, whatever ships next — one world, many tools, no lock-in.
+
+WORLD.md gives image, video, and chat models a persistent, structured
 understanding of your world — its characters, objects, locations, style,
 and the rules that must never break — so you stop re-explaining it in
 every prompt, and your outputs stop drifting.
@@ -18,8 +20,12 @@ prompts, docs, and your head. Nothing owns it.
 The hard part was never making the image. It's keeping the world consistent
 behind all of them.
 
-world.md makes that knowledge into files: human-editable, git-versioned,
+WORLD.md makes that knowledge into files: human-editable, git-versioned,
 readable by any AI tool.
+
+## What it's for
+
+One world, many outputs: ad campaigns (one cast, one product, every deliverable), storyboarding and AI film (shot 1 and shot 40 match, across image and video tools), illustration sets and covers that hold a style for months, comics with a recurring cast, game concept-art bibles, brand content that always shows the current product design. If it has recurring characters, objects, or a look — it's a world.
 
 ## The format
 
@@ -135,6 +141,8 @@ worldmd diff   HEAD~5        # entity-level change log                          
 
 ## Using it with AI tools
 
+**The same world drives every lane — you don't pick a tool, you pick a target per shot.**
+
 Compose targets are per-tool profiles, not one generic block — each has its
 own budget, phrasing, and reference handling.
 
@@ -196,14 +204,14 @@ Learned by generating against a real campaign and counting what broke:
 
 ## What this is not
 
-Not an image generator, a DAM, or a prompt library. world.md sits upstream
+Not an image generator, a DAM, or a prompt library. WORLD.md sits upstream
 of all of them: it's the persistent context layer your tools read from.
 DESIGN.md gives coding agents a durable understanding of a design system;
-world.md does the same for generative models and the worlds they render.
+WORLD.md does the same for generative models and the worlds they render.
 
 Not a story-theory or narrative-structure tool, either. NCP (Narrative
 Context Protocol — the open edition of the Dramatica storyform) preserves a
-story's *thematic* coherence: authorial intent, dynamics, story beats. world.md
+story's *thematic* coherence: authorial intent, dynamics, story beats. WORLD.md
 preserves a world's *visual* coherence: entities, canon, and composing them
 into any tool. Different questions, near-zero overlap, complementary.
 
@@ -214,7 +222,7 @@ read-only viewer generator, per-tool context composition, and `worldmd
 lint` / `worldmd spec`. Not built yet: the MCP server, and the CLI's
 `shoot` / `serve` / `diff`. The format will change.
 
-world.md is a **validation instrument**, not a product. It's being tested
+WORLD.md is a **validation instrument**, not a product. It's being tested
 against one question: do a handful of people making real creative work —
 short films, campaigns, series, games — put their own project into this
 format and keep using it?
