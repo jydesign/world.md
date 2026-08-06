@@ -45,8 +45,10 @@ One world, many outputs: ad campaigns (one cast, one product, every deliverable)
 Early evidence, small samples, run by the author — but specific enough to
 report.
 
-The first Midjourney run pasted a whole world with no shot direction. All
-four images came back as **3D cartoons** in the model's house style, showing
+The test world was a product campaign — three athletes, three devices, three
+locations (`cross-trainerx-spring-launch.world` in this repo). The first
+Midjourney run pasted the whole thing with no shot direction. All four
+images came back as **3D cartoons** in the model's house style, showing
 every character at once, with no location legible and the products missing.
 The world was there; the prompt wasn't shaped.
 
@@ -91,6 +93,10 @@ harborline.world/
     pier-7.md
   references.yaml     # where external truth lives — never the media itself
 ```
+
+Two example worlds ship with this repo: **`harborline.world`** — small, and
+the one used for examples here — and **`cross-trainerx-spring-launch.world`**,
+a full product campaign, the world the results above came from.
 
 A single entity file (`characters/mara.md`):
 
