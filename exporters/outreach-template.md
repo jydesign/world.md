@@ -17,7 +17,7 @@ Hi [name],
 re-describing the same characters to Midjourney. This is the thing I've
 been building for exactly that."]
 
-It's called world.md: a plain-text way to write down a project's
+It's called WORLD.md: a plain-text way to write down a project's
 characters, products, locations, and style once, so AI tools stop making
 you re-explain them every prompt. It's early and rough, and honestly I'm
 trying to find out whether it's useful to anyone but me.

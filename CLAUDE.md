@@ -1,4 +1,4 @@
-# Project: world.md (working name — FROZEN, do not rename)
+# Project: WORLD.md (working name — FROZEN, do not rename)
 
 ## What this is
 An open-source spec + MCP server for portable creative-world context.
@@ -89,5 +89,5 @@ natural later). Everything else was deliberately cut.
 External validation: Google Labs' DESIGN.md (github.com/google-labs-code/
 design.md) applies the same pattern — YAML frontmatter tokens + markdown
 prose, git as truth, a lint/diff/spec CLI — to design systems for coding
-agents. Positioning analogy: "DESIGN.md : coding agents :: world.md :
+agents. Positioning analogy: "DESIGN.md : coding agents :: WORLD.md :
 generative models."

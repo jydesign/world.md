@@ -1,4 +1,4 @@
-# world.md — one-pass extraction primer
+# WORLD.md — one-pass extraction primer
 
 Use this when you ALREADY have written material — a script, treatment,
 creative brief, brand guide, character notes — and want a fast first draft

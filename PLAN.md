@@ -128,7 +128,7 @@ being prompted?
   storyform): REFERENCE, do not adopt or compete. NCP models
   thematic/structural authorial intent (Dynamics, Storypoints,
   Storybeats, the 64-element grid) — it keeps a story's MEANING
-  coherent. world.md keeps a world's LOOK coherent across tools
+  coherent. WORLD.md keeps a world's LOOK coherent across tools
   (entities, canon, per-tool composition). Different question, near-zero
   overlap. Do NOT import Dramatica structure into the scenes/shots model
   — it's heavy, opinionated, trademarked (USC/Write Bros), and violates

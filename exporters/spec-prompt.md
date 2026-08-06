@@ -1,4 +1,4 @@
-# world.md — the pasteable primer
+# WORLD.md — the pasteable primer
 
 This is the payload of `worldmd spec`: hand it to someone with no repo, no
 CLI, and no particular AI vendor, and they can build a world in one
