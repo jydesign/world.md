@@ -23,9 +23,52 @@ behind all of them.
 WORLD.md makes that knowledge into files: human-editable, git-versioned,
 readable by any AI tool.
 
+## "Why not just tell the AI?"
+
+You can — once. Then the session ends. Or you switch from ChatGPT to
+Midjourney. Or a teammate needs the same character. Or the product design
+changes and forty images have to reflect it.
+
+A chat can't be diffed, reviewed, branched, or handed to another vendor.
+Its memory belongs to whoever made the model.
+
+**This is version control for the things you keep re-describing.** One early
+reader put it better than I had: *"a type of source control that different
+AI tools can all use."*
+
 ## What it's for
 
 One world, many outputs: ad campaigns (one cast, one product, every deliverable), storyboarding and AI film (shot 1 and shot 40 match, across image and video tools), illustration sets and covers that hold a style for months, comics with a recurring cast, game concept-art bibles, brand content that always shows the current product design. If it has recurring characters, objects, or a look — it's a world.
+
+## Does it actually work?
+
+Early evidence, small samples, run by the author — but specific enough to
+report.
+
+The first Midjourney run pasted a whole world with no shot direction. All
+four images came back as **3D cartoons** in the model's house style, showing
+every character at once, with no location legible and the products missing.
+The world was there; the prompt wasn't shaped.
+
+Three fixes, each traced to a named failure:
+
+- **`medium: photograph`**, set in `style.md` and placed first in the
+  prompt → photographic **0/4 → 4/4**
+- **Composing per shot** instead of per world → one subject, the right
+  action, instead of a group lineup
+- **Canon kept beside the entity it governs**, and location facts protected
+  from budget trimming → the stadium appeared **0/4 → 4/4**
+
+The same world then ran on **ChatGPT and Gemini** with no changes to the
+files — only a different compose target. A second world, in an illustration
+medium, held its style across three images on the first try.
+
+What *didn't* work is in [FEEDBACK.md](FEEDBACK.md) too: models are weak on
+left/right, so "watch on the LEFT wrist" drifts; subtle recurring motifs
+render as literal signage; and Midjourney's moderation rejected a prompt
+until we stopped dumping every `never:` rule into `--no`. Canon that can't
+be won at generation is still worth writing — it makes off-canon output
+objectively cullable.
 
 ## The format
 
