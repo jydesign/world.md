@@ -856,3 +856,64 @@ substantive recommendations both survived: no Gemini-specific button, and
 note: the longer labels push "Copy world package" onto a second toolbar
 row at ~800px width — not broken, but a candidate for tightening if the
 toolbar gets crowded later.
+
+---
+
+## 2026-08-06 — 017 · FIRST EXTERNAL RESPONSES (3 people, read-only — nobody has run it yet)
+
+James shared the repo with three contacts. All three responded to READING
+it; none has built a world or generated an image. Verbatim below.
+
+### M.M. (text, 8/4) — the richest signal
+> "I read through it. It took me a few minutes to click with it. At first
+> I was thinking, 'why not just chat with the bot?' But then I realized
+> it's really about having a type of source control that different AI
+> tools can all use. Once I saw it that way, the idea felt much more
+> compelling as a tool for creative teams. It seems focused on image
+> generation? Does it solve a pain point for you currently?"
+
+Follow-up: *"do the models consider your world file differently or can you
+reproduce results between models?"*
+
+### B.C. (LinkedIn DM, 8/5)
+> "That world.md is great. Wonderful idea. Part of it is about retaining
+> ownership of your AI source files, in a way, yes? I've seen a few tools
+> like this help you keep proprietary things your company wants you to
+> turn into skills or MD files. Tools that help you hand over the bare
+> minimum so it works but your IP isn't totally forked over..."
+
+### I.B. (LinkedIn DM, 8/5)
+> "I took a quick look at your WORLD.md project... I personally don't have
+> experience with image generation, but I have a friend who is a concept
+> artist, and he might be interested."
+
+### Findings
+
+1. **"Why not just chat with the bot?" is THE barrier.** It cost M.M.
+   several minutes before the idea landed. Per PLAN's own rule — if they
+   need it explained, that IS the finding — this objection must be
+   answered on the first screen and currently isn't.
+2. **Two people independently reframed it better than the README does.**
+   M.M.: *"source control that different AI tools can all use."*
+   B.C.: *"retaining ownership of your AI source files."* Both land faster
+   than the README's drift/consistency lead. The README HAS these ideas
+   (vendor-neutral, git-versioned, own knowledge not media) but buries
+   them under the drift story.
+3. **Perceived as image-only.** M.M.: *"It seems focused on image
+   generation?"* James is separately wondering about books/scripts. Every
+   example in the README is an image tool.
+4. **"Creative teams" was M.M.'s instinct**, not solo creators — a
+   different audience than the recruiting has assumed.
+5. **The funnel is failing at read→try, not try→keep.** 0/3 attempted a
+   world. That is a positioning/onboarding problem, NOT a tooling gap —
+   none of the unbuilt CLI work (serve, shoot, MCP) would have changed
+   any of these three outcomes.
+6. **Referral path exists** (I.B.'s concept-artist friend) — warmer than
+   cold outreach, and closer to the actual target user.
+7. James's own reply produced a use case the README lacks: *"a celebrity
+   wearing a gadget that keeps changing up to the last minute. You could
+   reference the latest designs and rerun images."* Concrete and
+   commercial; the README has no scenario this vivid.
+8. James's instinct: *"I should do a short video showing a few use
+   cases."* Well-supported — "took a few minutes to click" says reading
+   isn't landing fast, and he now has real generated image sets to show.
