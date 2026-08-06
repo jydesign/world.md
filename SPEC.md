@@ -173,7 +173,7 @@ one generic block. Each profile defines a token budget, a phrasing style,
 and how references are handled.
 
 v0.1 profiles:
-- `chat` — WORLD.md summary + style.md + full entity files, one block.
+- `chat` — world.md summary + style.md + full entity files, one block.
   Generic long-context chat (Claude, Gemini, etc.); the MCP default.
 - `gpt-image` — long-context chat profile: instruction preamble + full
   world; load once per session, brief shots conversationally after.
