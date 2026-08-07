@@ -1,6 +1,10 @@
-# WORLD.md
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/hero-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="docs/hero-light.png">
+  <img alt="WORLD.md — a portable, vendor-neutral format for describing a creative world to generative AI. It gives your characters, places, and style a memory that works across every tool." src="docs/hero-light.png">
+</picture>
 
-**A portable, vendor-neutral format for describing a creative world to generative AI.**
+# WORLD.md
 
 Define your world once, in files you own. Generate with it anywhere — Midjourney, ChatGPT, Google Gemini, FLUX, whatever ships next — one world, many tools, no lock-in.
 
