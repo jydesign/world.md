@@ -4,6 +4,10 @@
   <img alt="WORLD.md — a portable, vendor-neutral format for describing a creative world to generative AI. It gives your characters, places, and style a memory that works across every tool." src="docs/hero-light.png">
 </picture>
 
+[![tests](https://github.com/jydesign/world.md/actions/workflows/test.yml/badge.svg)](https://github.com/jydesign/world.md/actions/workflows/test.yml)
+[![license](https://img.shields.io/github/license/jydesign/world.md?color=blue)](LICENSE)
+[![status: alpha](https://img.shields.io/badge/status-alpha-orange)](#status)
+
 # WORLD.md
 
 Define your world once, in files you own. Generate with it anywhere — Midjourney, ChatGPT, Google Gemini, FLUX, whatever ships next — one world, many tools, no lock-in.

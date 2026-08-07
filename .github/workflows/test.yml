@@ -1,0 +1,28 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['20.x', '22.x']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      # Example worlds must lint clean, the shared loader must keep the shape
+      # the viewer template reads, and the generator must produce a populated page.
+      - run: npm test
+      # The worlds shipped in this repo are what new users copy — they have to
+      # be exemplary, so lint them explicitly too (non-zero exit on any error).
+      - run: node cli/worldmd.mjs lint
