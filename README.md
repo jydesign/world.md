@@ -71,7 +71,8 @@ Three fixes, each traced to a named failure:
 
 The same world then ran on **ChatGPT and Gemini** with no changes to the
 files — only a different compose target. A second world, in an illustration
-medium, held its style across three images on the first try.
+medium, held its style across three images on the first try. Both sets are
+below.
 
 What *didn't* work is in [FEEDBACK.md](FEEDBACK.md) too: models are weak on
 left/right, so "watch on the LEFT wrist" drifts; subtle recurring motifs
@@ -79,6 +80,24 @@ render as literal signage; and Midjourney's moderation rejected a prompt
 until we stopped dumping every `never:` rule into `--no`. Canon that can't
 be won at generation is still worth writing — it makes off-canon output
 objectively cullable.
+
+## From file to output
+
+<img alt="Six generated images above the WORLD.md viewer. Top row: three photographic ad-campaign frames made with ChatGPT — an athlete tying her boot in a stadium at sunrise, a man in a kitchen beside a speaker, a skydiver over a coastline. Middle row: three charcoal storyboard illustrations made with Google Gemini for Robert Frost's poem The Death of the Hired Man. Below: the read-only viewer showing the amara-vale.md character page, with its canon rules and physical facts." src="docs/worldmd-github-samples-and-viewer.jpg" />
+
+Six images, two worlds, two tools — and the files they came from.
+
+**Top:** a product campaign composed for ChatGPT's image model, from a world
+whose `style.md` sets `medium: photograph`. **Middle:** illustrative
+storyboards for Robert Frost's *The Death of the Hired Man*, composed for
+Google Gemini from a world set to `medium: illustration` — same format, same
+compose target, entirely different look. **Bottom:** the read-only viewer
+showing `characters/amara-vale.md` — the file behind the athlete in the first
+frame. Canon at the top (the scar is on the LEFT, the hair is gathered UP),
+then the physical facts that survive prompt compression.
+
+Nothing in those images was re-described per prompt. It was written once and
+composed per shot.
 
 ## The format
 
@@ -302,21 +321,3 @@ commercial or not, with no permission, licensing, or attribution required —
 and the spec and primers here may be copied, pasted, and adapted freely
 (they are designed to be pasted into a chat window). A format that isn't
 free to implement isn't a format; it's a product.
-
-## From file to output
-
-<img alt="Six generated images above the WORLD.md viewer. Top row: three photographic ad-campaign frames made with ChatGPT — an athlete tying her boot in a stadium at sunrise, a man in a kitchen beside a speaker, a skydiver over a coastline. Middle row: three charcoal storyboard illustrations made with Google Gemini for Robert Frost's poem The Death of the Hired Man. Below: the read-only viewer showing the amara-vale.md character page, with its canon rules and physical facts." src="docs/worldmd-github-samples-and-viewer.jpg" />
-
-Six images, two worlds, two tools — and the files they came from.
-
-**Top:** a product campaign composed for ChatGPT's image model, from a world
-whose `style.md` sets `medium: photograph`. **Middle:** illustrative
-storyboards for Robert Frost's *The Death of the Hired Man*, composed for
-Google Gemini from a world set to `medium: illustration` — same format, same
-compose target, entirely different look. **Bottom:** the read-only viewer
-showing `characters/amara-vale.md` — the file behind the athlete in the first
-frame. Canon at the top (the scar is on the LEFT, the hair is gathered UP),
-then the physical facts that survive prompt compression.
-
-Nothing in those images was re-described per prompt. It was written once and
-composed per shot.
