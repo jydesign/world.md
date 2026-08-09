@@ -17,6 +17,10 @@ understanding of your world — its characters, objects, locations, style,
 and the rules that must never break — so you stop re-explaining it in
 every prompt, and your outputs stop drifting.
 
+> **[See it work first →](https://jydesign.github.io/world.md/)** Two finished
+> worlds with shots already written. Click a shot, copy, paste into any image
+> tool. Five minutes, nothing to install, no files to make.
+
 ## The problem
 
 Generative AI is brilliant at the first image and hopeless at the fortieth.
