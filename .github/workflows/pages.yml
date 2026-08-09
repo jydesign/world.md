@@ -1,0 +1,56 @@
+name: pages
+
+# Publishes the "try it" page plus a live viewer for each example world.
+# Viewers are GENERATED here, never committed — the .world folders stay the
+# source of truth and the published HTML is only a projection of them.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: npm
+      - run: npm ci
+
+      # A world that doesn't lint has no business being published as an example.
+      - run: node cli/worldmd.mjs lint
+
+      - name: Build site
+        run: |
+          mkdir -p _site
+          cp site/index.html _site/
+          for w in *.world; do
+            node viewer/generate.mjs "$w" "_site/${w%.world}-viewer.html"
+          done
+          ls -la _site
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

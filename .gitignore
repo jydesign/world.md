@@ -11,3 +11,6 @@ node_modules/
 # Generated viewer output — the viewer is a *projection* of the .world
 # folder, not source. Regenerate with: node viewer/generate.mjs <world>
 *-viewer.html
+
+# Pages build output (generated in CI from the .world folders)
+_site/

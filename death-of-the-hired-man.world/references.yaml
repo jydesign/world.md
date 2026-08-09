@@ -1,0 +1,47 @@
+# External truth for the film. Top-level keys are the reference ids that
+# entity files cite as references.yaml#<id>. The world records WHERE a source
+# lives — never its contents.
+
+frost-poem:
+  kind: doc
+  source: web
+  url: https://en.wikipedia.org/wiki/The_Death_of_the_Hired_Man
+  current: "1914"
+  approved: true
+  note: "Primary narrative source — Robert Frost, 'The Death of the Hired Man' (1914). Preserve its ambiguity, moral tension, and restraint. Verify public-domain status in the production jurisdiction before distribution."
+
+kollwitz-reference:
+  kind: image
+  source: web
+  url: https://www.moma.org/artists/3201-kathe-kollwitz
+  current: pending
+  approved: true
+  note: "Visual influence — Käthe Kollwitz (MoMA reference page). Study graphic force, mark-making, bodily weight, human compassion; never reproduce a specific composition. Reproduction rights vary by work and institution."
+
+period-farm-research:
+  kind: doc
+  source: web
+  current: pending
+  approved: false
+  note: "1910s rural New England farm architecture and working landscape — needed to approve farm layout, materials, outbuildings, fences, meadow, upper pasture, and garden."
+
+period-wardrobe-research:
+  kind: doc
+  source: web
+  current: pending
+  approved: false
+  note: "1910s rural New England work clothing — needed before locking character model sheets and wardrobe continuity."
+
+period-object-research:
+  kind: doc
+  source: web
+  current: pending
+  approved: false
+  note: "1910s kerosene lamps, cast-iron stoves, chairs, and farm tools — needed before approving exact object designs."
+
+approved-visual-development:
+  kind: image
+  source: local
+  current: pending
+  approved: false
+  note: "Approved character, object, and environment development — model sheets, turnarounds, value studies, location plans, reference frames. Add as created."

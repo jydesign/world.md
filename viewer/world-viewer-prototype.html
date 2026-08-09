@@ -705,6 +705,17 @@ function setMode(m){
   render();
 }
 render();
+
+/* Deep link: #shot=<urlencoded> pre-fills the shot field and sets the
+   compose target (#target=midjourney). Lets a "try this" link land someone
+   one click from a composed prompt. */
+(function(){
+  const h=new URLSearchParams(location.hash.replace(/^#/,''));
+  const t=h.get('target'); if(t&&TARGETS[t]) setTarget(t);
+  const s=h.get('shot');
+  if(s){ const el=document.getElementById('shot-input');
+    if(el){ el.value=s; el.focus(); el.setSelectionRange(s.length,s.length); } }
+})();
 </script>
 </body>
 </html>

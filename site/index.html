@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Try WORLD.md — see it work in five minutes</title>
+<meta name="description" content="Two ready-made worlds and six tested shots. Copy a prompt, paste it into any image generator, and watch a character stay itself across shots and tools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF7; --card:#FFFFFF; --ink:#1F1D1A; --ink-2:#5C5850; --ink-3:#8B867C;
+    --line:#E7E3DA; --line-2:#D8D3C7;
+    --w-slate:#2E4B52; --w-amber:#D9A441; --w-hull:#8C3B2E; --w-night:#151C1E;
+    --canon-bg:#FBF3E2;
+    --mono:'IBM Plex Mono',monospace; --ui:'Instrument Sans',sans-serif; --prose:'Newsreader',serif;
+    --r:10px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--ui);
+       -webkit-font-smoothing:antialiased;line-height:1.55}
+  .wrap{max-width:760px;margin:0 auto;padding:48px 24px 96px}
+  header{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:36px}
+  .lockup{display:flex;align-items:center;gap:8px;margin-bottom:22px}
+  .lockup svg{width:19px;height:19px}
+  .lockup b{font-size:13.5px;font-weight:700;letter-spacing:.02em}
+  .lockup b span{color:var(--ink-3);font-weight:600}
+  h1{font-family:var(--prose);font-weight:500;font-size:34px;line-height:1.2;margin:0 0 12px}
+  .sub{font-size:16px;color:var(--ink-2);margin:0}
+  h2{font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;
+     color:var(--ink-3);font-weight:500;margin:44px 0 14px}
+  h3{font-size:17px;margin:0 0 4px;font-weight:600}
+  p{margin:0 0 14px}
+  .lede{font-family:var(--prose);font-size:18px;line-height:1.6}
+  .worlds{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:620px){.worlds{grid-template-columns:1fr}}
+  .world{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px}
+  .world .meta{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-bottom:10px}
+  .world p{font-size:14px;color:var(--ink-2);margin-bottom:14px}
+  .shots{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+  .shots a{display:block;text-decoration:none;color:var(--ink);background:var(--paper);
+           border:1px solid var(--line-2);border-radius:8px;padding:9px 11px;font-size:13px;line-height:1.4}
+  .shots a:hover{border-color:var(--w-amber);background:var(--canon-bg)}
+  .shots .n{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);display:block;margin-bottom:2px}
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 8px}
+  ol.steps li{counter-increment:s;position:relative;padding-left:34px;margin-bottom:13px}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;
+    border-radius:50%;background:var(--w-night);color:var(--paper);font-family:var(--mono);
+    font-size:11px;display:grid;place-items:center}
+  .note{background:var(--canon-bg);border-left:3px solid var(--w-amber);border-radius:0 8px 8px 0;
+        padding:13px 16px;font-size:14px;margin:18px 0}
+  .note b{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;
+          display:block;color:var(--ink-2);margin-bottom:4px;font-weight:500}
+  code{font-family:var(--mono);font-size:.9em;background:#F1EDE4;padding:1px 5px;border-radius:4px}
+  a{color:var(--w-slate)}
+  footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--line);
+         font-size:13.5px;color:var(--ink-2)}
+  footer a{color:var(--w-slate)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="lockup">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M14 2V7C14 7.26522 14.1054 7.51957 14.2929 7.70711C14.4804 7.89464 14.7348 8 15 8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M14.692 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8C20.0008 7.68311 19.9388 7.3692 19.8176 7.07639C19.6964 6.78358 19.5185 6.51767 19.294 6.294L15.706 2.706C15.4823 2.48152 15.2164 2.30356 14.9236 2.18238C14.6308 2.06121 14.3169 1.99922 14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V7.804" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M8 22C11.3137 22 14 19.3137 14 16C14 12.6863 11.3137 10 8 10C4.68629 10 2 12.6863 2 16C2 19.3137 4.68629 22 8 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M5.6 16C5.6 13.766 6.45934 11.6177 8 10C9.54066 11.6177 10.4 13.766 10.4 16C10.4 18.234 9.54066 20.3823 8 22C6.45934 20.3823 5.6 18.234 5.6 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M2 16H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <b>WORLD<span>.md</span></b>
+  </div>
+  <h1>See it work before you build anything.</h1>
+  <p class="sub">Two worlds already exist below. Borrow one, run a couple of shots, and watch a
+  character stay itself across scenes and across tools. Nothing to install, no files to make.</p>
+</header>
+
+<h2>1 · Pick a world</h2>
+<p class="lede">Each link opens the world and drops a ready-made shot into it. Click one, hit
+<b>Copy world package</b>, paste into whatever image tool you use.</p>
+
+<div class="worlds">
+  <div class="world">
+    <div class="meta">campaign · medium: photograph</div>
+    <h3>Cross-TrainerX</h3>
+    <p>A product campaign: three athletes, three devices, three locations.</p>
+    <ul class="shots">
+      <li><a href="cross-trainerx-spring-launch-viewer.html#target=gpt-image&shot=Amara%20kneels%20pitch-side%20at%20Northstar%20Ground%20at%20sunrise%20tightening%20her%20boot%20cuff%2C%20her%20left%20side%20toward%20camera%2C%20Pulse%20Arc%20watch%20face%20toward%20camera.">
+        <span class="n">shot 1</span>Amara at the stadium at sunrise, watch toward camera</a></li>
+      <li><a href="cross-trainerx-spring-launch-viewer.html#target=gpt-image&shot=Mateo%20R%C3%ADos%20prepares%20breakfast%20after%20training%20in%20his%20home%20Casa%20Ladera.%20He%20holds%20a%20ceramic%20bowl%20of%20fruit%20while%20speaking%20naturally%20toward%20the%20kitchen%20counter%2C%20caught%20mid%E2%80%93voice%20command%20rather%20than%20posing.%20Nearby%20is%20the%20Cross-TrainerX%20Orbit%20Home.">
+        <span class="n">shot 2</span>Mateo making breakfast, mid voice-command</a></li>
+      <li><a href="cross-trainerx-spring-launch-viewer.html#target=gpt-image&shot=Leonie%20Falk%20leaps%20from%20the%20open%20side%20of%20a%20sleek%20parachuter%27s%20aircraft%20in%20The%20Leap%20%28high-altitude%20skydive%29.%20Wearing%20Cross-TrainerX%20Vista%20Air">
+        <span class="n">shot 3</span>Leonie leaping from the aircraft, wearing Vista Air</a></li>
+    </ul>
+  </div>
+
+  <div class="world">
+    <div class="meta">film · medium: illustration</div>
+    <h3>The Death of the Hired Man</h3>
+    <p>Charcoal storyboards for the Robert Frost poem. Same format, entirely different look.</p>
+    <ul class="shots">
+      <li><a href="death-of-the-hired-man-viewer.html#target=gpt-image&shot=A%20portrait%20layout%20still%20that%20would%20be%20used%20for%20a%20book%20cover%2C%20showing%20the%20critical%20scene%20of%20light%20cast%20on%20Mary%27s%20apron%2C%20try%20to%20show%20all%20characters%20in%20a%20clever%20way">
+        <span class="n">shot 1</span>Book cover — lamplight on Mary's apron, all three present</a></li>
+      <li><a href="death-of-the-hired-man-viewer.html#target=gpt-image&shot=A%20portrait%20layout%20still%20that%20would%20be%20used%20for%20a%20book%20cover%2C%20showing%20Silas%20approaching%20Warren%20and%20Mary%27s%20Farm%2C%20Silas%20in%20the%20foreground%20we%20see%20his%20back%2C%20the%20Farm%20house%20a%20bit%20away%20on%20the%20horizon.">
+        <span class="n">shot 2</span>Silas approaching the farm, seen from behind</a></li>
+      <li><a href="death-of-the-hired-man-viewer.html#target=gpt-image&shot=A%20portrait%20layout%20still%20that%20would%20be%20used%20for%20a%20book%20cover%2C%20illustrating%20this%20line%20Mary%20speaks%3A%20%E2%80%9CI%E2%80%99ll%20sit%20and%20see%20if%20that%20small%20sailing%20cloud%20Will%20hit%20or%20miss%20the%20moon.%E2%80%99%20%20It%20hit%20the%20moon.%E2%80%9D">
+        <span class="n">shot 3</span>"Will hit or miss the moon. It hit the moon."</a></li>
+    </ul>
+  </div>
+</div>
+
+<h2>2 · Run two of them</h2>
+<ol class="steps">
+  <li>Click a shot above. The world opens with that shot already filled in.</li>
+  <li>Hit <b>Copy world package</b> in the top right.</li>
+  <li>Paste into ChatGPT, Gemini, or Claude and ask for the image.</li>
+  <li>Come back, click a <em>different</em> shot from the same world, and do it again.</li>
+</ol>
+
+<div class="note">
+  <b>Using Midjourney?</b>
+  Switch the compose chip from <em>Chat to Image</em> to <em>Midjourney</em> before copying — it
+  produces a terser block with the right flags. The chat tools are the gentler first try.
+</div>
+
+<h2>3 · Notice what you didn't have to do</h2>
+<p class="lede">You never described Amara's face, her scar, the palette, or the lighting — and they
+came out consistent anyway, in a scene nobody had written before. That's the world doing the work.
+The shot line was one sentence; everything else came from the files.</p>
+
+<div class="note">
+  <b>The comparison, if you want it</b>
+  Take the same shot line on its own — without the copied world package — and generate it again.
+  The gap between those two images is the entire point.
+</div>
+
+<h2>4 · Now write your own shot</h2>
+<p class="lede">Go back to a world and type your own scene into the shot field — anything, a moment
+that was never in the brief. Copy, paste, generate. If the character still looks like herself, you
+have just used somebody else's world without learning anything about the format.</p>
+
+<h2>Then, if you want it</h2>
+<p>
+  <b>Make your own world.</b> Paste
+  <a href="https://github.com/jydesign/world.md/blob/main/exporters/spec-prompt.md">spec-prompt.md</a>
+  into any AI chat and it interviews you and writes the files. Already have a script or a brief?
+  <a href="https://github.com/jydesign/world.md/blob/main/exporters/extract-prompt.md">extract-prompt.md</a>
+  drafts one from it in a single pass.
+</p>
+<p>
+  <b>Tinker with one of these.</b> Clone the
+  <a href="https://github.com/jydesign/world.md">repo</a>, change a canon line, regenerate, and see
+  what moves.
+</p>
+
+<footer>
+  <p><b>This is alpha, and the useful thing you can send back is what broke.</b> Where it confused
+  you, what drifted anyway, where you gave up. Blunt beats polite —
+  <a href="https://github.com/jydesign/world.md/issues">open an issue</a> or reply to whoever sent
+  you this.</p>
+  <p style="margin-top:14px;color:var(--ink-3)">
+    WORLD.md is a portable, vendor-neutral format for describing a creative world to generative AI.
+    Free to implement, Apache-2.0 · <a href="https://github.com/jydesign/world.md">github.com/jydesign/world.md</a>
+  </p>
+</footer>
+
+</div>
+</body>
+</html>
