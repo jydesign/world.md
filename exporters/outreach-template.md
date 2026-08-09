@@ -121,9 +121,11 @@ No rush and no polish expected — thank you for taking a look.
   block or a bad frame, the demo does not merely fail — it discredits the
   idea. See FEEDBACK 014: Midjourney refused a prompt until the merged
   `never:` dump was removed from `--no`.
-- **Steer first-timers to chat tools** (ChatGPT / Gemini / Claude). They
-  tolerate the full package and have gentler moderation. Midjourney is the
-  better demo for MJ natives, but it needs the terser target.
+- **Steer first-timers to image-generating chats** (ChatGPT / Gemini /
+  Ideogram). They tolerate the full package and have gentler moderation.
+  Midjourney is the better demo for MJ natives, but it needs the terser
+  target. Note Claude does NOT generate images — it is where you build and
+  revise a world, not where you run a shot.
 - **C asks for ONE project, not "and then try another."** The gate is
   whether >=2 people reach for it on a SECOND project *unprompted*.
   Mentioning a second project contaminates the exact signal being measured.

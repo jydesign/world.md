@@ -114,9 +114,9 @@ asset in.
 **How you use it.** Compose per shot, not per world: take the style, the
 world canon, and *only* the entities your shot names, then add one line of
 shot direction. For terse tools (Midjourney) put medium and style first and
-merge all `never:` lists into `--no`. For chat tools (ChatGPT, Claude,
-Gemini) paste the whole world once per session and brief shots in plain
-language.
+merge all `never:` lists into `--no`. For image-generating chats (ChatGPT,
+Gemini, Ideogram) paste the whole world once per session and brief shots in
+plain language.
 
 ---
 

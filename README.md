@@ -226,10 +226,13 @@ worldmd diff   HEAD~5        # entity-level change log                          
 Compose targets are per-tool profiles, not one generic block — each has its
 own budget, phrasing, and reference handling.
 
-- **Chat models (Claude, ChatGPT, Gemini)** — `chat` / `gpt-image`: paste
-  the whole world once per session, then brief shots in plain language.
-  Long-context tools tolerate the full package comfortably. Prose ships
-  here; only facts ship to image prompts.
+- **Chat models that generate (ChatGPT, Gemini, Ideogram)** — `gpt-image`:
+  paste the whole world once per session, then brief shots in plain
+  language. Long-context tools tolerate the full package comfortably.
+- **Chat models that don't (Claude, and any long-context model)** — `chat`:
+  no image generation, but the best place to *build* the world, compose a
+  shot, or reason about what drifted. Prose ships here; only facts ship to
+  image prompts.
 - **Image tools (Midjourney, FLUX, Nano Banana)** — `midjourney` / `flux` /
   `nano-banana`: a tight block that leads with medium and style, carries
   each entity's facts with its canon beside them, and merges every `never:`
