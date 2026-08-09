@@ -917,3 +917,46 @@ reproduce results between models?"*
 8. James's instinct: *"I should do a short video showing a few use
    cases."* Well-supported — "took a few minutes to click" says reading
    isn't landing fast, and he now has real generated image sets to show.
+
+---
+
+## 2026-08-08 — 018 · Fourth reader, still zero trials
+
+### P.K. (text, 8/8)
+> "This is amazing. I'm glad you're pursuing this."
+
+Warm, and empty. No question, no reframe, no attempt. Logged because the
+ABSENCE of engagement is the signal: this is what people say when they
+support you and are not going to do anything.
+
+### The tally that matters
+Four people shared with, four positive responses, **zero trials**. Nobody
+has built a world, generated an image, or reported a problem. Every
+response has been to the IDEA, none to the TOOL.
+
+### Diagnosis — this is not a README problem
+The README got a lot better this week (objection answered up front, proof
+with real numbers, the file-to-output composite moved above the fold). But
+all four readers engaged with the idea just fine; none converted. More copy
+polish will not move this number. Two likelier causes:
+
+1. **Wrong pool.** These are personal/professional contacts, not people
+   with the pain. I.B. said outright he has no image-generation experience.
+   The people who feel this daily — concept artists, AI filmmakers,
+   storyboard artists, indie game art leads — mostly are not in this
+   network. The single warmest actual target user surfaced so far is
+   I.B.'s **concept-artist friend**, and that referral has not been pursued.
+2. **The ask is too big.** The outreach template asks for "one real project
+   you're actively working on… use it for a week." That is a substantial
+   favor. A 5-minute ask converts far better than a 1-week one, and still
+   produces something to react to.
+
+### Actions proposed (not yet applied)
+- Pursue the I.B. referral — a real concept artist beats four supportive
+  friends.
+- Shrink the ask: "paste this one file into ChatGPT and send me what it
+  builds" (5 min) instead of "adopt it for a week." Keep the week-long ask
+  in reserve for anyone who bites.
+- Recruit where the pain is — MJ/AI-video communities — rather than only
+  the personal network.
+- STOP polishing the README. It is not the bottleneck.
