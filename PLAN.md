@@ -123,6 +123,27 @@ being prompted?
   (prompt-only tools are chirality-weak); it is enforced at shot-line
   staging, selection (canon checklist), reference conditioning, CAD
   insertion, and the never-mirror rule.
+- 2026-08-09 (landscape note — WorkOS `auth.md`,
+  github.com/workos/auth.md): REFERENCE only, and NOT a comparable project.
+  It is a protocol for agents to authenticate to services on a user's
+  behalf; a service hosts an AUTH.md telling agents how to authenticate
+  with it. Zero functional overlap with visual canon — nothing to adopt,
+  nothing to compete with, no interop case.
+  What it does confirm is a BRANDING/convention trend, now three
+  independent instances: DESIGN.md (design systems for coding agents),
+  AUTH.md (authentication for agents), WORLD.md (creative canon for
+  generative models). `SOMETHING.md` as a human-editable, machine-readable
+  contract an agent reads is a real emerging convention, not a one-off
+  analogy. Useful for positioning; changes nothing about scope.
+  One structural difference worth remembering rather than copying:
+  auth.md is SERVICE-hosted and agent-pulled (the service tells agents how
+  to deal with it), while WORLD.md is USER-owned and pushed to any tool
+  (the author tells tools how to deal with their work). That inversion is
+  the ownership thesis, not a gap — cf. FEEDBACK 017, where an external
+  reader independently described the value as "retaining ownership of your
+  AI source files." Do NOT adapt hosted discovery: the MCP server is
+  already the unbuilt "pull" version of that idea, and anything beyond it
+  is post-gate at best.
 - 2026-07-29 (positioning research — NCP / Narrative Context Protocol,
   USC ETC / Narrative First, the open JSON edition of the Dramatica
   storyform): REFERENCE, do not adopt or compete. NCP models
