@@ -1084,8 +1084,32 @@ left untouched — they are proven clean, and swapping tested prompts for
 untested ones on the demo page is the exact risk the outreach notes warn
 about.
 
-### Also noted, unresolved
-The Frost world declares `format: film` but all three demo shots ask for "a
-portrait layout still…for a book cover". Storyboards and covers are
-different deliverables. Not a bug, but the world is declared as one thing
-and shot as another; worth resolving if the world is ever used seriously.
+### Also noted, unresolved — WITHDRAWN (2026-08-09)
+I flagged that the Frost world declares `format: film` while all three demo
+shots ask for "a portrait layout still…for a book cover", and called it a
+world-vs-shot mismatch. **That was an over-flag; withdrawing it.**
+
+`format: film` is correct. The world calls itself a film five times in its
+own canon and prose ("The film preserves ambiguity…", "The film draws from
+Käthe Kollwitz's graphic force…"), and the original frontmatter said
+"illustrated or animated film" before it was normalized to the controlled
+value. A user asking that world for cover-style framing is the format
+working as designed — compose per shot, and the shot picks the deliverable.
+Film projects produce key art and one-sheets routinely.
+
+Worth recording from the same exchange, because it is a real trap: James
+proposed `format: illustration`. That would **fail lint** — `format` is a
+controlled value (`film | campaign | series | game | book`) — and it would
+collapse two distinct axes, since `format` is WHAT is being made and
+`medium` is HOW it is rendered, and that world already has
+`medium: illustration`. The linter would have caught it, which is a small
+piece of evidence that the controlled vocabulary earns its keep.
+
+Nothing changed. Shots 1 and 2 in particular were left alone: they are
+tested clean, and swapping "book cover" for "poster" would be both untested
+and plausibly worse, since "poster" invites lettering more strongly.
+
+The only live version of this question is authorial, not metadata: if the
+project is ever decided to be a BOOK rather than a film, that is
+`format: book` plus rewriting five canon and prose lines from "the film" to
+"the book."
