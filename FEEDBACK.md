@@ -1037,3 +1037,55 @@ Caveat kept: MJ moderation is non-deterministic, and this is n=1 on the
 success side against n=2 on the failure side. The demo page's warning has
 been softened from "no matter how the prompt is built" (now demonstrably
 false) to "occasionally cautious", which is what the evidence supports.
+
+---
+
+## 2026-08-09 — 020 · Quoting dialogue in a shot line makes the model render it
+
+Frost shot 3 asked the model to illustrate a line Mary speaks, and quoted the
+line. Three of four frames came back with the quote rendered as caption
+type — and **garbled**: "I'll sit and see it *thaf* small sailing cloud",
+"see *nu at* that small sailing *doud*". The classic generated-type failure.
+
+### James isolated the variable (three runs)
+1. Original — "a portrait layout still **that would be used for a book
+   cover**, illustrating this line Mary speaks: *[quote]*" → text rendered.
+2. Removed the book-cover framing, kept the quote → **text still rendered
+   on all of them.**
+3. Kept the quote but added an explicit **"do not render the text"** →
+   image-only. Clean.
+
+**So "book cover" is not the trigger; the quote is.** Confirmed
+independently: shots 1 and 2 both say "book cover", neither has ever
+produced text, including the Silas run today.
+
+### This refines rule 4 rather than contradicting it
+Rule 4 says negation is weak — yet "do not render the text" WORKED, where
+"no logos" has repeatedly failed (004). The distinction: negation is weak
+**against a prior**, not against an instruction. Athletic apparel carries a
+strong learned prior that it has logos, so "no logos" fights the model's
+own expectation. Whether text appears is a discrete binary with no
+competing prior, so an explicit instruction lands.
+
+### Design decision: this belongs to the SHOT, not the world
+James: *"I think it's something to be addressed by the Shot prompt and
+that's what an actual user would also do… we don't want to take away the
+option to include text or to push the image generator into a 'page layout'
+direction if that's desired."* Agreed, and it is consistent with the
+existing principle — whether type appears is a per-deliverable choice, and
+per-deliverable choices live in the shot line, never in the world. So NO
+typography `never:` rule was added to the Frost world, even though the
+Cross-TrainerX world has one (there it is a genuine brand constraint: the
+real wordmark is a registered reference and must be composited, not drawn).
+
+### Applied
+Demo shot 3 replaced with James's tested wording verbatim. Shots 1 and 2
+left untouched — they are proven clean, and swapping tested prompts for
+untested ones on the demo page is the exact risk the outreach notes warn
+about.
+
+### Also noted, unresolved
+The Frost world declares `format: film` but all three demo shots ask for "a
+portrait layout still…for a book cover". Storyboards and covers are
+different deliverables. Not a bug, but the world is declared as one thing
+and shot as another; worth resolving if the world is ever used seriously.
