@@ -1016,3 +1016,24 @@ An evidence-backed fix left unbuilt is a live bug with a delay fuse. 014
 had the diagnosis, the isolation test, and the remedy written down — and the
 gap between "recorded" and "built" is exactly where this resurfaced, on the
 most visible surface in the project.
+
+### UPDATE — CONFIRMED FIXED (2026-08-09)
+James reran the same Silas shot on Midjourney with the curated `--no` and it
+**generated**. Four frames, and the strongest Frost output of the series —
+from the tool that had been worst for this world. Medium held 4/4 (charcoal
+illustration, no digital-filter look), shot correct 4/4 (Silas foreground,
+back to camera, farmhouse distant on the horizon), weak cold light falling
+into dense darkness, Kollwitz influence legible without duplication.
+
+**This also corrects my own residual-risk warning in the entry above.** I
+predicted the canon text alone might still trip the moderator, since canon
+is budget-exempt and this world's canon says "illness", "poverty", "near
+death". It did not. Those words were still in the accepted prompt. The
+`--no` dump was the SOLE trigger — a cleaner result than predicted, and it
+means charged language inside canon prose is tolerated while the same
+words stacked in a bare `--no` list are not.
+
+Caveat kept: MJ moderation is non-deterministic, and this is n=1 on the
+success side against n=2 on the failure side. The demo page's warning has
+been softened from "no matter how the prompt is built" (now demonstrably
+false) to "occasionally cautious", which is what the evidence supports.
