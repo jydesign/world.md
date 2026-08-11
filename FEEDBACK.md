@@ -960,3 +960,59 @@ polish will not move this number. Two likelier causes:
 - Recruit where the pain is — MJ/AI-video communities — rather than only
   the personal network.
 - STOP polishing the README. It is not the bottleneck.
+
+---
+
+## 2026-08-09 — 019 · Midjourney moderation blocked a shot ON THE DEMO PAGE
+
+James ran the Frost "Silas approaching the farm" shot from the new try page
+with the Midjourney target and got the moderator refusal again — the same
+message as 014.
+
+### This is 014, unfixed
+FEEDBACK 014 confirmed by isolation test that dumping the full merged
+`never:` list into `--no` was the trigger, and recorded the fix ("emit a
+SHORT curated `--no`") as **evidence-backed but NOT built, per standing
+instruction**. It never got built, and then it shipped on the one page whose
+entire purpose is a frictionless first experience. Caught by James rather
+than by a stranger, which is luck, not process.
+
+### The structure of the problem, now measured
+Sorting both worlds' `never:` entries by length is diagnostic:
+- **Short entries (3 words) are concrete visual attributes** — "bright
+  saturated colors", "glossy digital rendering". These are what `--no`
+  actually acts on.
+- **Long entries are directives, explanations, or charged language** —
+  "exaggerated smiles, tears, or grimaces", "heroic poses or theatrical
+  villain framing", "essential detail in the outer 20% of the frame",
+  "generated wordmarks — type is composited in post". `--no` cannot act on
+  any of those, and they are exactly what the moderator chokes on.
+
+So the same trim fixes both problems: wasted budget and moderation risk.
+
+### Fix (BUILT this time)
+`curatedNo()` in the midjourney target: drop entries containing
+moderation-risky words, then take the shortest few (max 6 entries / 24
+words). Results:
+- Frost: **12 entries / 56 words → 6 / 18**, both charged entries gone,
+  what remains is six pure visual attributes.
+- Cross-TrainerX: **7 / 57 → 3 / 19**.
+
+Trimming this hard costs nothing, and 014 is the proof: removing `--no`
+entirely produced the BEST Midjourney output of the whole series. Negation
+is weak (rule 4); the positive canon is where enforcement actually lives.
+
+### Residual risk, handled honestly rather than hidden
+A clean `--no` does not fully protect the Frost world: canon is exempt from
+budget trimming BY DESIGN, and its canon says "near death", "illness",
+"poverty", "childless" — because the poem is about a dying farmhand. MJ may
+still refuse it. The demo page now says so plainly and tells the reader it
+is the moderator, not them, with two outs (the campaign world, or a chat
+tool). Better to set the expectation than to let a first-timer conclude the
+idea is broken.
+
+### Lesson
+An evidence-backed fix left unbuilt is a live bug with a delay fuse. 014
+had the diagnosis, the isolation test, and the remedy written down — and the
+gap between "recorded" and "built" is exactly where this resurfaced, on the
+most visible surface in the project.

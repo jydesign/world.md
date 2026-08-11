@@ -396,6 +396,30 @@ function rawNevers(entities){
   entities.forEach(e=>(e.never||[]).forEach(x=>n.push(x)));
   return n.map(x=>String(x).replace(/^never\s+/i,''));
 }
+/* Midjourney's --no takes a SHORT list of things that could appear in the
+   frame. Dumping every merged `never:` rule into it (a) wastes budget on
+   directives --no cannot act on ("essential detail in the outer 20%"), and
+   (b) hands the moderator a pile of charged words to choke on — it blocked
+   two real prompts outright (FEEDBACK 014, 019). Removing the dump entirely
+   produced the BEST Midjourney output of the test series, so trimming hard
+   costs nothing: negation is weak anyway (rule 4) and the positive canon is
+   where enforcement actually lives.
+   Rule: drop entries containing moderation-risky words, then take the
+   shortest few. Short entries are concrete visual attributes; long ones are
+   directives and explanations. */
+const NO_RISK=/\b(tears?|grimaces?|villain|death|dying|dead|illness|ill|poverty|blood|corpse|naked|nude|childless|suicide|abuse)\b/i;
+function curatedNo(entities){
+  const seen=new Set();
+  return rawNevers(entities)
+    .filter(t=>!NO_RISK.test(t))
+    .filter(t=>{const k=t.toLowerCase();if(seen.has(k))return false;seen.add(k);return true})
+    .sort((a,b)=>a.split(/\s+/).length-b.split(/\s+/).length)
+    .reduce((acc,t)=>{
+      const w=acc.words+t.split(/\s+/).length;
+      if(acc.list.length>=6||w>24)return acc;
+      return {list:[...acc.list,t],words:w};
+    },{list:[],words:0}).list;
+}
 function mediumWord(){
   const m=(WORLD.style||{}).medium||'';
   return {photograph:'cinematic photograph, photorealistic','3d-render':'3D render',illustration:'illustration',anime:'anime'}[m]||m;
@@ -434,7 +458,7 @@ function mjBlock(entities,shot){
     atmo:e.atmosphere?Object.values(e.atmosphere).join(', '):null
   }));
   const atmo=packs.filter(p=>p.atmo).map(p=>p.atmo).join('; ');
-  const no=rawNevers(entities).join(', ');
+  const no=curatedNo(entities).join(', ');
   /* Each entity ships facts + its canon ADJACENT (early tokens adhere
      better in terse tools). d = drop tier when over budget: 3 atmosphere,
      2 style flavor; entity facts (d:1) are truncated gracefully with a
